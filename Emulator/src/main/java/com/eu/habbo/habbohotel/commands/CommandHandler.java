@@ -12,6 +12,7 @@ import com.eu.habbo.habbohotel.pets.RideablePet;
 import com.eu.habbo.habbohotel.rooms.Room;
 import com.eu.habbo.habbohotel.rooms.RoomRightLevels;
 import com.eu.habbo.messages.outgoing.rooms.users.RoomUserTypingComposer;
+import com.eu.habbo.habbohotel.roleplay.commands.*;
 import com.eu.habbo.plugin.events.users.UserCommandEvent;
 import com.eu.habbo.plugin.events.users.UserExecuteCommandEvent;
 import java.util.ArrayList;
@@ -359,6 +360,14 @@ public class CommandHandler {
         addCommand(new RemovePrefixCommand());
         addCommand(new WiredCommand());
         addCommand(new TestCommand());
+
+        // Roleplay Commands
+        addCommand(new RpStatsCommand());
+        addCommand(new CurarCommand());
+        addCommand(new ComerCommand());
+        addCommand(new InventarioCommand());
+        addCommand(new ComprarCommand());
+        addCommand(new VenderCommand());
     }
 
     public List<Command> getCommandsForRank(int rankId) {

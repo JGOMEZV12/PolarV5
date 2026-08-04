@@ -25,6 +25,8 @@ import com.eu.habbo.networking.gameserver.handlers.SustainedUnwritableHandler;
 import com.eu.habbo.networking.gameserver.handlers.WebSocketHttpCleanupHandler;
 import com.eu.habbo.networking.gameserver.handlers.WebSocketHttpHandler;
 import com.eu.habbo.networking.gameserver.ssl.SSLCertificateLoader;
+import com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketHandler;
+import com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketRouter;
 import com.eu.habbo.networking.gameserver.stats.EmuStatsHttpHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
@@ -99,7 +101,9 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         ch.pipeline().addLast(blockingHttp, "badgeHttpHandler", new BadgeHttpHandler());
         ch.pipeline().addLast(blockingHttp, "badgeLeaderboardHttpHandler", new BadgeLeaderboardHttpHandler());
         ch.pipeline().addLast(blockingHttp, "emuStatsHttpHandler", new EmuStatsHttpHandler());
+        ch.pipeline().addLast("rpWebSocketRouter", new RoleplayWebSocketRouter());
         ch.pipeline().addLast("wsProtocolHandler", new WebSocketServerProtocolHandler(this.wsConfig));
+        ch.pipeline().addLast("rpWebSocketHandler", new RoleplayWebSocketHandler());
         ch.pipeline().addLast("wsHttpCleanup", new WebSocketHttpCleanupHandler());
         ch.pipeline().addLast("wsFrameAggregator", new WebSocketFrameAggregator(MAX_FRAME_SIZE));
         ch.pipeline().addLast("wsCodec", new WebSocketCodec());

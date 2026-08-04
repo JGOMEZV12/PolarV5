@@ -870,6 +870,13 @@ U|com/eu/habbo/habbohotel/pets/breeding/PetBreedingSession.java|CALL|getConfig|1
 U|com/eu/habbo/habbohotel/pets/breeding/PetBreedingSession.java|CALL|getGameEnvironment|1
 U|com/eu/habbo/habbohotel/pets/breeding/PetBreedingSession.java|CALL|getThreading|1
 U|com/eu/habbo/habbohotel/polls/PollManager.java|CALL|getDatabase|2
+U|com/eu/habbo/habbohotel/roleplay/commands/ComerCommand.java|CALL|getThreading|1
+U|com/eu/habbo/habbohotel/roleplay/commands/ComprarCommand.java|CALL|getThreading|1
+U|com/eu/habbo/habbohotel/roleplay/commands/CurarCommand.java|CALL|getGameEnvironment|1
+U|com/eu/habbo/habbohotel/roleplay/commands/VenderCommand.java|CALL|getThreading|1
+U|com/eu/habbo/habbohotel/roleplay/economy/ProductsManager.java|CALL|getDatabase|4
+U|com/eu/habbo/habbohotel/roleplay/users/RoleplayUserManager.java|CALL|getDatabase|8
+U|com/eu/habbo/habbohotel/roleplay/users/RoleplayUserManager.java|CALL|getThreading|2
 U|com/eu/habbo/habbohotel/rooms/BuildersClubRoomSupport.java|CALL|getDatabase|10
 U|com/eu/habbo/habbohotel/rooms/BuildersClubRoomSupport.java|CALL|getGameEnvironment|10
 U|com/eu/habbo/habbohotel/rooms/CustomRoomLayout.java|CALL|getDatabase|1

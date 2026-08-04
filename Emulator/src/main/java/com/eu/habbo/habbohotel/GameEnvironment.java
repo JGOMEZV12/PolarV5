@@ -33,6 +33,7 @@ import com.eu.habbo.habbohotel.users.HabboManager;
 import com.eu.habbo.habbohotel.users.custombadge.CustomBadgeManager;
 import com.eu.habbo.habbohotel.users.infostand.InfostandBackgroundManager;
 import com.eu.habbo.habbohotel.users.subscriptions.SubscriptionManager;
+import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
 import com.eu.habbo.habbohotel.users.subscriptions.SubscriptionScheduler;
 import com.eu.habbo.habbohotel.wheel.WheelManager;
 import java.util.LinkedHashMap;
@@ -177,6 +178,9 @@ public class GameEnvironment {
             }
         });
         Emulator.getThreading().run(this.subscriptionScheduler);
+
+        // Inicializar Productos de Roleplay
+        ProductsManager.initialize();
 
         LOGGER.info("GameEnvironment -> Loaded!");
     }
