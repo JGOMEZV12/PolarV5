@@ -3,10 +3,10 @@ package com.eu.habbo.habbohotel.roleplay.commands;
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.users.Habbo;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayCooldowns;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
+import com.eu.habbo.habbohotel.users.Habbo;
 
 /**
  * Portado desde: Polar RP/HabboHotel/Rooms/Chat/Commands/Users/Jobs/Medic/CureCommand.cs
@@ -17,7 +17,7 @@ import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 public class CurarCommand extends Command {
 
     public CurarCommand() {
-        super(null, new String[]{"curar"});
+        super(null, new String[] {"curar"});
     }
 
     @Override
@@ -89,7 +89,8 @@ public class CurarCommand extends Command {
         int cureCost = (rpUser.getJobId() == 2) ? 0 : 15;
 
         if (cureCost > 0 && rpUser.getBankChequings() < cureCost) {
-            executor.whisper("No tienes suficiente dinero en el banco para curarte de emergencia. Requiere $" + cureCost);
+            executor.whisper(
+                    "No tienes suficiente dinero en el banco para curarte de emergencia. Requiere $" + cureCost);
             return true;
         }
 

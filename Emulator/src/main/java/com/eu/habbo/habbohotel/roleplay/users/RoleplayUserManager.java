@@ -3,9 +3,6 @@ package com.eu.habbo.habbohotel.roleplay.users;
 import com.eu.habbo.Emulator;
 import com.eu.habbo.plugin.EventHandler;
 import com.eu.habbo.plugin.events.users.UserDisconnectEvent;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +11,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Portado desde: Polar RP/HabboRoleplay/RoleplayUsers/UserDataHandler.cs
@@ -83,7 +82,8 @@ public class RoleplayUserManager {
 
         RoleplayUser user = null;
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_users WHERE id = ? LIMIT 1")) {
+                PreparedStatement statement =
+                        connection.prepareStatement("SELECT * FROM rp_users WHERE id = ? LIMIT 1")) {
             statement.setInt(1, userId);
             try (ResultSet set = statement.executeQuery()) {
                 if (set.next()) {
@@ -97,7 +97,7 @@ public class RoleplayUserManager {
         if (user == null) {
             // Registrar usuario en rp_users con valores por defecto
             try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-                 PreparedStatement statement = connection.prepareStatement("INSERT INTO rp_users (id) VALUES (?)")) {
+                    PreparedStatement statement = connection.prepareStatement("INSERT INTO rp_users (id) VALUES (?)")) {
                 statement.setInt(1, userId);
                 statement.executeUpdate();
             } catch (SQLException e) {
@@ -106,7 +106,8 @@ public class RoleplayUserManager {
 
             // Intentar cargar de nuevo
             try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_users WHERE id = ? LIMIT 1")) {
+                    PreparedStatement statement =
+                            connection.prepareStatement("SELECT * FROM rp_users WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, userId);
                 try (ResultSet set = statement.executeQuery()) {
                     if (set.next()) {
@@ -135,7 +136,8 @@ public class RoleplayUserManager {
 
         RoleplayCooldowns cd = null;
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_cooldowns WHERE id = ? LIMIT 1")) {
+                PreparedStatement statement =
+                        connection.prepareStatement("SELECT * FROM rp_cooldowns WHERE id = ? LIMIT 1")) {
             statement.setInt(1, userId);
             try (ResultSet set = statement.executeQuery()) {
                 if (set.next()) {
@@ -149,7 +151,8 @@ public class RoleplayUserManager {
         if (cd == null) {
             // Registrar usuario en rp_cooldowns con valores por defecto
             try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-                 PreparedStatement statement = connection.prepareStatement("INSERT INTO rp_cooldowns (id) VALUES (?)")) {
+                    PreparedStatement statement =
+                            connection.prepareStatement("INSERT INTO rp_cooldowns (id) VALUES (?)")) {
                 statement.setInt(1, userId);
                 statement.executeUpdate();
             } catch (SQLException e) {
@@ -158,7 +161,8 @@ public class RoleplayUserManager {
 
             // Intentar cargar de nuevo
             try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_cooldowns WHERE id = ? LIMIT 1")) {
+                    PreparedStatement statement =
+                            connection.prepareStatement("SELECT * FROM rp_cooldowns WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, userId);
                 try (ResultSet set = statement.executeQuery()) {
                     if (set.next()) {
@@ -182,34 +186,33 @@ public class RoleplayUserManager {
     public static void saveRoleplayUser(RoleplayUser user) {
         if (user == null) return;
 
-        String query = "UPDATE rp_users SET " +
-                "level = ?, level_exp = ?, class = ?, permanent_class = ?, " +
-                "job_id = ?, job_rank = ?, job_request = ?, sendhome_time_left = ?, " +
-                "maxhealth = ?, curhealth = ?, maxenergy = ?, curenergy = ?, " +
-                "curalcohol = ?, maxalcohol = ?, kevlar = ?, hunger = ?, " +
-                "sida = ?, hygiene = ?, animo = ?, poop = ?, " +
-                "intelligence = ?, strength = ?, stamina = ?, intelligence_exp = ?, " +
-                "strength_exp = ?, stamina_exp = ?, passive_mode = ?, is_stun = ?, " +
-                "is_dead = ?, dead_time_left = ?, is_jailed = ?, jailed_time_left = ?, " +
-                "is_wanted = ?, wanted_level = ?, wanted_time_left = ?, on_probation = ?, " +
-                "probation_time_left = ?, is_cuffed = ?, cuffed_time_left = ?, punches = ?, " +
-                "kills = ?, hit_kills = ?, gun_kills = ?, deaths = ?, " +
-                "cop_deaths = ?, time_worked = ?, arrests = ?, arrested = ?, " +
-                "evasions = ?, bank_account = ?, bank_target = ?, bank_chequings = ?, " +
-                "bank_savings = ?, weedbaul = ?, BasuLvl = ?, BasuXP = ?, " +
-                "hunt_points = ?, hunt_skins = ?, ArmLvl = ?, ArmXP = ?, " +
-                "MecLvl = ?, MecXP = ?, CamLvl = ?, CamXP = ?, " +
-                "last_killed = ?, married_to = ?, hijo = ?, gang_id = ?, " +
-                "gang_rank = ?, gang_request = ?, changename_count = ?, car = ?, " +
-                "car_fuel = ?, weed = ?, cocaine = ?, botiquin = ?, " +
-                "heroina = ?, caramelos = ?, medicina = ?, cigarette = ?, " +
-                "pildora = ?, dynamite = ?, weedmateria = ?, unlocked_quests = ?, " +
-                "brawl_wins = ?, cw_wins = ?, mw_wins = ?, soloqueue_wins = ?, " +
-                "is_noob = ?, noob_time_left = ?, inmunidad_activada = ?, vip_banned = ?, " +
-                "last_coordinates = ? WHERE id = ?";
+        String query = "UPDATE rp_users SET " + "level = ?, level_exp = ?, class = ?, permanent_class = ?, "
+                + "job_id = ?, job_rank = ?, job_request = ?, sendhome_time_left = ?, "
+                + "maxhealth = ?, curhealth = ?, maxenergy = ?, curenergy = ?, "
+                + "curalcohol = ?, maxalcohol = ?, kevlar = ?, hunger = ?, "
+                + "sida = ?, hygiene = ?, animo = ?, poop = ?, "
+                + "intelligence = ?, strength = ?, stamina = ?, intelligence_exp = ?, "
+                + "strength_exp = ?, stamina_exp = ?, passive_mode = ?, is_stun = ?, "
+                + "is_dead = ?, dead_time_left = ?, is_jailed = ?, jailed_time_left = ?, "
+                + "is_wanted = ?, wanted_level = ?, wanted_time_left = ?, on_probation = ?, "
+                + "probation_time_left = ?, is_cuffed = ?, cuffed_time_left = ?, punches = ?, "
+                + "kills = ?, hit_kills = ?, gun_kills = ?, deaths = ?, "
+                + "cop_deaths = ?, time_worked = ?, arrests = ?, arrested = ?, "
+                + "evasions = ?, bank_account = ?, bank_target = ?, bank_chequings = ?, "
+                + "bank_savings = ?, weedbaul = ?, BasuLvl = ?, BasuXP = ?, "
+                + "hunt_points = ?, hunt_skins = ?, ArmLvl = ?, ArmXP = ?, "
+                + "MecLvl = ?, MecXP = ?, CamLvl = ?, CamXP = ?, "
+                + "last_killed = ?, married_to = ?, hijo = ?, gang_id = ?, "
+                + "gang_rank = ?, gang_request = ?, changename_count = ?, car = ?, "
+                + "car_fuel = ?, weed = ?, cocaine = ?, botiquin = ?, "
+                + "heroina = ?, caramelos = ?, medicina = ?, cigarette = ?, "
+                + "pildora = ?, dynamite = ?, weedmateria = ?, unlocked_quests = ?, "
+                + "brawl_wins = ?, cw_wins = ?, mw_wins = ?, soloqueue_wins = ?, "
+                + "is_noob = ?, noob_time_left = ?, inmunidad_activada = ?, vip_banned = ?, "
+                + "last_coordinates = ? WHERE id = ?";
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setInt(1, user.getLevel());
             statement.setInt(2, user.getLevelExp());
@@ -324,12 +327,11 @@ public class RoleplayUserManager {
     public static void saveRoleplayCooldowns(RoleplayCooldowns cd) {
         if (cd == null) return;
 
-        String query = "UPDATE rp_cooldowns SET " +
-                "robbery = ?, text_cooldown = ?, robbery_bank = ?, " +
-                "medipacks = ?, psvmode = ? WHERE id = ?";
+        String query = "UPDATE rp_cooldowns SET " + "robbery = ?, text_cooldown = ?, robbery_bank = ?, "
+                + "medipacks = ?, psvmode = ? WHERE id = ?";
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+                PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setInt(1, cd.getRobbery());
             statement.setInt(2, cd.getTextCooldown());

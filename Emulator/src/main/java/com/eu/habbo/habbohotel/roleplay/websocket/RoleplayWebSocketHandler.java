@@ -8,10 +8,9 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
+import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Portado desde: Polar RP/HabboRoleplay/Web/WebEventManager.cs
@@ -26,7 +25,8 @@ public class RoleplayWebSocketHandler extends SimpleChannelInboundHandler<Object
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleplayWebSocketHandler.class);
     private static final Gson GSON = new Gson();
 
-    private static final ConcurrentHashMap<ChannelHandlerContext, Integer> activeConnections = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<ChannelHandlerContext, Integer> activeConnections =
+            new ConcurrentHashMap<>();
 
     public static ConcurrentHashMap<ChannelHandlerContext, Integer> getActiveConnections() {
         return activeConnections;
@@ -99,14 +99,14 @@ public class RoleplayWebSocketHandler extends SimpleChannelInboundHandler<Object
             // Cargar y componer estadísticas de roleplay
             RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
             if (rpUser != null) {
-                String statsPayload = "ID:" + rpUser.getUserId() + ";" +
-                        "LEVEL:" + rpUser.getLevel() + ";" +
-                        "EXP:" + rpUser.getLevelExp() + ";" +
-                        "CLASS:" + rpUser.getRpClass() + ";" +
-                        "HEALTH:" + rpUser.getCurHealth() + "/" + rpUser.getMaxHealth() + ";" +
-                        "ENERGY:" + rpUser.getCurEnergy() + "/" + rpUser.getMaxEnergy() + ";" +
-                        "MONEY:" + rpUser.getBankChequings() + ";" +
-                        "ARMOR:" + rpUser.getArmor();
+                String statsPayload = "ID:" + rpUser.getUserId() + ";" + "LEVEL:"
+                        + rpUser.getLevel() + ";" + "EXP:"
+                        + rpUser.getLevelExp() + ";" + "CLASS:"
+                        + rpUser.getRpClass() + ";" + "HEALTH:"
+                        + rpUser.getCurHealth() + "/" + rpUser.getMaxHealth() + ";" + "ENERGY:"
+                        + rpUser.getCurEnergy() + "/" + rpUser.getMaxEnergy() + ";" + "MONEY:"
+                        + rpUser.getBankChequings() + ";" + "ARMOR:"
+                        + rpUser.getArmor();
 
                 ctx.writeAndFlush(new TextWebSocketFrame("compose_characterbar|" + statsPayload));
             }

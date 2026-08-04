@@ -2,13 +2,12 @@ package com.eu.habbo.habbohotel.roleplay.commands;
 
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.users.Habbo;
 import com.eu.habbo.habbohotel.roleplay.economy.Product;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
-
+import com.eu.habbo.habbohotel.users.Habbo;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ import java.util.Map;
 public class InventarioCommand extends Command {
 
     public InventarioCommand() {
-        super(null, new String[]{"inv", "inventario"});
+        super(null, new String[] {"inv", "inventario"});
     }
 
     @Override
@@ -59,8 +58,15 @@ public class InventarioCommand extends Command {
         for (Map.Entry<Integer, Integer> entry : productCounts.entrySet()) {
             Product p = ProductsManager.getProduct(entry.getKey());
             if (p != null) {
-                sb.append("• ").append(entry.getValue()).append("x ").append(p.getDisplayName())
-                        .append(" [").append(p.getProductName()).append("] (Tipo: ").append(p.getType()).append(")\r\n");
+                sb.append("• ")
+                        .append(entry.getValue())
+                        .append("x ")
+                        .append(p.getDisplayName())
+                        .append(" [")
+                        .append(p.getProductName())
+                        .append("] (Tipo: ")
+                        .append(p.getType())
+                        .append(")\r\n");
             }
         }
 

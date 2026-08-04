@@ -14,12 +14,14 @@ import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 public class RpStatsCommand extends Command {
 
     public RpStatsCommand() {
-        super(null, new String[]{"stats", "rpstats"});
+        super(null, new String[] {"stats", "rpstats"});
     }
 
     @Override
     public boolean handle(GameClient gameClient, String[] params) throws Exception {
-        if (gameClient == null || gameClient.getHabbo() == null || gameClient.getHabbo().getHabboInfo() == null) {
+        if (gameClient == null
+                || gameClient.getHabbo() == null
+                || gameClient.getHabbo().getHabboInfo() == null) {
             return false;
         }
 
@@ -33,14 +35,40 @@ public class RpStatsCommand extends Command {
 
         StringBuilder sb = new StringBuilder();
         sb.append("=== TUS ESTADÍSTICAS ROLEPLAY ===\r\n");
-        sb.append("• Nivel: ").append(rpUser.getLevel()).append(" (EXP: ").append(rpUser.getLevelExp()).append(")\r\n");
-        sb.append("• Clase: ").append(rpUser.getRpClass().isEmpty() ? "Ninguna" : rpUser.getRpClass()).append("\r\n");
-        sb.append("• Salud: ").append(rpUser.getCurHealth()).append("/").append(rpUser.getMaxHealth()).append("\r\n");
-        sb.append("• Energía: ").append(rpUser.getCurEnergy()).append("/").append(rpUser.getMaxEnergy()).append("\r\n");
-        sb.append("• Hambre: ").append(rpUser.getHunger()).append("% | Higiene: ").append(rpUser.getHygiene()).append("%\r\n");
+        sb.append("• Nivel: ")
+                .append(rpUser.getLevel())
+                .append(" (EXP: ")
+                .append(rpUser.getLevelExp())
+                .append(")\r\n");
+        sb.append("• Clase: ")
+                .append(rpUser.getRpClass().isEmpty() ? "Ninguna" : rpUser.getRpClass())
+                .append("\r\n");
+        sb.append("• Salud: ")
+                .append(rpUser.getCurHealth())
+                .append("/")
+                .append(rpUser.getMaxHealth())
+                .append("\r\n");
+        sb.append("• Energía: ")
+                .append(rpUser.getCurEnergy())
+                .append("/")
+                .append(rpUser.getMaxEnergy())
+                .append("\r\n");
+        sb.append("• Hambre: ")
+                .append(rpUser.getHunger())
+                .append("% | Higiene: ")
+                .append(rpUser.getHygiene())
+                .append("%\r\n");
         sb.append("• Dinero (Banco): $").append(rpUser.getBankChequings()).append("\r\n");
-        sb.append("• Armero Rango: ").append(rpUser.getArmLvl()).append(" | Mecánico Rango: ").append(rpUser.getMecLvl()).append("\r\n");
-        sb.append("• Trabajo ID: ").append(rpUser.getJobId()).append(" (Rango: ").append(rpUser.getJobRank()).append(")");
+        sb.append("• Armero Rango: ")
+                .append(rpUser.getArmLvl())
+                .append(" | Mecánico Rango: ")
+                .append(rpUser.getMecLvl())
+                .append("\r\n");
+        sb.append("• Trabajo ID: ")
+                .append(rpUser.getJobId())
+                .append(" (Rango: ")
+                .append(rpUser.getJobRank())
+                .append(")");
 
         gameClient.getHabbo().whisper(sb.toString());
         return true;

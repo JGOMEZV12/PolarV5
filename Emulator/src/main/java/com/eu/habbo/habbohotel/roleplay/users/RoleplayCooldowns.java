@@ -31,15 +31,47 @@ public class RoleplayCooldowns {
         this.psvmode = row.getInt("psvmode");
     }
 
-    public int getId() { return id; }
-    public int getRobbery() { return robbery; }
-    public void setRobbery(int robbery) { this.robbery = robbery; }
-    public int getTextCooldown() { return textCooldown; }
-    public void setTextCooldown(int textCooldown) { this.textCooldown = textCooldown; }
-    public int getRobberyBank() { return robberyBank; }
-    public void setRobberyBank(int robberyBank) { this.robberyBank = robberyBank; }
-    public int getMedipacks() { return medipacks; }
-    public void setMedipacks(int medipacks) { this.medipacks = medipacks; }
-    public int getPsvmode() { return psvmode; }
-    public void setPsvmode(int psvmode) { this.psvmode = psvmode; }
+    public int getId() {
+        return id;
+    }
+
+    public int getRobbery() {
+        return robbery;
+    }
+
+    public void setRobbery(int robbery) {
+        this.robbery = robbery;
+    }
+
+    public int getTextCooldown() {
+        return textCooldown;
+    }
+
+    public void setTextCooldown(int textCooldown) {
+        this.textCooldown = textCooldown;
+    }
+
+    public int getRobberyBank() {
+        return robberyBank;
+    }
+
+    public void setRobberyBank(int robberyBank) {
+        this.robberyBank = robberyBank;
+    }
+
+    public int getMedipacks() {
+        return medipacks;
+    }
+
+    public void setMedipacks(int medipacks) {
+        this.medipacks = medipacks;
+    }
+
+    public int getPsvmode() {
+        return psvmode;
+    }
+
+    public void setPsvmode(int psvmode) {
+        this.psvmode = psvmode;
+    }
 }

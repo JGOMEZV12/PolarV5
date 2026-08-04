@@ -3,13 +3,12 @@ package com.eu.habbo.habbohotel.roleplay.commands;
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.users.Habbo;
 import com.eu.habbo.habbohotel.roleplay.economy.Product;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
-
+import com.eu.habbo.habbohotel.users.Habbo;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ import java.util.List;
 public class ComerCommand extends Command {
 
     public ComerCommand() {
-        super(null, new String[]{"comer"});
+        super(null, new String[] {"comer"});
     }
 
     @Override
@@ -88,7 +87,8 @@ public class ComerCommand extends Command {
             RoleplayUserManager.saveRoleplayUser(rpUser);
         });
 
-        habbo.whisper("¡Has consumido '" + product.getDisplayName() + "'! Tu hambre se ha reducido y recuperas +30 de Energía.");
+        habbo.whisper("¡Has consumido '" + product.getDisplayName()
+                + "'! Tu hambre se ha reducido y recuperas +30 de Energía.");
         return true;
     }
 }

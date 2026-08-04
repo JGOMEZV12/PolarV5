@@ -1,6 +1,8 @@
 package com.eu.habbo.networking.gameserver;
 
 import com.eu.habbo.Emulator;
+import com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketHandler;
+import com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketRouter;
 import com.eu.habbo.messages.PacketManager;
 import com.eu.habbo.networking.gameserver.auth.AuthHttpHandler;
 import com.eu.habbo.networking.gameserver.auth.NitroSecureApiHandler;
@@ -25,8 +27,6 @@ import com.eu.habbo.networking.gameserver.handlers.SustainedUnwritableHandler;
 import com.eu.habbo.networking.gameserver.handlers.WebSocketHttpCleanupHandler;
 import com.eu.habbo.networking.gameserver.handlers.WebSocketHttpHandler;
 import com.eu.habbo.networking.gameserver.ssl.SSLCertificateLoader;
-import com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketHandler;
-import com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketRouter;
 import com.eu.habbo.networking.gameserver.stats.EmuStatsHttpHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;

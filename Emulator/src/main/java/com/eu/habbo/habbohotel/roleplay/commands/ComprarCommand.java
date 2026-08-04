@@ -3,12 +3,12 @@ package com.eu.habbo.habbohotel.roleplay.commands;
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.users.Habbo;
 import com.eu.habbo.habbohotel.roleplay.economy.Product;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
+import com.eu.habbo.habbohotel.users.Habbo;
 
 /**
  * Portado desde: Polar RP/HabboRoleplay/Products/ProductsManager.cs / rp_user_products
@@ -20,7 +20,7 @@ import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 public class ComprarCommand extends Command {
 
     public ComprarCommand() {
-        super(null, new String[]{"comprar"});
+        super(null, new String[] {"comprar"});
     }
 
     @Override
@@ -43,7 +43,8 @@ public class ComprarCommand extends Command {
         if (params.length >= 3) {
             try {
                 quantityVal = Integer.parseInt(params[2]);
-            } catch (NumberFormatException ignored) {}
+            } catch (NumberFormatException ignored) {
+            }
         }
 
         final int quantity = (quantityVal <= 0) ? 1 : quantityVal;
@@ -63,7 +64,8 @@ public class ComprarCommand extends Command {
         int totalPrice = product.getPrice() * quantity;
 
         if (rpUser.getBankChequings() < totalPrice) {
-            habbo.whisper("No tienes suficiente dinero en tu cuenta bancaria. Costo total: $" + totalPrice + " (Tienes: $" + rpUser.getBankChequings() + ")");
+            habbo.whisper("No tienes suficiente dinero en tu cuenta bancaria. Costo total: $" + totalPrice
+                    + " (Tienes: $" + rpUser.getBankChequings() + ")");
             return true;
         }
 
@@ -81,7 +83,8 @@ public class ComprarCommand extends Command {
             RoleplayUserManager.saveRoleplayUser(rpUser);
         });
 
-        habbo.whisper("¡Has comprado " + quantity + "x '" + product.getDisplayName() + "' por un total de $" + totalPrice + " cobrados del banco!");
+        habbo.whisper("¡Has comprado " + quantity + "x '" + product.getDisplayName() + "' por un total de $"
+                + totalPrice + " cobrados del banco!");
         return true;
     }
 }

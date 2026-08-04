@@ -30,10 +30,27 @@ public class ProductOwned {
         this.extradata = row.getString("extradata");
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public int getProductId() { return productId; }
-    public int getUserId() { return userId; }
-    public String getExtradata() { return extradata; }
-    public void setExtradata(String extradata) { this.extradata = extradata; }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getExtradata() {
+        return extradata;
+    }
+
+    public void setExtradata(String extradata) {
+        this.extradata = extradata;
+    }
 }

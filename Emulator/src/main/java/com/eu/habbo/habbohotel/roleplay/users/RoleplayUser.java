@@ -2,7 +2,6 @@ package com.eu.habbo.habbohotel.roleplay.users;
 
 import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -249,202 +248,751 @@ public class RoleplayUser {
         return this.ownedProducts;
     }
 
-    public int getUserId() { return userId; }
-    public int getLevel() { return level; }
-    public void setLevel(int level) { this.level = level; }
-    public int getLevelExp() { return levelExp; }
-    public void setLevelExp(int levelExp) { this.levelExp = levelExp; }
-    public String getRpClass() { return rpClass; }
-    public void setRpClass(String rpClass) { this.rpClass = rpClass; }
-    public boolean isPermanentClass() { return permanentClass; }
-    public void setPermanentClass(boolean permanentClass) { this.permanentClass = permanentClass; }
+    public int getUserId() {
+        return userId;
+    }
 
-    public int getJobId() { return jobId; }
-    public void setJobId(int jobId) { this.jobId = jobId; }
-    public int getJobRank() { return jobRank; }
-    public void setJobRank(int jobRank) { this.jobRank = jobRank; }
-    public int getJobRequest() { return jobRequest; }
-    public void setJobRequest(int jobRequest) { this.jobRequest = jobRequest; }
-    public int getSendHomeTimeLeft() { return sendHomeTimeLeft; }
-    public void setSendHomeTimeLeft(int sendHomeTimeLeft) { this.sendHomeTimeLeft = sendHomeTimeLeft; }
+    public int getLevel() {
+        return level;
+    }
 
-    public int getMaxHealth() { return maxHealth; }
-    public void setMaxHealth(int maxHealth) { this.maxHealth = maxHealth; }
-    public int getCurHealth() { return curHealth; }
-    public void setCurHealth(int curHealth) { this.curHealth = curHealth; }
-    public int getMaxEnergy() { return maxEnergy; }
-    public void setMaxEnergy(int maxEnergy) { this.maxEnergy = maxEnergy; }
-    public int getCurEnergy() { return curEnergy; }
-    public void setCurEnergy(int curEnergy) { this.curEnergy = curEnergy; }
-    public int getCurAlcohol() { return curAlcohol; }
-    public void setCurAlcohol(int curAlcohol) { this.curAlcohol = curAlcohol; }
-    public int getMaxAlcohol() { return maxAlcohol; }
-    public void setMaxAlcohol(int maxAlcohol) { this.maxAlcohol = maxAlcohol; }
-    public int getArmor() { return armor; }
-    public void setArmor(int armor) { this.armor = armor; }
-    public int getHunger() { return hunger; }
-    public void setHunger(int hunger) { this.hunger = hunger; }
-    public int getSida() { return sida; }
-    public void setSida(int sida) { this.sida = sida; }
-    public int getHygiene() { return hygiene; }
-    public void setHygiene(int hygiene) { this.hygiene = hygiene; }
-    public int getAnimo() { return animo; }
-    public void setAnimo(int animo) { this.animo = animo; }
-    public int getPoop() { return poop; }
-    public void setPoop(int poop) { this.poop = poop; }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-    public int getIntelligence() { return intelligence; }
-    public void setIntelligence(int intelligence) { this.intelligence = intelligence; }
-    public int getStrength() { return strength; }
-    public void setStrength(int strength) { this.strength = strength; }
-    public int getStamina() { return stamina; }
-    public void setStamina(int stamina) { this.stamina = stamina; }
-    public int getIntelligenceExp() { return intelligenceExp; }
-    public void setIntelligenceExp(int intelligenceExp) { this.intelligenceExp = intelligenceExp; }
-    public int getStrengthExp() { return strengthExp; }
-    public void setStrengthExp(int strengthExp) { this.strengthExp = strengthExp; }
-    public int getStaminaExp() { return staminaExp; }
-    public void setStaminaExp(int staminaExp) { this.staminaExp = staminaExp; }
-    public boolean isPassiveMode() { return passiveMode; }
-    public void setPassiveMode(boolean passiveMode) { this.passiveMode = passiveMode; }
+    public int getLevelExp() {
+        return levelExp;
+    }
 
-    public boolean isStun() { return isStun; }
-    public void setStun(boolean isStun) { this.isStun = isStun; }
-    public boolean isDead() { return isDead; }
-    public void setDead(boolean isDead) { this.isDead = isDead; }
-    public int getDeadTimeLeft() { return deadTimeLeft; }
-    public void setDeadTimeLeft(int deadTimeLeft) { this.deadTimeLeft = deadTimeLeft; }
-    public boolean isJailed() { return isJailed; }
-    public void setJailed(boolean isJailed) { this.isJailed = isJailed; }
-    public int getJailedTimeLeft() { return jailedTimeLeft; }
-    public void setJailedTimeLeft(int jailedTimeLeft) { this.jailedTimeLeft = jailedTimeLeft; }
-    public boolean isWanted() { return isWanted; }
-    public void setWanted(boolean isWanted) { this.isWanted = isWanted; }
-    public int getWantedLevel() { return wantedLevel; }
-    public void setWantedLevel(int wantedLevel) { this.wantedLevel = wantedLevel; }
-    public int getWantedTimeLeft() { return wantedTimeLeft; }
-    public void setWantedTimeLeft(int wantedTimeLeft) { this.wantedTimeLeft = wantedTimeLeft; }
-    public boolean isOnProbation() { return onProbation; }
-    public void setOnProbation(boolean onProbation) { this.onProbation = onProbation; }
-    public int getProbationTimeLeft() { return probationTimeLeft; }
-    public void setProbationTimeLeft(int probationTimeLeft) { this.probationTimeLeft = probationTimeLeft; }
-    public boolean isCuffed() { return isCuffed; }
-    public void setCuffed(boolean isCuffed) { this.isCuffed = isCuffed; }
-    public int getCuffedTimeLeft() { return cuffedTimeLeft; }
-    public void setCuffedTimeLeft(int cuffedTimeLeft) { this.cuffedTimeLeft = cuffedTimeLeft; }
+    public void setLevelExp(int levelExp) {
+        this.levelExp = levelExp;
+    }
 
-    public int getPunches() { return punches; }
-    public void setPunches(int punches) { this.punches = punches; }
-    public int getKills() { return kills; }
-    public void setKills(int kills) { this.kills = kills; }
-    public int getHitKills() { return hitKills; }
-    public void setHitKills(int hitKills) { this.hitKills = hitKills; }
-    public int getGunKills() { return gunKills; }
-    public void setGunKills(int gunKills) { this.gunKills = gunKills; }
-    public int getDeaths() { return deaths; }
-    public void setDeaths(int deaths) { this.deaths = deaths; }
-    public int getCopDeaths() { return copDeaths; }
-    public void setCopDeaths(int copDeaths) { this.copDeaths = copDeaths; }
-    public int getTimeWorked() { return timeWorked; }
-    public void setTimeWorked(int timeWorked) { this.timeWorked = timeWorked; }
-    public int getArrests() { return arrests; }
-    public void setArrests(int arrests) { this.arrests = arrests; }
-    public int getArrested() { return arrested; }
-    public void setArrested(int arrested) { this.arrested = arrested; }
-    public int getEvasions() { return evasions; }
-    public void setEvasions(int evasions) { this.evasions = evasions; }
+    public String getRpClass() {
+        return rpClass;
+    }
 
-    public int getBankAccount() { return bankAccount; }
-    public void setBankAccount(int bankAccount) { this.bankAccount = bankAccount; }
-    public int getBankTarget() { return bankTarget; }
-    public void setBankTarget(int bankTarget) { this.bankTarget = bankTarget; }
-    public int getBankChequings() { return bankChequings; }
-    public void setBankChequings(int bankChequings) { this.bankChequings = bankChequings; }
-    public int getBankSavings() { return bankSavings; }
-    public void setBankSavings(int bankSavings) { this.bankSavings = bankSavings; }
-    public int getWeedBaul() { return weedBaul; }
-    public void setWeedBaul(int weedBaul) { this.weedBaul = weedBaul; }
+    public void setRpClass(String rpClass) {
+        this.rpClass = rpClass;
+    }
 
-    public int getBasuLvl() { return basuLvl; }
-    public void setBasuLvl(int basuLvl) { this.basuLvl = basuLvl; }
-    public int getBasuXp() { return basuXp; }
-    public void setBasuXp(int basuXp) { this.basuXp = basuXp; }
-    public int getHuntPoints() { return huntPoints; }
-    public void setHuntPoints(int huntPoints) { this.huntPoints = huntPoints; }
-    public String getHuntSkins() { return huntSkins; }
-    public void setHuntSkins(String huntSkins) { this.huntSkins = huntSkins; }
-    public int getArmLvl() { return armLvl; }
-    public void setArmLvl(int armLvl) { this.armLvl = armLvl; }
-    public int getArmXp() { return armXp; }
-    public void setArmXp(int armXp) { this.armXp = armXp; }
-    public int getMecLvl() { return mecLvl; }
-    public void setMecLvl(int mecLvl) { this.mecLvl = mecLvl; }
-    public int getMecXp() { return mecXp; }
-    public void setMecXp(int mecXp) { this.mecXp = mecXp; }
-    public int getCamLvl() { return camLvl; }
-    public void setCamLvl(int camLvl) { this.camLvl = camLvl; }
-    public int getCamXp() { return camXp; }
-    public void setCamXp(int camXp) { this.camXp = camXp; }
+    public boolean isPermanentClass() {
+        return permanentClass;
+    }
 
-    public int getLastKilled() { return lastKilled; }
-    public void setLastKilled(int lastKilled) { this.lastKilled = lastKilled; }
-    public int getMarriedTo() { return marriedTo; }
-    public void setMarriedTo(int marriedTo) { this.marriedTo = marriedTo; }
-    public int getHijo() { return hijo; }
-    public void setHijo(int hijo) { this.hijo = hijo; }
+    public void setPermanentClass(boolean permanentClass) {
+        this.permanentClass = permanentClass;
+    }
 
-    public int getGangId() { return gangId; }
-    public void setGangId(int gangId) { this.gangId = gangId; }
-    public int getGangRank() { return gangRank; }
-    public void setGangRank(int gangRank) { this.gangRank = gangRank; }
-    public int getGangRequest() { return gangRequest; }
-    public void setGangRequest(int gangRequest) { this.gangRequest = gangRequest; }
-    public int getChangeNameCount() { return changeNameCount; }
-    public void setChangeNameCount(int changeNameCount) { this.changeNameCount = changeNameCount; }
+    public int getJobId() {
+        return jobId;
+    }
 
-    public int getCar() { return car; }
-    public void setCar(int car) { this.car = car; }
-    public int getCarFuel() { return carFuel; }
-    public void setCarFuel(int carFuel) { this.carFuel = carFuel; }
-    public int getWeed() { return weed; }
-    public void setWeed(int weed) { this.weed = weed; }
-    public int getCocaine() { return cocaine; }
-    public void setCocaine(int cocaine) { this.cocaine = cocaine; }
-    public int getBotiquin() { return botiquin; }
-    public void setBotiquin(int botiquin) { this.botiquin = botiquin; }
-    public int getHeroina() { return heroina; }
-    public void setHeroina(int heroina) { this.heroina = heroina; }
-    public int getCaramelos() { return caramelos; }
-    public void setCaramelos(int caramelos) { this.caramelos = caramelos; }
-    public int getMedicina() { return medicina; }
-    public void setMedicina(int medicina) { this.medicina = medicina; }
-    public int getCigarette() { return cigarette; }
-    public void setCigarette(int cigarette) { this.cigarette = cigarette; }
-    public int getPildora() { return pildora; }
-    public void setPildora(int pildora) { this.pildora = pildora; }
-    public int getDynamite() { return dynamite; }
-    public void setDynamite(int dynamite) { this.dynamite = dynamite; }
-    public int getWeedmateria() { return weedmateria; }
-    public void setWeedmateria(int weedmateria) { this.weedmateria = weedmateria; }
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
 
-    public String getUnlockedQuests() { return unlockedQuests; }
-    public void setUnlockedQuests(String unlockedQuests) { this.unlockedQuests = unlockedQuests; }
-    public int getBrawlWins() { return brawlWins; }
-    public void setBrawlWins(int brawlWins) { this.brawlWins = brawlWins; }
-    public int getCwWins() { return cwWins; }
-    public void setCwWins(int cwWins) { this.cwWins = cwWins; }
-    public int getMwWins() { return mwWins; }
-    public void setMwWins(int mwWins) { this.mwWins = mwWins; }
-    public int getSoloQueueWins() { return soloQueueWins; }
-    public void setSoloQueueWins(int soloQueueWins) { this.soloQueueWins = soloQueueWins; }
-    public boolean isNoob() { return isNoob; }
-    public void setNoob(boolean isNoob) { this.isNoob = isNoob; }
-    public int getNoobTimeLeft() { return noobTimeLeft; }
-    public void setNoobTimeLeft(int noobTimeLeft) { this.noobTimeLeft = noobTimeLeft; }
-    public boolean isInmunidadActivada() { return inmunidadActivada; }
-    public void setInmunidadActivada(boolean inmunidadActivada) { this.inmunidadActivada = inmunidadActivada; }
-    public int getVipBanned() { return vipBanned; }
-    public void setVipBanned(int vipBanned) { this.vipBanned = vipBanned; }
-    public String getLastCoordinates() { return lastCoordinates; }
-    public void setLastCoordinates(String lastCoordinates) { this.lastCoordinates = lastCoordinates; }
+    public int getJobRank() {
+        return jobRank;
+    }
+
+    public void setJobRank(int jobRank) {
+        this.jobRank = jobRank;
+    }
+
+    public int getJobRequest() {
+        return jobRequest;
+    }
+
+    public void setJobRequest(int jobRequest) {
+        this.jobRequest = jobRequest;
+    }
+
+    public int getSendHomeTimeLeft() {
+        return sendHomeTimeLeft;
+    }
+
+    public void setSendHomeTimeLeft(int sendHomeTimeLeft) {
+        this.sendHomeTimeLeft = sendHomeTimeLeft;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getCurHealth() {
+        return curHealth;
+    }
+
+    public void setCurHealth(int curHealth) {
+        this.curHealth = curHealth;
+    }
+
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void setMaxEnergy(int maxEnergy) {
+        this.maxEnergy = maxEnergy;
+    }
+
+    public int getCurEnergy() {
+        return curEnergy;
+    }
+
+    public void setCurEnergy(int curEnergy) {
+        this.curEnergy = curEnergy;
+    }
+
+    public int getCurAlcohol() {
+        return curAlcohol;
+    }
+
+    public void setCurAlcohol(int curAlcohol) {
+        this.curAlcohol = curAlcohol;
+    }
+
+    public int getMaxAlcohol() {
+        return maxAlcohol;
+    }
+
+    public void setMaxAlcohol(int maxAlcohol) {
+        this.maxAlcohol = maxAlcohol;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    public int getHunger() {
+        return hunger;
+    }
+
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
+    }
+
+    public int getSida() {
+        return sida;
+    }
+
+    public void setSida(int sida) {
+        this.sida = sida;
+    }
+
+    public int getHygiene() {
+        return hygiene;
+    }
+
+    public void setHygiene(int hygiene) {
+        this.hygiene = hygiene;
+    }
+
+    public int getAnimo() {
+        return animo;
+    }
+
+    public void setAnimo(int animo) {
+        this.animo = animo;
+    }
+
+    public int getPoop() {
+        return poop;
+    }
+
+    public void setPoop(int poop) {
+        this.poop = poop;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
+
+    public int getIntelligenceExp() {
+        return intelligenceExp;
+    }
+
+    public void setIntelligenceExp(int intelligenceExp) {
+        this.intelligenceExp = intelligenceExp;
+    }
+
+    public int getStrengthExp() {
+        return strengthExp;
+    }
+
+    public void setStrengthExp(int strengthExp) {
+        this.strengthExp = strengthExp;
+    }
+
+    public int getStaminaExp() {
+        return staminaExp;
+    }
+
+    public void setStaminaExp(int staminaExp) {
+        this.staminaExp = staminaExp;
+    }
+
+    public boolean isPassiveMode() {
+        return passiveMode;
+    }
+
+    public void setPassiveMode(boolean passiveMode) {
+        this.passiveMode = passiveMode;
+    }
+
+    public boolean isStun() {
+        return isStun;
+    }
+
+    public void setStun(boolean isStun) {
+        this.isStun = isStun;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean isDead) {
+        this.isDead = isDead;
+    }
+
+    public int getDeadTimeLeft() {
+        return deadTimeLeft;
+    }
+
+    public void setDeadTimeLeft(int deadTimeLeft) {
+        this.deadTimeLeft = deadTimeLeft;
+    }
+
+    public boolean isJailed() {
+        return isJailed;
+    }
+
+    public void setJailed(boolean isJailed) {
+        this.isJailed = isJailed;
+    }
+
+    public int getJailedTimeLeft() {
+        return jailedTimeLeft;
+    }
+
+    public void setJailedTimeLeft(int jailedTimeLeft) {
+        this.jailedTimeLeft = jailedTimeLeft;
+    }
+
+    public boolean isWanted() {
+        return isWanted;
+    }
+
+    public void setWanted(boolean isWanted) {
+        this.isWanted = isWanted;
+    }
+
+    public int getWantedLevel() {
+        return wantedLevel;
+    }
+
+    public void setWantedLevel(int wantedLevel) {
+        this.wantedLevel = wantedLevel;
+    }
+
+    public int getWantedTimeLeft() {
+        return wantedTimeLeft;
+    }
+
+    public void setWantedTimeLeft(int wantedTimeLeft) {
+        this.wantedTimeLeft = wantedTimeLeft;
+    }
+
+    public boolean isOnProbation() {
+        return onProbation;
+    }
+
+    public void setOnProbation(boolean onProbation) {
+        this.onProbation = onProbation;
+    }
+
+    public int getProbationTimeLeft() {
+        return probationTimeLeft;
+    }
+
+    public void setProbationTimeLeft(int probationTimeLeft) {
+        this.probationTimeLeft = probationTimeLeft;
+    }
+
+    public boolean isCuffed() {
+        return isCuffed;
+    }
+
+    public void setCuffed(boolean isCuffed) {
+        this.isCuffed = isCuffed;
+    }
+
+    public int getCuffedTimeLeft() {
+        return cuffedTimeLeft;
+    }
+
+    public void setCuffedTimeLeft(int cuffedTimeLeft) {
+        this.cuffedTimeLeft = cuffedTimeLeft;
+    }
+
+    public int getPunches() {
+        return punches;
+    }
+
+    public void setPunches(int punches) {
+        this.punches = punches;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public int getHitKills() {
+        return hitKills;
+    }
+
+    public void setHitKills(int hitKills) {
+        this.hitKills = hitKills;
+    }
+
+    public int getGunKills() {
+        return gunKills;
+    }
+
+    public void setGunKills(int gunKills) {
+        this.gunKills = gunKills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public int getCopDeaths() {
+        return copDeaths;
+    }
+
+    public void setCopDeaths(int copDeaths) {
+        this.copDeaths = copDeaths;
+    }
+
+    public int getTimeWorked() {
+        return timeWorked;
+    }
+
+    public void setTimeWorked(int timeWorked) {
+        this.timeWorked = timeWorked;
+    }
+
+    public int getArrests() {
+        return arrests;
+    }
+
+    public void setArrests(int arrests) {
+        this.arrests = arrests;
+    }
+
+    public int getArrested() {
+        return arrested;
+    }
+
+    public void setArrested(int arrested) {
+        this.arrested = arrested;
+    }
+
+    public int getEvasions() {
+        return evasions;
+    }
+
+    public void setEvasions(int evasions) {
+        this.evasions = evasions;
+    }
+
+    public int getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(int bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public int getBankTarget() {
+        return bankTarget;
+    }
+
+    public void setBankTarget(int bankTarget) {
+        this.bankTarget = bankTarget;
+    }
+
+    public int getBankChequings() {
+        return bankChequings;
+    }
+
+    public void setBankChequings(int bankChequings) {
+        this.bankChequings = bankChequings;
+    }
+
+    public int getBankSavings() {
+        return bankSavings;
+    }
+
+    public void setBankSavings(int bankSavings) {
+        this.bankSavings = bankSavings;
+    }
+
+    public int getWeedBaul() {
+        return weedBaul;
+    }
+
+    public void setWeedBaul(int weedBaul) {
+        this.weedBaul = weedBaul;
+    }
+
+    public int getBasuLvl() {
+        return basuLvl;
+    }
+
+    public void setBasuLvl(int basuLvl) {
+        this.basuLvl = basuLvl;
+    }
+
+    public int getBasuXp() {
+        return basuXp;
+    }
+
+    public void setBasuXp(int basuXp) {
+        this.basuXp = basuXp;
+    }
+
+    public int getHuntPoints() {
+        return huntPoints;
+    }
+
+    public void setHuntPoints(int huntPoints) {
+        this.huntPoints = huntPoints;
+    }
+
+    public String getHuntSkins() {
+        return huntSkins;
+    }
+
+    public void setHuntSkins(String huntSkins) {
+        this.huntSkins = huntSkins;
+    }
+
+    public int getArmLvl() {
+        return armLvl;
+    }
+
+    public void setArmLvl(int armLvl) {
+        this.armLvl = armLvl;
+    }
+
+    public int getArmXp() {
+        return armXp;
+    }
+
+    public void setArmXp(int armXp) {
+        this.armXp = armXp;
+    }
+
+    public int getMecLvl() {
+        return mecLvl;
+    }
+
+    public void setMecLvl(int mecLvl) {
+        this.mecLvl = mecLvl;
+    }
+
+    public int getMecXp() {
+        return mecXp;
+    }
+
+    public void setMecXp(int mecXp) {
+        this.mecXp = mecXp;
+    }
+
+    public int getCamLvl() {
+        return camLvl;
+    }
+
+    public void setCamLvl(int camLvl) {
+        this.camLvl = camLvl;
+    }
+
+    public int getCamXp() {
+        return camXp;
+    }
+
+    public void setCamXp(int camXp) {
+        this.camXp = camXp;
+    }
+
+    public int getLastKilled() {
+        return lastKilled;
+    }
+
+    public void setLastKilled(int lastKilled) {
+        this.lastKilled = lastKilled;
+    }
+
+    public int getMarriedTo() {
+        return marriedTo;
+    }
+
+    public void setMarriedTo(int marriedTo) {
+        this.marriedTo = marriedTo;
+    }
+
+    public int getHijo() {
+        return hijo;
+    }
+
+    public void setHijo(int hijo) {
+        this.hijo = hijo;
+    }
+
+    public int getGangId() {
+        return gangId;
+    }
+
+    public void setGangId(int gangId) {
+        this.gangId = gangId;
+    }
+
+    public int getGangRank() {
+        return gangRank;
+    }
+
+    public void setGangRank(int gangRank) {
+        this.gangRank = gangRank;
+    }
+
+    public int getGangRequest() {
+        return gangRequest;
+    }
+
+    public void setGangRequest(int gangRequest) {
+        this.gangRequest = gangRequest;
+    }
+
+    public int getChangeNameCount() {
+        return changeNameCount;
+    }
+
+    public void setChangeNameCount(int changeNameCount) {
+        this.changeNameCount = changeNameCount;
+    }
+
+    public int getCar() {
+        return car;
+    }
+
+    public void setCar(int car) {
+        this.car = car;
+    }
+
+    public int getCarFuel() {
+        return carFuel;
+    }
+
+    public void setCarFuel(int carFuel) {
+        this.carFuel = carFuel;
+    }
+
+    public int getWeed() {
+        return weed;
+    }
+
+    public void setWeed(int weed) {
+        this.weed = weed;
+    }
+
+    public int getCocaine() {
+        return cocaine;
+    }
+
+    public void setCocaine(int cocaine) {
+        this.cocaine = cocaine;
+    }
+
+    public int getBotiquin() {
+        return botiquin;
+    }
+
+    public void setBotiquin(int botiquin) {
+        this.botiquin = botiquin;
+    }
+
+    public int getHeroina() {
+        return heroina;
+    }
+
+    public void setHeroina(int heroina) {
+        this.heroina = heroina;
+    }
+
+    public int getCaramelos() {
+        return caramelos;
+    }
+
+    public void setCaramelos(int caramelos) {
+        this.caramelos = caramelos;
+    }
+
+    public int getMedicina() {
+        return medicina;
+    }
+
+    public void setMedicina(int medicina) {
+        this.medicina = medicina;
+    }
+
+    public int getCigarette() {
+        return cigarette;
+    }
+
+    public void setCigarette(int cigarette) {
+        this.cigarette = cigarette;
+    }
+
+    public int getPildora() {
+        return pildora;
+    }
+
+    public void setPildora(int pildora) {
+        this.pildora = pildora;
+    }
+
+    public int getDynamite() {
+        return dynamite;
+    }
+
+    public void setDynamite(int dynamite) {
+        this.dynamite = dynamite;
+    }
+
+    public int getWeedmateria() {
+        return weedmateria;
+    }
+
+    public void setWeedmateria(int weedmateria) {
+        this.weedmateria = weedmateria;
+    }
+
+    public String getUnlockedQuests() {
+        return unlockedQuests;
+    }
+
+    public void setUnlockedQuests(String unlockedQuests) {
+        this.unlockedQuests = unlockedQuests;
+    }
+
+    public int getBrawlWins() {
+        return brawlWins;
+    }
+
+    public void setBrawlWins(int brawlWins) {
+        this.brawlWins = brawlWins;
+    }
+
+    public int getCwWins() {
+        return cwWins;
+    }
+
+    public void setCwWins(int cwWins) {
+        this.cwWins = cwWins;
+    }
+
+    public int getMwWins() {
+        return mwWins;
+    }
+
+    public void setMwWins(int mwWins) {
+        this.mwWins = mwWins;
+    }
+
+    public int getSoloQueueWins() {
+        return soloQueueWins;
+    }
+
+    public void setSoloQueueWins(int soloQueueWins) {
+        this.soloQueueWins = soloQueueWins;
+    }
+
+    public boolean isNoob() {
+        return isNoob;
+    }
+
+    public void setNoob(boolean isNoob) {
+        this.isNoob = isNoob;
+    }
+
+    public int getNoobTimeLeft() {
+        return noobTimeLeft;
+    }
+
+    public void setNoobTimeLeft(int noobTimeLeft) {
+        this.noobTimeLeft = noobTimeLeft;
+    }
+
+    public boolean isInmunidadActivada() {
+        return inmunidadActivada;
+    }
+
+    public void setInmunidadActivada(boolean inmunidadActivada) {
+        this.inmunidadActivada = inmunidadActivada;
+    }
+
+    public int getVipBanned() {
+        return vipBanned;
+    }
+
+    public void setVipBanned(int vipBanned) {
+        this.vipBanned = vipBanned;
+    }
+
+    public String getLastCoordinates() {
+        return lastCoordinates;
+    }
+
+    public void setLastCoordinates(String lastCoordinates) {
+        this.lastCoordinates = lastCoordinates;
+    }
 }

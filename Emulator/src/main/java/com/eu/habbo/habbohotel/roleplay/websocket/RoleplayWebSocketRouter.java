@@ -27,7 +27,11 @@ public class RoleplayWebSocketRouter extends ChannelInboundHandlerAdapter {
                         .build();
 
                 if (ctx.pipeline().get("wsProtocolHandler") != null) {
-                    ctx.pipeline().replace("wsProtocolHandler", "wsProtocolHandler", new WebSocketServerProtocolHandler(wsConfig));
+                    ctx.pipeline()
+                            .replace(
+                                    "wsProtocolHandler",
+                                    "wsProtocolHandler",
+                                    new WebSocketServerProtocolHandler(wsConfig));
                 }
             }
         }
