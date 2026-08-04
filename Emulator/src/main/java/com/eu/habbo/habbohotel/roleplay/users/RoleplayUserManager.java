@@ -291,6 +291,10 @@ public class RoleplayUserManager {
             statement.setInt(75, user.getCocaine());
             statement.setInt(76, user.getBotiquin());
             statement.setInt(77, user.getHeroina());
+            statement.setInt(78, user.getCaramelos());
+            statement.setInt(79, user.getMedicina());
+            statement.setInt(80, user.getCigarette());
+            statement.setInt(81, user.getPildora());
             statement.setInt(82, user.getDynamite());
             statement.setInt(83, user.getWeedmateria());
             statement.setString(84, user.getUnlockedQuests());

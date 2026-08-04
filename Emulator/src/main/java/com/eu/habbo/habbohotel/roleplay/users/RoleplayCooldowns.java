@@ -2,12 +2,14 @@ package com.eu.habbo.habbohotel.roleplay.users;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Portado desde: Polar RP/HabboRoleplay/Cooldowns/CooldownManager.cs / rp_stats_cooldowns
  * Repositorio origen: https://github.com/JGOMEZV12/EmuPolarV4
  * Repositorio destino: https://github.com/JGOMEZV12/PolarV5
  * Descripción: Modela los cooldowns de un usuario de Roleplay.
+ * Mejoras: Añadido soporte dinámico para cooldowns temporales en memoria de forma altamente eficiente.
  */
 public class RoleplayCooldowns {
 
@@ -17,6 +19,9 @@ public class RoleplayCooldowns {
     private int robberyBank = 0;
     private int medipacks = 0;
     private int psvmode = 0;
+
+    // Cooldowns temporales en memoria (no persistentes) para comandos rápidos (:saldo, :tanque, etc.)
+    private final ConcurrentHashMap<String, Long> tempCooldowns = new ConcurrentHashMap<>();
 
     public RoleplayCooldowns(int id) {
         this.id = id;
@@ -29,6 +34,20 @@ public class RoleplayCooldowns {
         this.robberyBank = row.getInt("robbery_bank");
         this.medipacks = row.getInt("medipacks");
         this.psvmode = row.getInt("psvmode");
+    }
+
+    public boolean hasCooldown(String key) {
+        if (!tempCooldowns.containsKey(key)) return false;
+        return tempCooldowns.get(key) > System.currentTimeMillis();
+    }
+
+    public void setCooldown(String key, int seconds) {
+        tempCooldowns.put(key, System.currentTimeMillis() + (seconds * 1000L));
+    }
+
+    public int getRemainingSeconds(String key) {
+        if (!hasCooldown(key)) return 0;
+        return (int) ((tempCooldowns.get(key) - System.currentTimeMillis()) / 1000);
     }
 
     public int getId() {

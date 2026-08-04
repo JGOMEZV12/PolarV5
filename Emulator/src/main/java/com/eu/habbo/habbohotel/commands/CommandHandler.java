@@ -15,6 +15,10 @@ import com.eu.habbo.habbohotel.roleplay.commands.CurarCommand;
 import com.eu.habbo.habbohotel.roleplay.commands.InventarioCommand;
 import com.eu.habbo.habbohotel.roleplay.commands.RpStatsCommand;
 import com.eu.habbo.habbohotel.roleplay.commands.VenderCommand;
+import com.eu.habbo.habbohotel.roleplay.commands.rp.DepositarCommand;
+import com.eu.habbo.habbohotel.roleplay.commands.rp.RetirarCommand;
+import com.eu.habbo.habbohotel.roleplay.commands.rp.SaldoCommand;
+import com.eu.habbo.habbohotel.roleplay.commands.rp.TanqueCommand;
 import com.eu.habbo.habbohotel.rooms.Room;
 import com.eu.habbo.habbohotel.rooms.RoomRightLevels;
 import com.eu.habbo.messages.outgoing.rooms.users.RoomUserTypingComposer;
@@ -373,6 +377,12 @@ public class CommandHandler {
         addCommand(new InventarioCommand());
         addCommand(new ComprarCommand());
         addCommand(new VenderCommand());
+
+        // Roleplay Bank/Economy Commands
+        addCommand(new SaldoCommand());
+        addCommand(new DepositarCommand());
+        addCommand(new RetirarCommand());
+        addCommand(new TanqueCommand());
     }
 
     public List<Command> getCommandsForRank(int rankId) {
