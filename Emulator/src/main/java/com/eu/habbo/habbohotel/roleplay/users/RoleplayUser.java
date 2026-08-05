@@ -125,13 +125,33 @@ public class RoleplayUser {
 
     // Caché local para productos del inventario del usuario
     private List<ProductOwned> ownedProducts = null;
+    private final OfferManager offerManager;
+
+    // Campos de combate en memoria
+    private Weapon equippedWeapon = null;
+    private int bullets = 0;
+    private int wlife = 100;
+    private boolean combatMode = false;
+
+    // Campos de vehiculos en memoria
+    private boolean drivingInCar = false;
+
+    // Campos de robos en memoria
+    private boolean robbery = false;
+    private boolean atmRobbery = false;
+    private boolean robartiendaRobbery = false;
+
+    // Campos de embarazo en memoria
+    private int embarazo = 0;
 
     public RoleplayUser(int userId) {
         this.userId = userId;
+        this.offerManager = new OfferManager(userId);
     }
 
     public RoleplayUser(ResultSet row) throws SQLException {
         this.userId = row.getInt("id");
+        this.offerManager = new OfferManager(this.userId);
         this.level = row.getInt("level");
         this.levelExp = row.getInt("level_exp");
         this.rpClass = row.getString("class");
@@ -994,5 +1014,57 @@ public class RoleplayUser {
 
     public void setLastCoordinates(String lastCoordinates) {
         this.lastCoordinates = lastCoordinates;
+    }
+
+    public OfferManager getOfferManager() {
+        return offerManager;
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public void setEquippedWeapon(Weapon equippedWeapon) {
+        this.equippedWeapon = equippedWeapon;
+    }
+
+    public int getBullets() {
+        return bullets;
+    }
+
+    public void setBullets(int bullets) {
+        this.bullets = bullets;
+    }
+
+    public int getWlife() {
+        return wlife;
+    }
+
+    public void setWlife(int wlife) {
+        this.wlife = wlife;
+    }
+
+    public boolean isCombatMode() {
+        return combatMode;
+    }
+
+    public void setCombatMode(boolean combatMode) {
+        this.combatMode = combatMode;
+    }
+
+    public boolean isDrivingInCar() {
+        return drivingInCar;
+    }
+
+    public void setDrivingInCar(boolean drivingInCar) {
+        this.drivingInCar = drivingInCar;
+    }
+
+    public int getEmbarazo() {
+        return embarazo;
+    }
+
+    public void setEmbarazo(int embarazo) {
+        this.embarazo = embarazo;
     }
 }
