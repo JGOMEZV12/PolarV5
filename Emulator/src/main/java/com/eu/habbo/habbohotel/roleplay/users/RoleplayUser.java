@@ -260,10 +260,11 @@ public class RoleplayUser {
 
     public List<ProductOwned> getOwnedProducts() {
         if (this.ownedProducts == null) {
-            this.ownedProducts = ProductsManager.getMyProductsOwned(this.userId);
-            if (this.ownedProducts == null) {
-                this.ownedProducts = new ArrayList<>();
+            List<ProductOwned> dbProducts = ProductsManager.getMyProductsOwned(this.userId);
+            if (dbProducts == null) {
+                dbProducts = new ArrayList<>();
             }
+            this.ownedProducts = java.util.Collections.synchronizedList(dbProducts);
         }
         return this.ownedProducts;
     }

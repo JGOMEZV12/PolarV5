@@ -54,6 +54,10 @@ public class RoleplayWebSocketHandler extends SimpleChannelInboundHandler<Object
 
                 // Registrar conexión activa
                 activeConnections.put(ctx, 0);
+            } else {
+                // Si la URI no es /events, este handler no pertenece a esta conexión.
+                // Lo removemos de la pipeline para evitar fugas/interferencias.
+                ctx.pipeline().remove(this);
             }
         }
         super.userEventTriggered(ctx, evt);
