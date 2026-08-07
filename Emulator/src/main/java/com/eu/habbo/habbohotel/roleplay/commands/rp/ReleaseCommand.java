@@ -35,19 +35,24 @@ public class ReleaseCommand extends Command {
 
         Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
-            executor.whisper("Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
+            executor.whisper(
+                    "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
             return true;
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper(targetHabbo.getHabboInfo().getUsername() + " ¡Ni siquiera está en la misma habitación que tú!");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    targetHabbo.getHabboInfo().getUsername() + " ¡Ni siquiera está en la misma habitación que tú!");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -68,7 +73,8 @@ public class ReleaseCommand extends Command {
             return true;
         }
 
-        executor.shout("*Libera a " + targetHabbo.getHabboInfo().getUsername() + " De la cárcel en libertad condicional*");
+        executor.shout(
+                "*Libera a " + targetHabbo.getHabboInfo().getUsername() + " De la cárcel en libertad condicional*");
         targetRp.setJailed(false);
         targetRp.setStun(false);
         targetRp.setParalized(false);

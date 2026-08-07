@@ -36,19 +36,24 @@ public class SecuestrarCommand extends Command {
 
         Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
-            executor.whisper("Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
+            executor.whisper(
+                    "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
             return true;
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper("Se ha producido un error al encontrar a ese usuario, tal vez no estén en línea o en esta sala.");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    "Se ha producido un error al encontrar a ese usuario, tal vez no estén en línea o en esta sala.");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -95,7 +100,8 @@ public class SecuestrarCommand extends Command {
                 targetRp.setWorking(false);
             }
 
-            executor.shout("*Agarra a " + targetHabbo.getHabboInfo().getUsername() + " le pone un trapo en la boca y nariz para secuestrarlo*");
+            executor.shout("*Agarra a " + targetHabbo.getHabboInfo().getUsername()
+                    + " le pone un trapo en la boca y nariz para secuestrarlo*");
             targetRp.setCuffed(false);
             if (targetHabbo.getRoomUnit() != null) {
                 targetHabbo.getRoomUnit().setEffectId(0, 0);
@@ -107,7 +113,8 @@ public class SecuestrarCommand extends Command {
             targetRp.setJailedTimeLeft(10); // 10 minutes default secuestro
 
             Emulator.getGameEnvironment().getRoomManager().enterRoom(targetHabbo, secuestroRoomId, "", true);
-            targetHabbo.alert("Has sido secuestrado por " + executor.getHabboInfo().getUsername() + " por 10 minutos!");
+            targetHabbo.alert(
+                    "Has sido secuestrado por " + executor.getHabboInfo().getUsername() + " por 10 minutos!");
 
             RoleplayUserManager.saveRoleplayUser(targetRp);
             RoleplayUserManager.saveRoleplayUser(rpUser);

@@ -50,12 +50,14 @@ public class PoliceTrialCommand extends Command {
 
         Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
-            executor.whisper("Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
+            executor.whisper(
+                    "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
             return true;
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (targetRp == null) {
             return true;

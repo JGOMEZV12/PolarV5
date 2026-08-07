@@ -36,19 +36,24 @@ public class CuffCommand extends Command {
 
         Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
-            executor.whisper("Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
+            executor.whisper(
+                    "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
             return true;
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper("Se ha producido un error al encontrar a ese usuario, tal vez no están en línea o en esta habitación.");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    "Se ha producido un error al encontrar a ese usuario, tal vez no están en línea o en esta habitación.");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -102,11 +107,13 @@ public class CuffCommand extends Command {
 
         if (distanceX <= 1 && distanceY <= 1) {
             if (targetRp.getEquippedWeapon() != null) {
-                executor.shout("*Agarra a " + targetHabbo.getHabboInfo().getUsername() + "'s " + targetRp.getEquippedWeapon().getPublicName() + " y lo golpe para esposarlo*");
+                executor.shout("*Agarra a " + targetHabbo.getHabboInfo().getUsername() + "'s "
+                        + targetRp.getEquippedWeapon().getPublicName() + " y lo golpe para esposarlo*");
                 targetRp.setEquippedWeapon(null);
             }
 
-            executor.shout("*Saca las esposas de su cinturón y las envuelve alrededor de las manos de " + targetHabbo.getHabboInfo().getUsername() + "'s para detenerlo*");
+            executor.shout("*Saca las esposas de su cinturón y las envuelve alrededor de las manos de "
+                    + targetHabbo.getHabboInfo().getUsername() + "'s para detenerlo*");
             targetRp.setCuffed(true);
             targetRp.setCuffedTimeLeft(8);
 

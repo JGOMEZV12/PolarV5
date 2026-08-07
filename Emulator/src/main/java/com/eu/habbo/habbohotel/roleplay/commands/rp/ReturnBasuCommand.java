@@ -39,7 +39,9 @@ public class ReturnBasuCommand extends Command {
         }
 
         int basureroRoomId = Emulator.getConfig().getInt("roleplay.basurero.room.id", 6);
-        int currentRoomId = executor.getHabboInfo().getCurrentRoom() != null ? executor.getHabboInfo().getCurrentRoom().getId() : 0;
+        int currentRoomId = executor.getHabboInfo().getCurrentRoom() != null
+                ? executor.getHabboInfo().getCurrentRoom().getId()
+                : 0;
 
         if (currentRoomId != basureroRoomId) {
             executor.whisper("¡Debes ir al Basurero de la Ciudad para descargar el camión!");

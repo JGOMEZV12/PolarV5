@@ -1,6 +1,5 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;

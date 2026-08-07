@@ -1,6 +1,5 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
@@ -49,7 +48,8 @@ public class ReturnCamCommand extends Command {
         }
 
         if (rpUser.getCamState() == 0) {
-            executor.whisper("El camión no ha sido cargado aún. ¡Ve a cargarlo de mercancía! ((Usa :cargarcamion [ID]))");
+            executor.whisper(
+                    "El camión no ha sido cargado aún. ¡Ve a cargarlo de mercancía! ((Usa :cargarcamion [ID]))");
             return true;
         }
 
@@ -62,15 +62,20 @@ public class ReturnCamCommand extends Command {
         int pieces = 2;
 
         if (rpUser.getCamLvl() == 2) {
-            pay = 16; pieces = 5;
+            pay = 16;
+            pieces = 5;
         } else if (rpUser.getCamLvl() == 3) {
-            pay = 20; pieces = 7;
+            pay = 20;
+            pieces = 7;
         } else if (rpUser.getCamLvl() == 4) {
-            pay = 22; pieces = 7;
+            pay = 22;
+            pieces = 7;
         } else if (rpUser.getCamLvl() == 5) {
-            pay = 25; pieces = 7;
+            pay = 25;
+            pieces = 7;
         } else if (rpUser.getCamLvl() >= 6) {
-            pay = 30; pieces = 7;
+            pay = 30;
+            pieces = 7;
         }
 
         String win = "¡Excelente entra! Tus ganancias son: $" + pay;

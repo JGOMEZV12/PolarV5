@@ -1,6 +1,5 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
@@ -53,7 +52,9 @@ public class DepositCamCommand extends Command {
             return true;
         }
 
-        int currentRoomId = executor.getHabboInfo().getCurrentRoom() != null ? executor.getHabboInfo().getCurrentRoom().getId() : 0;
+        int currentRoomId = executor.getHabboInfo().getCurrentRoom() != null
+                ? executor.getHabboInfo().getCurrentRoom().getId()
+                : 0;
         if (rpUser.getCamDest() != currentRoomId) {
             executor.whisper("¡Debes ir al room ID " + rpUser.getCamDest() + " para entregar la mercancía!");
             return true;
@@ -67,7 +68,8 @@ public class DepositCamCommand extends Command {
         rpUser.setCamState(2); // Unloaded
 
         executor.shout("*Comienza a descargar su camión*");
-        executor.whisper("Has descargado el camión con éxito. ¡Vuelve a la sede de transportistas para entregar el camión y recibir tu paga! ((Usa :entregarcamion))");
+        executor.whisper(
+                "Has descargado el camión con éxito. ¡Vuelve a la sede de transportistas para entregar el camión y recibir tu paga! ((Usa :entregarcamion))");
 
         RoleplayUserManager.saveRoleplayUser(rpUser);
 

@@ -56,10 +56,14 @@ public class RadioAlertCommand extends Command {
 
         String formattedMessage = "[RADIO POLICÍA] " + executor.getHabboInfo().getUsername() + ": " + message;
 
-        for (GameClient client : Emulator.getGameServer().getGameClientManager().getCurrentlyConnectedClients().values()) {
-            if (client.getHabbo() != null) {
-                RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(client.getHabbo().getHabboInfo().getId());
-                if (otherRp != null && (otherRp.getJobId() == 1 || otherRp.isPoliceTrial()) && !otherRp.isDisableRadio()) {
+        for (GameClient client :
+                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
+            if (client != null && client.getHabbo() != null) {
+                RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
+                        client.getHabbo().getHabboInfo().getId());
+                if (otherRp != null
+                        && (otherRp.getJobId() == 1 || otherRp.isPoliceTrial())
+                        && !otherRp.isDisableRadio()) {
                     client.getHabbo().whisper(formattedMessage);
                 }
             }

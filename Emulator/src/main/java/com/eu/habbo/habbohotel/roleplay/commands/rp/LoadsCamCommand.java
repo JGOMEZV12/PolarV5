@@ -43,23 +43,50 @@ public class LoadsCamCommand extends Command {
         int piezas = 2;
 
         if (rpUser.getCamLvl() == 2) {
-            amn = 16; med = 4; crack = 2; piezas = 5;
+            amn = 16;
+            med = 4;
+            crack = 2;
+            piezas = 5;
         } else if (rpUser.getCamLvl() == 3) {
-            amn = 20; med = 6; crack = 3; piezas = 7;
+            amn = 20;
+            med = 6;
+            crack = 3;
+            piezas = 7;
         } else if (rpUser.getCamLvl() == 4) {
-            amn = 22; med = 8; crack = 4; piezas = 7;
+            amn = 22;
+            med = 8;
+            crack = 4;
+            piezas = 7;
         } else if (rpUser.getCamLvl() == 5) {
-            amn = 25; med = 10; crack = 5; piezas = 7;
+            amn = 25;
+            med = 10;
+            crack = 5;
+            piezas = 7;
         } else if (rpUser.getCamLvl() >= 6) {
-            amn = 30; med = 12; crack = 6; piezas = 7;
+            amn = 30;
+            med = 12;
+            crack = 6;
+            piezas = 7;
         }
 
         StringBuilder cargas = new StringBuilder();
-        cargas.append("==========================\n Cargas de Camionero Nivel ").append(rpUser.getCamLvl()).append("\n==========================\n");
+        cargas.append("==========================\n Cargas de Camionero Nivel ")
+                .append(rpUser.getCamLvl())
+                .append("\n==========================\n");
         cargas.append("[1] [L] Productos de 24/7 (Ganancias $").append(amn).append(")\n");
         cargas.append("[2] [L] Ropa (Ganancias $").append(amn).append(")\n");
-        cargas.append("[3] [I] Drogas (Ganancias $").append(amn).append(" + ").append(med).append(" Medicamentos + ").append(crack).append(" g. de Crack)\n");
-        cargas.append("[4] [I] Armas (Ganancias $").append(amn).append(" + ").append(piezas).append(" piezas de armas)\n\n\n");
+        cargas.append("[3] [I] Drogas (Ganancias $")
+                .append(amn)
+                .append(" + ")
+                .append(med)
+                .append(" Medicamentos + ")
+                .append(crack)
+                .append(" g. de Crack)\n");
+        cargas.append("[4] [I] Armas (Ganancias $")
+                .append(amn)
+                .append(" + ")
+                .append(piezas)
+                .append(" piezas de armas)\n\n\n");
         cargas.append("[I] = Carga Ilegal\n");
         cargas.append("[L] = Carga Legal\n");
 

@@ -50,7 +50,8 @@ public class OpenAccountCommand extends Command {
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (targetRp == null) {
             return true;
@@ -70,9 +71,11 @@ public class OpenAccountCommand extends Command {
                 return true;
             }
 
-            executor.shout("*Ofertas para abrir una cuenta corriente para " + targetHabbo.getHabboInfo().getUsername() + " ¡GRATIS!*");
+            executor.shout("*Ofertas para abrir una cuenta corriente para "
+                    + targetHabbo.getHabboInfo().getUsername() + " ¡GRATIS!*");
             targetRp.getOfferManager().createOffer("corriente", userId, 0);
-            targetHabbo.whisper("Acaba de recibir una Cuenta corriente gratis DIGA ':aceptar corriente' para activarla!");
+            targetHabbo.whisper(
+                    "Acaba de recibir una Cuenta corriente gratis DIGA ':aceptar corriente' para activarla!");
         } else {
             int cost = 2500;
             if (targetRp.getBankAccount() > 1) {
@@ -85,9 +88,11 @@ public class OpenAccountCommand extends Command {
                 return true;
             }
 
-            executor.shout("*Ofertas para abrir una Cuenta de Ahorro para " + targetHabbo.getHabboInfo().getUsername() + " por $" + cost + "*");
+            executor.shout("*Ofertas para abrir una Cuenta de Ahorro para "
+                    + targetHabbo.getHabboInfo().getUsername() + " por $" + cost + "*");
             targetRp.getOfferManager().createOffer("ahorro", userId, cost);
-            targetHabbo.whisper("Recién se le ha ofrecido una cuenta de ahorros por $" + cost + " DIGA ':aceptar ahorro' para activarla!");
+            targetHabbo.whisper("Recién se le ha ofrecido una cuenta de ahorros por $" + cost
+                    + " DIGA ':aceptar ahorro' para activarla!");
         }
 
         return true;

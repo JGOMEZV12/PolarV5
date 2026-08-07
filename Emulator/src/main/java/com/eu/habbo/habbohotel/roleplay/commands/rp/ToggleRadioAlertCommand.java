@@ -39,7 +39,8 @@ public class ToggleRadioAlertCommand extends Command {
 
         rpUser.setDisableRadio(!rpUser.isDisableRadio());
 
-        executor.whisper("Usted es " + (rpUser.isDisableRadio() ? "now" : "no longer") + " Ignorando las alertas de radio");
+        executor.whisper(
+                "Usted es " + (rpUser.isDisableRadio() ? "now" : "no longer") + " Ignorando las alertas de radio");
 
         RoleplayUserManager.saveRoleplayUser(rpUser);
 

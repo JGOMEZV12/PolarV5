@@ -7,7 +7,6 @@ import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.rooms.RoomTile;
 import com.eu.habbo.habbohotel.users.Habbo;
-
 import java.util.Random;
 
 /**
@@ -38,19 +37,24 @@ public class SearchCommand extends Command {
 
         Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
-            executor.whisper("Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
+            executor.whisper(
+                    "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
             return true;
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper("Se ha producido un error al encontrar a ese usuario, tal vez no estén en línea o en esta sala.");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    "Se ha producido un error al encontrar a ese usuario, tal vez no estén en línea o en esta sala.");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -92,7 +96,8 @@ public class SearchCommand extends Command {
             int chance = random.nextInt(100) + 1;
 
             if (chance <= 8) {
-                executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " Tratando de encontrar alguna droga, pero parece que no puede encontrar ninguna*");
+                executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername()
+                        + " Tratando de encontrar alguna droga, pero parece que no puede encontrar ninguna*");
                 return true;
             } else {
                 boolean hasWeed = targetRp.getWeed() > 0;
@@ -100,19 +105,25 @@ public class SearchCommand extends Command {
                 boolean hasHeroine = targetRp.getHeroina() > 0;
 
                 if (!hasWeed && !hasCocaine && !hasHeroine) {
-                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " Tratando de encontrar alguna droga, pero parece que no puede encontrar ninguna*");
+                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername()
+                            + " Tratando de encontrar alguna droga, pero parece que no puede encontrar ninguna*");
                     return true;
                 } else if (hasWeed && !hasCocaine && !hasHeroine) {
-                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra " + targetRp.getWeed() + "g de marihuana [LEGAL SON: 10g]*");
+                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra "
+                            + targetRp.getWeed() + "g de marihuana [LEGAL SON: 10g]*");
                     return true;
                 } else if (hasCocaine && !hasWeed && !hasHeroine) {
-                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra " + targetRp.getCocaine() + "g de cocaina [LEGAL SON: 8g] *");
+                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra "
+                            + targetRp.getCocaine() + "g de cocaina [LEGAL SON: 8g] *");
                     return true;
                 } else if (hasHeroine && !hasCocaine && !hasWeed) {
-                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra " + targetRp.getHeroina() + "g de heroina [LEGAL SON: 20g] *");
+                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra "
+                            + targetRp.getHeroina() + "g de heroina [LEGAL SON: 20g] *");
                     return true;
                 } else {
-                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra " + targetRp.getCocaine() + "g de cocaina [LEGAL SON: 8g] y " + targetRp.getWeed() + "g de marihuana [LEGAL SON: 10g]*");
+                    executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername() + " y encuentra "
+                            + targetRp.getCocaine() + "g de cocaina [LEGAL SON: 8g] y " + targetRp.getWeed()
+                            + "g de marihuana [LEGAL SON: 10g]*");
                     return true;
                 }
             }

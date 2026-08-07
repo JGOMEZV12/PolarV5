@@ -1,6 +1,5 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
@@ -54,7 +53,8 @@ public class ServeCommand extends Command {
         }
 
         if (params.length == 1) {
-            executor.whisper("Por favor escriba :servir [item / menu]. Ítems disponibles: Pizza, Hamburguesa, Cerveza, Soda, Agua.");
+            executor.whisper(
+                    "Por favor escriba :servir [item / menu]. Ítems disponibles: Pizza, Hamburguesa, Cerveza, Soda, Agua.");
             return true;
         }
 
@@ -91,7 +91,8 @@ public class ServeCommand extends Command {
             displayName = "Agua";
             carryId = 1;
         } else {
-            executor.whisper("¡Esto no es un tipo válido de comida o bebida! Ítems disponibles: Pizza, Hamburguesa, Cerveza, Soda, Agua.");
+            executor.whisper(
+                    "¡Esto no es un tipo válido de comida o bebida! Ítems disponibles: Pizza, Hamburguesa, Cerveza, Soda, Agua.");
             return true;
         }
 

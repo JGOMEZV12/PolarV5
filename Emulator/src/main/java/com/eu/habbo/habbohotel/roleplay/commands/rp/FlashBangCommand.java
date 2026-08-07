@@ -1,6 +1,5 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
@@ -62,7 +61,8 @@ public class FlashBangCommand extends Command {
                 continue;
             }
 
-            RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(otherHabbo.getHabboInfo().getId());
+            RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
+                    otherHabbo.getHabboInfo().getId());
             if (otherRp != null && otherRp.isWanted() && !otherRp.isDead() && !otherRp.isJailed()) {
                 RoomTile targetTile = otherHabbo.getRoomUnit().getCurrentLocation();
                 if (targetTile != null) {

@@ -50,7 +50,8 @@ public class CheckBalanceCommand extends Command {
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (targetRp == null) {
             return true;
@@ -70,16 +71,20 @@ public class CheckBalanceCommand extends Command {
                 return true;
             }
 
-            executor.shout("*Revisa la cuenta de " + targetHabbo.getHabboInfo().getUsername() + "'s Saldo en su Cuenta Corriente*");
-            executor.whisper(targetHabbo.getHabboInfo().getUsername() + " Tienen un saldo de: $" + targetRp.getBankChequings() + " En su cuenta Corriente");
+            executor.shout("*Revisa la cuenta de " + targetHabbo.getHabboInfo().getUsername()
+                    + "'s Saldo en su Cuenta Corriente*");
+            executor.whisper(targetHabbo.getHabboInfo().getUsername() + " Tienen un saldo de: $"
+                    + targetRp.getBankChequings() + " En su cuenta Corriente");
         } else {
             if (targetRp.getBankAccount() <= 1) {
                 executor.whisper("¡Este usuario no tiene una cuenta de ahorros!");
                 return true;
             }
 
-            executor.shout("*Revisa la cuenta de " + targetHabbo.getHabboInfo().getUsername() + "'s Saldo en su cuenta de Ahorros*");
-            executor.whisper(targetHabbo.getHabboInfo().getUsername() + " Tiene $" + targetRp.getBankSavings() + " En su cuenta de Ahorros!");
+            executor.shout("*Revisa la cuenta de " + targetHabbo.getHabboInfo().getUsername()
+                    + "'s Saldo en su cuenta de Ahorros*");
+            executor.whisper(targetHabbo.getHabboInfo().getUsername() + " Tiene $" + targetRp.getBankSavings()
+                    + " En su cuenta de Ahorros!");
         }
 
         return true;

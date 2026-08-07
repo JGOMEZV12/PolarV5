@@ -1,6 +1,5 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
@@ -62,7 +61,9 @@ public class CheckCarInfoCommand extends Command {
         stats.append("INFORMACIÓN DEL VEHÍCULO\n\n");
         stats.append("Modelo: Polaris Cruiser\n");
         stats.append("Dueño: ").append(executor.getHabboInfo().getUsername()).append("\n");
-        stats.append("Última persona en manejarlo: ").append(executor.getHabboInfo().getUsername()).append("\n\n");
+        stats.append("Última persona en manejarlo: ")
+                .append(executor.getHabboInfo().getUsername())
+                .append("\n\n");
         stats.append("ESTADÍSTICAS DEL VEHÍCULO\n\n");
         stats.append("Vida: 100/100\n");
         stats.append("Combustible: 50/100\n");

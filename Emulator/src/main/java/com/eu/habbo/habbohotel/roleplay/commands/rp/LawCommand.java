@@ -44,18 +44,21 @@ public class LawCommand extends Command {
         }
 
         if (params.length != 3) {
-            executor.whisper("Ingrese un nombre de ciudadano y el nivel deseado que desea asignarle. :buscar usuario nivel");
+            executor.whisper(
+                    "Ingrese un nombre de ciudadano y el nivel deseado que desea asignarle. :buscar usuario nivel");
             return true;
         }
 
         Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
-            executor.whisper("Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
+            executor.whisper(
+                    "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
             return true;
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (targetRp == null) {
             return true;
@@ -90,11 +93,15 @@ public class LawCommand extends Command {
 
         RoleplayUserManager.saveRoleplayUser(targetRp);
 
-        executor.whisper("¡Se ha agregado a " + targetHabbo.getHabboInfo().getUsername() + " a la lista de buscados con un nivel de " + wantedLevel + " estrella(s)!");
+        executor.whisper("¡Se ha agregado a " + targetHabbo.getHabboInfo().getUsername()
+                + " a la lista de buscados con un nivel de " + wantedLevel + " estrella(s)!");
 
-        for (GameClient client : Emulator.getGameServer().getGameClientManager().getCurrentlyConnectedClients().values()) {
-            if (client.getHabbo() != null) {
-                client.getHabbo().whisper("[NOTIFICACIÓN IMPORTANTE] La policia está buscando a: " + targetHabbo.getHabboInfo().getUsername() + ", ¡Ayudanos a encontrarlo!");
+        for (GameClient client :
+                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
+            if (client != null && client.getHabbo() != null) {
+                client.getHabbo()
+                        .whisper("[NOTIFICACIÓN IMPORTANTE] La policia está buscando a: "
+                                + targetHabbo.getHabboInfo().getUsername() + ", ¡Ayudanos a encontrarlo!");
             }
         }
 

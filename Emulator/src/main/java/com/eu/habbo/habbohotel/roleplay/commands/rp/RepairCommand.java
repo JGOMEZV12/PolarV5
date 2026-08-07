@@ -56,7 +56,8 @@ public class RepairCommand extends Command {
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (targetRp == null) {
             return true;
@@ -97,18 +98,22 @@ public class RepairCommand extends Command {
         }
 
         if (rpUser.getJobId() == 4) { // Mecánico
-            executor.shout("*Saca sus herramientas y comienza a reparar el vehículo de " + targetHabbo.getHabboInfo().getUsername() + "*");
+            executor.shout("*Saca sus herramientas y comienza a reparar el vehículo de "
+                    + targetHabbo.getHabboInfo().getUsername() + "*");
             executor.whisper("Has reparado el vehículo del cliente por un precio de $" + price);
-            targetHabbo.whisper("¡El mecánico " + executor.getHabboInfo().getUsername() + " ha reparado tu vehículo por un precio de $" + price + "!");
+            targetHabbo.whisper("¡El mecánico " + executor.getHabboInfo().getUsername()
+                    + " ha reparado tu vehículo por un precio de $" + price + "!");
         } else { // Armero
             if (targetRp.getEquippedWeapon() == null) {
                 executor.whisper("Esa persona no lleva ningún arma Equipada a ser reparada.");
                 return true;
             }
 
-            executor.shout("*Usa su destornillador para reparar el arma de " + targetHabbo.getHabboInfo().getUsername() + "*");
+            executor.shout("*Usa su destornillador para reparar el arma de "
+                    + targetHabbo.getHabboInfo().getUsername() + "*");
             executor.whisper("Has reparado el arma del cliente por un precio de $" + price);
-            targetHabbo.whisper("¡El armero " + executor.getHabboInfo().getUsername() + " ha reparado tu arma por un precio de $" + price + "!");
+            targetHabbo.whisper("¡El armero " + executor.getHabboInfo().getUsername()
+                    + " ha reparado tu arma por un precio de $" + price + "!");
         }
 
         executor.giveCredits(price);

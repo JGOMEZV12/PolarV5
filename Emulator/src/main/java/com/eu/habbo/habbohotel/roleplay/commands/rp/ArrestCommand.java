@@ -41,14 +41,18 @@ public class ArrestCommand extends Command {
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper("Ha ocurrido un error al buscar a la persona, probablemente esté desconectada o no está en esta zona.");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    "Ha ocurrido un error al buscar a la persona, probablemente esté desconectada o no está en esta zona.");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -118,7 +122,8 @@ public class ArrestCommand extends Command {
                 targetRp.setWorking(false);
             }
 
-            executor.shout("*Libera las manos de " + targetHabbo.getHabboInfo().getUsername() + " y lo encierra en una celda durante " + wantedTime + " minuto(s)*");
+            executor.shout("*Libera las manos de " + targetHabbo.getHabboInfo().getUsername()
+                    + " y lo encierra en una celda durante " + wantedTime + " minuto(s)*");
             targetRp.setCuffed(false);
             if (targetHabbo.getRoomUnit() != null) {
                 targetHabbo.getRoomUnit().setEffectId(0, 0);
@@ -132,7 +137,8 @@ public class ArrestCommand extends Command {
             targetHabbo.getHabboInfo().setHomeRoom(jailRoomId);
             Emulator.getGameEnvironment().getRoomManager().enterRoom(targetHabbo, jailRoomId, "", true);
 
-            targetHabbo.alert("Has sido arrestad@ por " + executor.getHabboInfo().getUsername() + " por " + wantedTime + " minuto(s)");
+            targetHabbo.alert("Has sido arrestad@ por "
+                    + executor.getHabboInfo().getUsername() + " por " + wantedTime + " minuto(s)");
 
             RoleplayUserManager.saveRoleplayUser(targetRp);
             RoleplayUserManager.saveRoleplayUser(rpUser);

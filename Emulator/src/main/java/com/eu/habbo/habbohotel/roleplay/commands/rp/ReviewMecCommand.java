@@ -80,7 +80,8 @@ public class ReviewMecCommand extends Command {
             }
             GameClient targetClient = targetHabbo.getClient();
 
-            RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+            RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(
+                    targetHabbo.getHabboInfo().getId());
 
             if (targetRp == null) {
                 return true;
@@ -95,7 +96,8 @@ public class ReviewMecCommand extends Command {
             rpUser.setArmPiecesTo(needPieces);
             rpUser.setArmUserTo(targetHabbo.getHabboInfo().getId());
 
-            executor.shout("*Observa el arma de " + targetHabbo.getHabboInfo().getUsername() + " y procede a examinarla*");
+            executor.shout(
+                    "*Observa el arma de " + targetHabbo.getHabboInfo().getUsername() + " y procede a examinarla*");
             executor.whisper("Esta arma necesita " + needPieces + " pieza(s) para ser reparada.");
 
             return true;

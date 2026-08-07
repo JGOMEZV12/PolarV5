@@ -41,14 +41,18 @@ public class StunCommand extends Command {
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper("Ha ocurrido un error al buscar a la persona, probablemente esté desconectada o no está en esta zona.");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    "Ha ocurrido un error al buscar a la persona, probablemente esté desconectada o no está en esta zona.");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -118,7 +122,8 @@ public class StunCommand extends Command {
             executor.getRoomUnit().setEffectId(0, 536);
         }
 
-        executor.shout("*Dispara su pistola electrica hacia " + targetHabbo.getHabboInfo().getUsername() + " inmovilizándolo inmediatamente*");
+        executor.shout("*Dispara su pistola electrica hacia "
+                + targetHabbo.getHabboInfo().getUsername() + " inmovilizándolo inmediatamente*");
 
         targetRp.setStun(true);
         if (targetHabbo.getRoomUnit() != null) {

@@ -43,15 +43,24 @@ public class BackupCommand extends Command {
             return true;
         }
 
-        String roomName = executor.getHabboInfo().getCurrentRoom() != null ? executor.getHabboInfo().getCurrentRoom().getName() : "Unknown";
-        int roomId = executor.getHabboInfo().getCurrentRoom() != null ? executor.getHabboInfo().getCurrentRoom().getId() : 0;
+        String roomName = executor.getHabboInfo().getCurrentRoom() != null
+                ? executor.getHabboInfo().getCurrentRoom().getName()
+                : "Unknown";
+        int roomId = executor.getHabboInfo().getCurrentRoom() != null
+                ? executor.getHabboInfo().getCurrentRoom().getId()
+                : 0;
 
-        String formattedMessage = "[RADIO POLICÍA] ¡" + executor.getHabboInfo().getUsername() + " está solicitando apoyo en " + roomName + " (ID: " + roomId + "). ¡VE RÁPIDO ALLÍ!";
+        String formattedMessage = "[RADIO POLICÍA] ¡" + executor.getHabboInfo().getUsername()
+                + " está solicitando apoyo en " + roomName + " (ID: " + roomId + "). ¡VE RÁPIDO ALLÍ!";
 
-        for (GameClient client : Emulator.getGameServer().getGameClientManager().getCurrentlyConnectedClients().values()) {
-            if (client.getHabbo() != null) {
-                RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(client.getHabbo().getHabboInfo().getId());
-                if (otherRp != null && (otherRp.getJobId() == 1 || otherRp.isPoliceTrial()) && !otherRp.isDisableRadio()) {
+        for (GameClient client :
+                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
+            if (client != null && client.getHabbo() != null) {
+                RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
+                        client.getHabbo().getHabboInfo().getId());
+                if (otherRp != null
+                        && (otherRp.getJobId() == 1 || otherRp.isPoliceTrial())
+                        && !otherRp.isDisableRadio()) {
                     client.getHabbo().whisper(formattedMessage);
                 }
             }

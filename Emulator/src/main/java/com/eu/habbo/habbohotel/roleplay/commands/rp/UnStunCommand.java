@@ -41,14 +41,18 @@ public class UnStunCommand extends Command {
         }
         GameClient targetClient = targetHabbo.getClient();
 
-        if (executor.getHabboInfo().getCurrentRoom() == null || targetHabbo.getHabboInfo().getCurrentRoom() == null ||
-                executor.getHabboInfo().getCurrentRoom().getId() != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
-            executor.whisper("Ha ocurrido un error al buscar a la persona, probablemente esté desconectada o no está en esta zona.");
+        if (executor.getHabboInfo().getCurrentRoom() == null
+                || targetHabbo.getHabboInfo().getCurrentRoom() == null
+                || executor.getHabboInfo().getCurrentRoom().getId()
+                        != targetHabbo.getHabboInfo().getCurrentRoom().getId()) {
+            executor.whisper(
+                    "Ha ocurrido un error al buscar a la persona, probablemente esté desconectada o no está en esta zona.");
             return true;
         }
 
         RoleplayUser rpUser = RoleplayUserManager.getRoleplayUser(userId);
-        RoleplayUser targetRp = RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
+        RoleplayUser targetRp =
+                RoleplayUserManager.getRoleplayUser(targetHabbo.getHabboInfo().getId());
 
         if (rpUser == null || targetRp == null) {
             return true;
@@ -81,7 +85,8 @@ public class UnStunCommand extends Command {
         int distanceY = Math.abs(clientTile.y - targetTile.y);
 
         if (distanceX <= 1 && distanceY <= 1) {
-            executor.shout("*Ayuda a " + targetHabbo.getHabboInfo().getUsername() + ", dándole tiempo para recuperarse de su aturdimiento*");
+            executor.shout("*Ayuda a " + targetHabbo.getHabboInfo().getUsername()
+                    + ", dándole tiempo para recuperarse de su aturdimiento*");
             targetRp.setStun(false);
             targetRp.setParalized(false);
             if (targetHabbo.getRoomUnit() != null) {
