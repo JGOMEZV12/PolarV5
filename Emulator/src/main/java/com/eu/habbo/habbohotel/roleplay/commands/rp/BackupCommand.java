@@ -53,9 +53,11 @@ public class BackupCommand extends Command {
         String formattedMessage = "[RADIO POLICÍA] ¡" + executor.getHabboInfo().getUsername()
                 + " está solicitando apoyo en " + roomName + " (ID: " + roomId + "). ¡VE RÁPIDO ALLÍ!";
 
-        for (GameClient client :
-                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
-            if (client != null && client.getHabbo() != null) {
+        for (GameClient client : Emulator.getGameServer()
+                .getGameClientManager()
+                .getCurrentlyConnectedClients()
+                .values()) {
+            if (client.getHabbo() != null) {
                 RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
                         client.getHabbo().getHabboInfo().getId());
                 if (otherRp != null

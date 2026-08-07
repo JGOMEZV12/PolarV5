@@ -67,7 +67,6 @@ final class JavaPacketSignatureExtractor {
             Map.entry("appendBytes", "bytes"));
 
     ExtractionResult extract(Path source, JavaPacketSide side, String rootMethod) throws IOException {
-        StaticJavaParser.getParserConfiguration().setLanguageLevel(com.github.javaparser.ParserConfiguration.LanguageLevel.BLEEDING_EDGE);
         CompilationUnit unit = StaticJavaParser.parse(source);
         ClassOrInterfaceDeclaration type = unit.findFirst(ClassOrInterfaceDeclaration.class)
                 .orElseThrow(() -> new IllegalArgumentException("No class found in " + source));

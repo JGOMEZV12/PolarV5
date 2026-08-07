@@ -45,9 +45,11 @@ public class ClearWantedCommand extends Command {
 
         executor.shout("*Borra toda la lista de Wanted, quitando a cualquiera que aún estaba en ella*");
 
-        for (GameClient client :
-                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
-            if (client != null && client.getHabbo() != null) {
+        for (GameClient client : Emulator.getGameServer()
+                .getGameClientManager()
+                .getCurrentlyConnectedClients()
+                .values()) {
+            if (client.getHabbo() != null) {
                 RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
                         client.getHabbo().getHabboInfo().getId());
                 if (otherRp != null && otherRp.isWanted()) {

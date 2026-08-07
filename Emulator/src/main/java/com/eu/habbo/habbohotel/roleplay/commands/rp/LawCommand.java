@@ -96,9 +96,11 @@ public class LawCommand extends Command {
         executor.whisper("¡Se ha agregado a " + targetHabbo.getHabboInfo().getUsername()
                 + " a la lista de buscados con un nivel de " + wantedLevel + " estrella(s)!");
 
-        for (GameClient client :
-                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
-            if (client != null && client.getHabbo() != null) {
+        for (GameClient client : Emulator.getGameServer()
+                .getGameClientManager()
+                .getCurrentlyConnectedClients()
+                .values()) {
+            if (client.getHabbo() != null) {
                 client.getHabbo()
                         .whisper("[NOTIFICACIÓN IMPORTANTE] La policia está buscando a: "
                                 + targetHabbo.getHabboInfo().getUsername() + ", ¡Ayudanos a encontrarlo!");
