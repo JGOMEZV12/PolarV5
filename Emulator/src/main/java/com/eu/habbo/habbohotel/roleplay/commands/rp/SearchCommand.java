@@ -7,7 +7,6 @@ import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.rooms.RoomTile;
 import com.eu.habbo.habbohotel.users.Habbo;
-import java.util.Random;
 
 /**
  * Portado desde: Polar RP/HabboHotel/Rooms/Chat/Commands/Users/Jobs/Types/Police/SearchCommand.cs
@@ -92,8 +91,7 @@ public class SearchCommand extends Command {
         int distanceY = Math.abs(clientTile.y - targetTile.y);
 
         if (distanceX <= 1 && distanceY <= 1) {
-            Random random = new Random();
-            int chance = random.nextInt(100) + 1;
+            int chance = java.util.concurrent.ThreadLocalRandom.current().nextInt(100) + 1;
 
             if (chance <= 8) {
                 executor.shout("*Revisa a " + targetHabbo.getHabboInfo().getUsername()
