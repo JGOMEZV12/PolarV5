@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.Bounty;
 import com.eu.habbo.habbohotel.roleplay.users.BountyManager;
 import com.eu.habbo.habbohotel.users.Habbo;
@@ -39,7 +39,7 @@ public class BountyListCommand extends Command {
                     continue;
                 }
 
-                Habbo target = Emulator.getGameEnvironment().getHabboManager().getHabbo(bounty.getUserId());
+                Habbo target = RpEngine.getGameEnvironment().getHabboManager().getHabbo(bounty.getUserId());
                 if (target != null) {
                     long timeLeftMinutes = (bounty.getExpiryTimeStamp() - now) / 60L;
                     message.append("Fugitivo: ")

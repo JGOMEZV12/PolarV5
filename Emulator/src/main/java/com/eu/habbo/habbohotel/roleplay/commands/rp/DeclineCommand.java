@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayOffer;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
@@ -54,7 +54,7 @@ public class DeclineCommand extends Command {
 
         RoleplayOffer offer = rpUser.getOfferManager().getActiveOffers().remove(offerType);
         if (offer != null) {
-            Habbo offerer = Emulator.getGameEnvironment().getHabboManager().getHabbo(offer.getOffererId());
+            Habbo offerer = RpEngine.getGameEnvironment().getHabboManager().getHabbo(offer.getOffererId());
             String offererName = (offerer != null) ? offerer.getHabboInfo().getUsername() : "Alguien";
 
             executor.shout("*Rechaza la oferta de " + offerType + " de " + offererName + "*");

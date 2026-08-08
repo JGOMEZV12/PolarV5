@@ -144,6 +144,25 @@ public class RoleplayUser {
     // Campos de embarazo en memoria
     private int embarazo = 0;
 
+    // Campos de trabajo en memoria faltantes
+    private boolean working = false;
+    private boolean policeTrial = false;
+    private boolean disableRadio = false;
+    private boolean jailbroken = false;
+    private boolean drivingCar = false;
+    private int chalecoPor = 0;
+    private int camCargId = 0;
+    private int camState = 0;
+    private int camDest = 0;
+    private int camOwnId = 0;
+    private boolean camLoading = false;
+    private boolean camUnLoading = false;
+    private boolean basuChofer = false;
+    private int basuTrashCount = 0;
+    private int armPiecesTo = 0;
+    private int armUserTo = 0;
+    private boolean paralized = false;
+
     public RoleplayUser(int userId) {
         this.userId = userId;
         this.offerManager = new OfferManager(userId);
@@ -1067,5 +1086,141 @@ public class RoleplayUser {
 
     public void setEmbarazo(int embarazo) {
         this.embarazo = embarazo;
+    }
+
+    public boolean isWorking() {
+        return working;
+    }
+
+    public void setWorking(boolean working) {
+        this.working = working;
+    }
+
+    public boolean isPoliceTrial() {
+        return policeTrial;
+    }
+
+    public void setPoliceTrial(boolean policeTrial) {
+        this.policeTrial = policeTrial;
+    }
+
+    public boolean isDisableRadio() {
+        return disableRadio;
+    }
+
+    public void setDisableRadio(boolean disableRadio) {
+        this.disableRadio = disableRadio;
+    }
+
+    public boolean isJailbroken() {
+        return jailbroken;
+    }
+
+    public void setJailbroken(boolean jailbroken) {
+        this.jailbroken = jailbroken;
+    }
+
+    public boolean isDrivingCar() {
+        return drivingCar;
+    }
+
+    public void setDrivingCar(boolean drivingCar) {
+        this.drivingCar = drivingCar;
+    }
+
+    public int getChalecoPor() {
+        return chalecoPor;
+    }
+
+    public void setChalecoPor(int chalecoPor) {
+        this.chalecoPor = chalecoPor;
+    }
+
+    public int getCamCargId() {
+        return camCargId;
+    }
+
+    public void setCamCargId(int camCargId) {
+        this.camCargId = camCargId;
+    }
+
+    public int getCamState() {
+        return camState;
+    }
+
+    public void setCamState(int camState) {
+        this.camState = camState;
+    }
+
+    public int getCamDest() {
+        return camDest;
+    }
+
+    public void setCamDest(int camDest) {
+        this.camDest = camDest;
+    }
+
+    public int getCamOwnId() {
+        return camOwnId;
+    }
+
+    public void setCamOwnId(int camOwnId) {
+        this.camOwnId = camOwnId;
+    }
+
+    public boolean isCamLoading() {
+        return camLoading;
+    }
+
+    public void setCamLoading(boolean camLoading) {
+        this.camLoading = camLoading;
+    }
+
+    public boolean isCamUnLoading() {
+        return camUnLoading;
+    }
+
+    public void setCamUnLoading(boolean camUnLoading) {
+        this.camUnLoading = camUnLoading;
+    }
+
+    public boolean isBasuChofer() {
+        return basuChofer;
+    }
+
+    public void setBasuChofer(boolean basuChofer) {
+        this.basuChofer = basuChofer;
+    }
+
+    public int getBasuTrashCount() {
+        return basuTrashCount;
+    }
+
+    public void setBasuTrashCount(int basuTrashCount) {
+        this.basuTrashCount = basuTrashCount;
+    }
+
+    public int getArmPiecesTo() {
+        return armPiecesTo;
+    }
+
+    public void setArmPiecesTo(int armPiecesTo) {
+        this.armPiecesTo = armPiecesTo;
+    }
+
+    public int getArmUserTo() {
+        return armUserTo;
+    }
+
+    public void setArmUserTo(int armUserTo) {
+        this.armUserTo = armUserTo;
+    }
+
+    public boolean isParalized() {
+        return paralized;
+    }
+
+    public void setParalized(boolean paralized) {
+        this.paralized = paralized;
     }
 }

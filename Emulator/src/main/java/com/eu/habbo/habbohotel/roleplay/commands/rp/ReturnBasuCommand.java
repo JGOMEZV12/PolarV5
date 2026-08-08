@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.users.Habbo;
@@ -38,7 +38,7 @@ public class ReturnBasuCommand extends Command {
             return true;
         }
 
-        int basureroRoomId = Emulator.getConfig().getInt("roleplay.basurero.room.id", 6);
+        int basureroRoomId = RpEngine.getConfig().getInt("roleplay.basurero.room.id", 6);
         int currentRoomId = executor.getHabboInfo().getCurrentRoom() != null
                 ? executor.getHabboInfo().getCurrentRoom().getId()
                 : 0;

@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.users.Habbo;
@@ -53,10 +53,8 @@ public class BackupCommand extends Command {
         String formattedMessage = "[RADIO POLICÍA] ¡" + executor.getHabboInfo().getUsername()
                 + " está solicitando apoyo en " + roomName + " (ID: " + roomId + "). ¡VE RÁPIDO ALLÍ!";
 
-        for (GameClient client : Emulator.getGameServer()
-                .getGameClientManager()
-                .getCurrentlyConnectedClients()
-                .values()) {
+        for (GameClient client :
+                RpEngine.getGameServer().getGameClientManager().getSessions().values()) {
             if (client.getHabbo() != null) {
                 RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
                         client.getHabbo().getHabboInfo().getId());

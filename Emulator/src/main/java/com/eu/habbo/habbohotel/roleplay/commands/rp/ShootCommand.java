@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.roleplay.users.Weapon;
@@ -39,7 +39,7 @@ public class ShootCommand extends Command {
         }
 
         String targetUsername = params[1];
-        Habbo targetHabbo = Emulator.getGameEnvironment().getHabboManager().getHabbo(targetUsername);
+        Habbo targetHabbo = RpEngine.getGameEnvironment().getHabboManager().getHabbo(targetUsername);
 
         if (targetHabbo == null) {
             executor.whisper(

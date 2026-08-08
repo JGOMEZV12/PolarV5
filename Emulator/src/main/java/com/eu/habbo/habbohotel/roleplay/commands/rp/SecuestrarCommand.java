@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.rooms.RoomTile;
@@ -34,7 +34,7 @@ public class SecuestrarCommand extends Command {
             return true;
         }
 
-        Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
+        Habbo targetHabbo = RpEngine.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
             executor.whisper(
                     "Se ha producido un error al intentar encontrar a ese usuario, tal vez estén sin conexión.");
@@ -108,11 +108,11 @@ public class SecuestrarCommand extends Command {
                 targetHabbo.getRoomUnit().setCanWalk(true);
             }
 
-            int secuestroRoomId = Emulator.getConfig().getInt("roleplay.secuestro.room.id", 5);
+            int secuestroRoomId = RpEngine.getConfig().getInt("roleplay.secuestro.room.id", 5);
             targetRp.setJailed(true);
             targetRp.setJailedTimeLeft(10); // 10 minutes default secuestro
 
-            Emulator.getGameEnvironment().getRoomManager().enterRoom(targetHabbo, secuestroRoomId, "", true);
+            RpEngine.getGameEnvironment().getRoomManager().enterRoom(targetHabbo, secuestroRoomId, "", true);
             targetHabbo.alert(
                     "Has sido secuestrado por " + executor.getHabboInfo().getUsername() + " por 10 minutos!");
 

@@ -1,6 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.economy;
 
-import com.eu.habbo.Emulator;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,7 +33,7 @@ public class ProductsManager {
         productsByName.clear();
         productsById.clear();
 
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_products");
                 ResultSet set = statement.executeQuery()) {
 
@@ -77,7 +77,7 @@ public class ProductsManager {
      */
     public static List<ProductOwned> getMyProductsOwned(int userId) {
         List<ProductOwned> list = new ArrayList<>();
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement =
                         connection.prepareStatement("SELECT * FROM rp_user_products WHERE user_id = ?")) {
             statement.setInt(1, userId);
@@ -97,7 +97,7 @@ public class ProductsManager {
      */
     public static ProductOwned createProductOwned(int userId, int productId, String extradata) {
         String query = "INSERT INTO rp_user_products (product_id, user_id, extradata) VALUES (?, ?, ?)";
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             statement.setInt(1, productId);
@@ -121,7 +121,7 @@ public class ProductsManager {
      * Elimina un producto del inventario del usuario.
      */
     public static void removeProductOwned(int ownedId) {
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement =
                         connection.prepareStatement("DELETE FROM rp_user_products WHERE id = ?")) {
             statement.setInt(1, ownedId);

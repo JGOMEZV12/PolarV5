@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.rooms.RoomTile;
@@ -34,7 +34,7 @@ public class StunCommand extends Command {
             return true;
         }
 
-        Habbo targetHabbo = Emulator.getGameServer().getGameClientManager().getHabbo(params[1]);
+        Habbo targetHabbo = RpEngine.getGameServer().getGameClientManager().getHabbo(params[1]);
         if (targetHabbo == null) {
             executor.whisper("Ha ocurrido un error al buscar a la persona, probablemente esté desconectada.");
             return true;

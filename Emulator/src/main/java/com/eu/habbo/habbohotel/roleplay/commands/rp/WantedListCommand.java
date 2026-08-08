@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.users.Habbo;
@@ -32,7 +32,7 @@ public class WantedListCommand extends Command {
 
         for (RoleplayUser u : RoleplayUserManager.getUsers().values()) {
             if (u.isWanted()) {
-                Habbo target = Emulator.getGameEnvironment().getHabboManager().getHabbo(u.getUserId());
+                Habbo target = RpEngine.getGameEnvironment().getHabboManager().getHabbo(u.getUserId());
                 if (target != null) {
                     message.append("- ")
                             .append(target.getHabboInfo().getUsername())

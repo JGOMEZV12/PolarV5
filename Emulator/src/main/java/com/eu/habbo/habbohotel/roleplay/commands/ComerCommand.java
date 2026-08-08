@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.economy.Product;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
@@ -82,7 +82,7 @@ public class ComerCommand extends Command {
         rpUser.setHunger(Math.max(0, rpUser.getHunger() - 25));
 
         // Procesar remoción y guardado en DB de forma asíncrona
-        Emulator.getThreading().run(() -> {
+        RpEngine.getThreading().run(() -> {
             ProductsManager.removeProductOwned(itemToConsume.getId());
             RoleplayUserManager.saveRoleplayUser(rpUser);
         });

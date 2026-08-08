@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
 import com.eu.habbo.habbohotel.users.Habbo;
@@ -45,10 +45,8 @@ public class ClearWantedCommand extends Command {
 
         executor.shout("*Borra toda la lista de Wanted, quitando a cualquiera que aún estaba en ella*");
 
-        for (GameClient client : Emulator.getGameServer()
-                .getGameClientManager()
-                .getCurrentlyConnectedClients()
-                .values()) {
+        for (GameClient client :
+                RpEngine.getGameServer().getGameClientManager().getSessions().values()) {
             if (client.getHabbo() != null) {
                 RoleplayUser otherRp = RoleplayUserManager.getRoleplayUser(
                         client.getHabbo().getHabboInfo().getId());

@@ -1,6 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.users;
 
-import com.eu.habbo.Emulator;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.plugin.EventHandler;
 import com.eu.habbo.plugin.events.users.UserDisconnectEvent;
 import java.sql.Connection;
@@ -81,7 +81,7 @@ public class RoleplayUserManager {
         }
 
         RoleplayUser user = null;
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement =
                         connection.prepareStatement("SELECT * FROM rp_users WHERE id = ? LIMIT 1")) {
             statement.setInt(1, userId);
@@ -96,7 +96,7 @@ public class RoleplayUserManager {
 
         if (user == null) {
             // Registrar usuario en rp_users con valores por defecto
-            try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+            try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                     PreparedStatement statement = connection.prepareStatement("INSERT INTO rp_users (id) VALUES (?)")) {
                 statement.setInt(1, userId);
                 statement.executeUpdate();
@@ -105,7 +105,7 @@ public class RoleplayUserManager {
             }
 
             // Intentar cargar de nuevo
-            try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+            try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                     PreparedStatement statement =
                             connection.prepareStatement("SELECT * FROM rp_users WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, userId);
@@ -135,7 +135,7 @@ public class RoleplayUserManager {
         }
 
         RoleplayCooldowns cd = null;
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement =
                         connection.prepareStatement("SELECT * FROM rp_cooldowns WHERE id = ? LIMIT 1")) {
             statement.setInt(1, userId);
@@ -150,7 +150,7 @@ public class RoleplayUserManager {
 
         if (cd == null) {
             // Registrar usuario en rp_cooldowns con valores por defecto
-            try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+            try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                     PreparedStatement statement =
                             connection.prepareStatement("INSERT INTO rp_cooldowns (id) VALUES (?)")) {
                 statement.setInt(1, userId);
@@ -160,7 +160,7 @@ public class RoleplayUserManager {
             }
 
             // Intentar cargar de nuevo
-            try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+            try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                     PreparedStatement statement =
                             connection.prepareStatement("SELECT * FROM rp_cooldowns WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, userId);
@@ -211,7 +211,7 @@ public class RoleplayUserManager {
                 + "is_noob = ?, noob_time_left = ?, inmunidad_activada = ?, vip_banned = ?, "
                 + "last_coordinates = ? WHERE id = ?";
 
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setInt(1, user.getLevel());
@@ -321,7 +321,7 @@ public class RoleplayUserManager {
      */
     public static void saveRoleplayUserAsync(RoleplayUser user) {
         if (user != null) {
-            Emulator.getThreading().run(() -> saveRoleplayUser(user));
+            RpEngine.getThreading().run(() -> saveRoleplayUser(user));
         }
     }
 
@@ -334,7 +334,7 @@ public class RoleplayUserManager {
         String query = "UPDATE rp_cooldowns SET " + "robbery = ?, text_cooldown = ?, robbery_bank = ?, "
                 + "medipacks = ?, psvmode = ? WHERE id = ?";
 
-        try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
+        try (Connection connection = RpEngine.getDatabase().getDataSource().getConnection();
                 PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setInt(1, cd.getRobbery());
@@ -355,7 +355,7 @@ public class RoleplayUserManager {
      */
     public static void saveRoleplayCooldownsAsync(RoleplayCooldowns cd) {
         if (cd != null) {
-            Emulator.getThreading().run(() -> saveRoleplayCooldowns(cd));
+            RpEngine.getThreading().run(() -> saveRoleplayCooldowns(cd));
         }
     }
 

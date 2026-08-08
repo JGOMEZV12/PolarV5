@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.Bounty;
 import com.eu.habbo.habbohotel.roleplay.users.BountyManager;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
@@ -36,7 +36,7 @@ public class AddBountyCommand extends Command {
         }
 
         String targetUsername = params[1];
-        Habbo targetHabbo = Emulator.getGameEnvironment().getHabboManager().getHabbo(targetUsername);
+        Habbo targetHabbo = RpEngine.getGameEnvironment().getHabboManager().getHabbo(targetUsername);
 
         if (targetHabbo == null) {
             executor.whisper(
@@ -89,7 +89,7 @@ public class AddBountyCommand extends Command {
         executor.shout("*Coloca una recompensa de $" + reward + " por " + targetUsername + "*");
 
         // Alerta policial/criminal global
-        for (Habbo h : Emulator.getGameEnvironment()
+        for (Habbo h : RpEngine.getGameEnvironment()
                 .getHabboManager()
                 .getOnlineHabbos()
                 .values()) {

@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayCooldowns;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
@@ -51,7 +51,7 @@ public class TanqueCommand extends Command {
         // Efecto del celular/teléfono (65)
         if (habbo.getRoomUnit() != null) {
             habbo.getRoomUnit().setEffectId(65, 0);
-            Emulator.getThreading().run(() -> {
+            RpEngine.getThreading().run(() -> {
                 try {
                     Thread.sleep(1500);
                     if (habbo.getRoomUnit() != null) {

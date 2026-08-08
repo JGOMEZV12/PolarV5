@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.economy.Product;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
 import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
@@ -90,7 +90,7 @@ public class VenderCommand extends Command {
         rpUser.setBankChequings(rpUser.getBankChequings() + sellPrice);
 
         // Procesar remoción y guardado en DB de forma asíncrona
-        Emulator.getThreading().run(() -> {
+        RpEngine.getThreading().run(() -> {
             for (int i = 0; i < quantity; i++) {
                 ProductOwned po = matchingOwned.get(i);
                 ProductsManager.removeProductOwned(po.getId());

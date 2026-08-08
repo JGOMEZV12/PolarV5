@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayOffer;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.users.RoleplayUserManager;
@@ -58,7 +58,7 @@ public class AcceptCommand extends Command {
             return true;
         }
 
-        Habbo offerer = Emulator.getGameEnvironment().getHabboManager().getHabbo(offer.getOffererId());
+        Habbo offerer = RpEngine.getGameEnvironment().getHabboManager().getHabbo(offer.getOffererId());
         if (offerer == null) {
             acceptor.whisper("El usuario ofertante no se encuentra conectado.");
             acceptorRp.getOfferManager().getActiveOffers().remove(offerType);

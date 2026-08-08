@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.commands.rp;
 
-import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.commands.Command;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.RpEngine;
 import com.eu.habbo.habbohotel.users.Habbo;
 
 /**
@@ -31,7 +31,7 @@ public class CtransferirCommand extends Command {
         }
 
         String targetUsername = params[1];
-        Habbo target = Emulator.getGameEnvironment().getHabboManager().getHabbo(targetUsername);
+        Habbo target = RpEngine.getGameEnvironment().getHabboManager().getHabbo(targetUsername);
 
         if (target == null) {
             executor.whisper("El usuario '" + targetUsername + "' no se encuentra conectado.");
