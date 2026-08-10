@@ -145,23 +145,53 @@ public class RoleplayUser {
     private int embarazo = 0;
 
     // Campos de trabajo en memoria faltantes
-    private boolean working = false;
-    private boolean policeTrial = false;
-    private boolean disableRadio = false;
-    private boolean jailbroken = false;
-    private boolean drivingCar = false;
-    private int chalecoPor = 0;
-    private int camCargId = 0;
-    private int camState = 0;
-    private int camDest = 0;
-    private int camOwnId = 0;
-    private boolean camLoading = false;
-    private boolean camUnLoading = false;
-    private boolean basuChofer = false;
-    private int basuTrashCount = 0;
-    private int armPiecesTo = 0;
-    private int armUserTo = 0;
-    private boolean paralized = false;
+    private transient boolean working = false;
+    private transient boolean policeTrial = false;
+    private transient boolean disableRadio = false;
+    private transient boolean jailbroken = false;
+    private transient boolean drivingCar = false;
+    private transient int chalecoPor = 0;
+    private transient int camCargId = 0;
+    private transient int camState = 0;
+    private transient int camDest = 0;
+    private transient int camOwnId = 0;
+    private transient boolean camLoading = false;
+    private transient boolean camUnLoading = false;
+    private transient boolean basuChofer = false;
+    private transient int basuTrashCount = 0;
+    private transient int armPiecesTo = 0;
+    private transient int armUserTo = 0;
+    private transient boolean paralized = false;
+
+    // Diálogos WebSocket / UI en memoria
+    private transient boolean viewProducts = false;
+    private transient boolean viewBaul = false;
+    private transient boolean viewHouse = false;
+    private transient boolean viewApartments = false;
+    private transient boolean usingPhone = false;
+    private transient String inApp = "";
+    private transient boolean viewShopPhones = false;
+    private transient boolean viewCarList = false;
+
+    // Timers / Progresos en tiempo real en memoria
+    private transient boolean processCocaine = false;
+    private transient boolean processWeed = false;
+    private transient boolean processHeroine = false;
+    private transient boolean isWorkingOut = false;
+    private transient boolean isFuelCharging = false;
+    private transient boolean learning = false;
+    private transient boolean isMecLoading = false;
+
+    // Vehículos en memoria
+    private transient int drivingCarId = 0;
+    private transient int pasajerosCount = 0;
+    private transient String pasajeros = "";
+
+    // Varios estado temporal en memoria
+    private transient boolean arrowEnabled = false;
+    private transient boolean targetLock = false;
+    private transient boolean breakGeneralTimer = false;
+    private transient Object hRidItem = null;
 
     public RoleplayUser(int userId) {
         this.userId = userId;
@@ -1222,5 +1252,181 @@ public class RoleplayUser {
 
     public void setParalized(boolean paralized) {
         this.paralized = paralized;
+    }
+
+    public boolean isViewProducts() {
+        return viewProducts;
+    }
+
+    public void setViewProducts(boolean viewProducts) {
+        this.viewProducts = viewProducts;
+    }
+
+    public boolean isViewBaul() {
+        return viewBaul;
+    }
+
+    public void setViewBaul(boolean viewBaul) {
+        this.viewBaul = viewBaul;
+    }
+
+    public boolean isViewHouse() {
+        return viewHouse;
+    }
+
+    public void setViewHouse(boolean viewHouse) {
+        this.viewHouse = viewHouse;
+    }
+
+    public boolean isViewApartments() {
+        return viewApartments;
+    }
+
+    public void setViewApartments(boolean viewApartments) {
+        this.viewApartments = viewApartments;
+    }
+
+    public boolean isUsingPhone() {
+        return usingPhone;
+    }
+
+    public void setUsingPhone(boolean usingPhone) {
+        this.usingPhone = usingPhone;
+    }
+
+    public String getInApp() {
+        return inApp;
+    }
+
+    public void setInApp(String inApp) {
+        this.inApp = inApp;
+    }
+
+    public boolean isViewShopPhones() {
+        return viewShopPhones;
+    }
+
+    public void setViewShopPhones(boolean viewShopPhones) {
+        this.viewShopPhones = viewShopPhones;
+    }
+
+    public boolean isViewCarList() {
+        return viewCarList;
+    }
+
+    public void setViewCarList(boolean viewCarList) {
+        this.viewCarList = viewCarList;
+    }
+
+    public boolean isProcessCocaine() {
+        return processCocaine;
+    }
+
+    public void setProcessCocaine(boolean processCocaine) {
+        this.processCocaine = processCocaine;
+    }
+
+    public boolean isProcessWeed() {
+        return processWeed;
+    }
+
+    public void setProcessWeed(boolean processWeed) {
+        this.processWeed = processWeed;
+    }
+
+    public boolean isProcessHeroine() {
+        return processHeroine;
+    }
+
+    public void setProcessHeroine(boolean processHeroine) {
+        this.processHeroine = processHeroine;
+    }
+
+    public boolean isWorkingOut() {
+        return isWorkingOut;
+    }
+
+    public void setWorkingOut(boolean workingOut) {
+        this.isWorkingOut = workingOut;
+    }
+
+    public boolean isFuelCharging() {
+        return isFuelCharging;
+    }
+
+    public void setFuelCharging(boolean fuelCharging) {
+        this.isFuelCharging = fuelCharging;
+    }
+
+    public boolean isLearning() {
+        return learning;
+    }
+
+    public void setLearning(boolean learning) {
+        this.learning = learning;
+    }
+
+    public boolean isMecLoading() {
+        return isMecLoading;
+    }
+
+    public void setMecLoading(boolean mecLoading) {
+        this.isMecLoading = mecLoading;
+    }
+
+    public int getDrivingCarId() {
+        return drivingCarId;
+    }
+
+    public void setDrivingCarId(int drivingCarId) {
+        this.drivingCarId = drivingCarId;
+    }
+
+    public int getPasajerosCount() {
+        return pasajerosCount;
+    }
+
+    public void setPasajerosCount(int pasajerosCount) {
+        this.pasajerosCount = pasajerosCount;
+    }
+
+    public String getPasajeros() {
+        return pasajeros;
+    }
+
+    public void setPasajeros(String pasajeros) {
+        this.pasajeros = pasajeros;
+    }
+
+    public boolean isArrowEnabled() {
+        return arrowEnabled;
+    }
+
+    public void setArrowEnabled(boolean arrowEnabled) {
+        this.arrowEnabled = arrowEnabled;
+    }
+
+    public boolean isTargetLock() {
+        return targetLock;
+    }
+
+    public void setTargetLock(boolean targetLock) {
+        this.targetLock = targetLock;
+    }
+
+    public boolean isBreakGeneralTimer() {
+        return breakGeneralTimer;
+    }
+
+    public void setBreakGeneralTimer(boolean breakGeneralTimer) {
+        this.breakGeneralTimer = breakGeneralTimer;
+    }
+
+    public Object getHRidItem() {
+        return hRidItem;
+    }
+
+    public void setHRidItem(Object hRidItem) {
+        this.hRidItem = hRidItem;
     }
 }
