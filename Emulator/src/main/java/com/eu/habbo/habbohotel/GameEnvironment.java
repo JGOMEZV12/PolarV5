@@ -24,6 +24,7 @@ import com.eu.habbo.habbohotel.navigation.NavigatorManager;
 import com.eu.habbo.habbohotel.permissions.PermissionsManager;
 import com.eu.habbo.habbohotel.pets.PetManager;
 import com.eu.habbo.habbohotel.polls.PollManager;
+import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
 import com.eu.habbo.habbohotel.rooms.RoomChatBubbleManager;
 import com.eu.habbo.habbohotel.rooms.RoomManager;
 import com.eu.habbo.habbohotel.soundboard.SoundboardManager;
@@ -177,6 +178,9 @@ public class GameEnvironment {
             }
         });
         Emulator.getThreading().run(this.subscriptionScheduler);
+
+        // Inicializar Productos de Roleplay
+        ProductsManager.initialize();
 
         LOGGER.info("GameEnvironment -> Loaded!");
     }

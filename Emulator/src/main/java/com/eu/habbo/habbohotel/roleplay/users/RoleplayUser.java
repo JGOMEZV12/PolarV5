@@ -1,0 +1,1432 @@
+package com.eu.habbo.habbohotel.roleplay.users;
+
+import com.eu.habbo.habbohotel.roleplay.economy.ProductOwned;
+import com.eu.habbo.habbohotel.roleplay.economy.ProductsManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Portado desde: Polar RP/HabboRoleplay/RoleplayUsers/RoleplayUser.cs
+ * Repositorio origen: https://github.com/JGOMEZV12/EmuPolarV4
+ * Repositorio destino: https://github.com/JGOMEZV12/PolarV5
+ * Descripción: Gestiona las estadísticas RP del usuario.
+ * Cambios: Adaptado de singleton C# a clase de instancia en Java controlada por RoleplayUserManager.
+ * Mejoras: Caché de productos del inventario integrada para evitar lecturas concurrentes a la DB.
+ */
+public class RoleplayUser {
+
+    private int userId;
+    private int level = 1;
+    private int levelExp = 0;
+    private String rpClass = "";
+    private boolean permanentClass = false;
+
+    private int jobId = 1;
+    private int jobRank = 1;
+    private int jobRequest = 0;
+    private int sendHomeTimeLeft = 0;
+
+    private int maxHealth = 100;
+    private int curHealth = 100;
+    private int maxEnergy = 100;
+    private int curEnergy = 100;
+    private int curAlcohol = 0;
+    private int maxAlcohol = 100;
+    private int armor = 0;
+    private int hunger = 0;
+    private int sida = 0;
+    private int hygiene = 0;
+    private int animo = 100;
+    private int poop = 0;
+
+    private int intelligence = 0;
+    private int strength = 0;
+    private int stamina = 0;
+    private int intelligenceExp = 0;
+    private int strengthExp = 0;
+    private int staminaExp = 0;
+    private boolean passiveMode = false;
+
+    private boolean isStun = false;
+    private boolean isDead = false;
+    private int deadTimeLeft = 0;
+    private boolean isJailed = false;
+    private int jailedTimeLeft = 0;
+    private boolean isWanted = false;
+    private int wantedLevel = 0;
+    private int wantedTimeLeft = 0;
+    private boolean onProbation = false;
+    private int probationTimeLeft = 0;
+    private boolean isCuffed = false;
+    private int cuffedTimeLeft = 0;
+
+    private int punches = 0;
+    private int kills = 0;
+    private int hitKills = 0;
+    private int gunKills = 0;
+    private int deaths = 0;
+    private int copDeaths = 0;
+    private int timeWorked = 0;
+    private int arrests = 0;
+    private int arrested = 0;
+    private int evasions = 0;
+
+    private int bankAccount = 0;
+    private int bankTarget = 0;
+    private int bankChequings = 0;
+    private int bankSavings = 0;
+    private int weedBaul = 0;
+
+    private int basuLvl = 1;
+    private int basuXp = 0;
+    private int huntPoints = 0;
+    private String huntSkins = "";
+    private int armLvl = 1;
+    private int armXp = 0;
+    private int mecLvl = 1;
+    private int mecXp = 0;
+    private int camLvl = 1;
+    private int camXp = 0;
+
+    private int lastKilled = 0;
+    private int marriedTo = 0;
+    private int hijo = 0;
+
+    private int gangId = 0;
+    private int gangRank = 0;
+    private int gangRequest = 0;
+    private int changeNameCount = 0;
+
+    private int car = 0;
+    private int carFuel = 0;
+    private int weed = 0;
+    private int cocaine = 0;
+    private int botiquin = 0;
+    private int heroina = 0;
+    private int caramelos = 0;
+    private int medicina = 0;
+    private int cigarette = 0;
+    private int pildora = 0;
+    private int dynamite = 0;
+    private int weedmateria = 0;
+
+    private String unlockedQuests = "";
+    private int brawlWins = 0;
+    private int cwWins = 0;
+    private int mwWins = 0;
+    private int soloQueueWins = 0;
+    private boolean isNoob = true;
+    private int noobTimeLeft = 0;
+    private boolean inmunidadActivada = false;
+    private int vipBanned = 0;
+    private String lastCoordinates = "";
+
+    // Caché local para productos del inventario del usuario
+    private List<ProductOwned> ownedProducts = null;
+    private final OfferManager offerManager;
+
+    // Campos de combate en memoria
+    private Weapon equippedWeapon = null;
+    private int bullets = 0;
+    private int wlife = 100;
+    private boolean combatMode = false;
+
+    // Campos de vehiculos en memoria
+    private boolean drivingInCar = false;
+
+    // Campos de robos en memoria
+    private boolean robbery = false;
+    private boolean atmRobbery = false;
+    private boolean robartiendaRobbery = false;
+
+    // Campos de embarazo en memoria
+    private int embarazo = 0;
+
+    // Campos de trabajo en memoria faltantes
+    private transient boolean working = false;
+    private transient boolean policeTrial = false;
+    private transient boolean disableRadio = false;
+    private transient boolean jailbroken = false;
+    private transient boolean drivingCar = false;
+    private transient int chalecoPor = 0;
+    private transient int camCargId = 0;
+    private transient int camState = 0;
+    private transient int camDest = 0;
+    private transient int camOwnId = 0;
+    private transient boolean camLoading = false;
+    private transient boolean camUnLoading = false;
+    private transient boolean basuChofer = false;
+    private transient int basuTrashCount = 0;
+    private transient int armPiecesTo = 0;
+    private transient int armUserTo = 0;
+    private transient boolean paralized = false;
+
+    // Diálogos WebSocket / UI en memoria
+    private transient boolean viewProducts = false;
+    private transient boolean viewBaul = false;
+    private transient boolean viewHouse = false;
+    private transient boolean viewApartments = false;
+    private transient boolean usingPhone = false;
+    private transient String inApp = "";
+    private transient boolean viewShopPhones = false;
+    private transient boolean viewCarList = false;
+
+    // Timers / Progresos en tiempo real en memoria
+    private transient boolean processCocaine = false;
+    private transient boolean processWeed = false;
+    private transient boolean processHeroine = false;
+    private transient boolean isWorkingOut = false;
+    private transient boolean isFuelCharging = false;
+    private transient boolean learning = false;
+    private transient boolean isMecLoading = false;
+
+    // Vehículos en memoria
+    private transient int drivingCarId = 0;
+    private transient int pasajerosCount = 0;
+    private transient String pasajeros = "";
+
+    // Varios estado temporal en memoria
+    private transient boolean arrowEnabled = false;
+    private transient boolean targetLock = false;
+    private transient boolean breakGeneralTimer = false;
+    private transient Object hRidItem = null;
+
+    public RoleplayUser(int userId) {
+        this.userId = userId;
+        this.offerManager = new OfferManager(userId);
+    }
+
+    public RoleplayUser(ResultSet row) throws SQLException {
+        this.userId = row.getInt("id");
+        this.offerManager = new OfferManager(this.userId);
+        this.level = row.getInt("level");
+        this.levelExp = row.getInt("level_exp");
+        this.rpClass = row.getString("class");
+        this.permanentClass = row.getString("permanent_class").equals("1");
+
+        this.jobId = row.getInt("job_id");
+        this.jobRank = row.getInt("job_rank");
+        this.jobRequest = row.getInt("job_request");
+        this.sendHomeTimeLeft = row.getInt("sendhome_time_left");
+
+        this.maxHealth = row.getInt("maxhealth");
+        this.curHealth = row.getInt("curhealth");
+        this.maxEnergy = row.getInt("maxenergy");
+        this.curEnergy = row.getInt("curenergy");
+        this.curAlcohol = row.getInt("curalcohol");
+        this.maxAlcohol = row.getInt("maxalcohol");
+        this.armor = row.getInt("kevlar");
+        this.hunger = row.getInt("hunger");
+        this.sida = row.getInt("sida");
+        this.hygiene = row.getInt("hygiene");
+        this.animo = row.getInt("animo");
+        this.poop = row.getInt("poop");
+
+        this.intelligence = row.getInt("intelligence");
+        this.strength = row.getInt("strength");
+        this.stamina = row.getInt("stamina");
+        this.intelligenceExp = row.getInt("intelligence_exp");
+        this.strengthExp = row.getInt("strength_exp");
+        this.staminaExp = row.getInt("stamina_exp");
+        this.passiveMode = row.getString("passive_mode").equals("1");
+
+        this.isStun = row.getString("is_stun").equals("1");
+        this.isDead = row.getString("is_dead").equals("1");
+        this.deadTimeLeft = row.getInt("dead_time_left");
+        this.isJailed = row.getString("is_jailed").equals("1");
+        this.jailedTimeLeft = row.getInt("jailed_time_left");
+        this.isWanted = row.getString("is_wanted").equals("1");
+        this.wantedLevel = row.getInt("wanted_level");
+        this.wantedTimeLeft = row.getInt("wanted_time_left");
+        this.onProbation = row.getString("on_probation").equals("1");
+        this.probationTimeLeft = row.getInt("probation_time_left");
+        this.isCuffed = row.getString("is_cuffed").equals("1");
+        this.cuffedTimeLeft = row.getInt("cuffed_time_left");
+
+        this.punches = row.getInt("punches");
+        this.kills = row.getInt("kills");
+        this.hitKills = row.getInt("hit_kills");
+        this.gunKills = row.getInt("gun_kills");
+        this.deaths = row.getInt("deaths");
+        this.copDeaths = row.getInt("cop_deaths");
+        this.timeWorked = row.getInt("time_worked");
+        this.arrests = row.getInt("arrests");
+        this.arrested = row.getInt("arrested");
+        this.evasions = row.getInt("evasions");
+
+        this.bankAccount = row.getInt("bank_account");
+        this.bankTarget = row.getInt("bank_target");
+        this.bankChequings = row.getInt("bank_chequings");
+        this.bankSavings = row.getInt("bank_savings");
+        this.weedBaul = row.getInt("weedbaul");
+
+        this.basuLvl = row.getInt("BasuLvl");
+        this.basuXp = row.getInt("BasuXP");
+        this.huntPoints = row.getInt("hunt_points");
+        this.huntSkins = row.getString("hunt_skins");
+        this.armLvl = row.getInt("ArmLvl");
+        this.armXp = row.getInt("ArmXP");
+        this.mecLvl = row.getInt("MecLvl");
+        this.mecXp = row.getInt("MecXP");
+        this.camLvl = row.getInt("CamLvl");
+        this.camXp = row.getInt("CamXP");
+
+        this.lastKilled = row.getInt("last_killed");
+        this.marriedTo = row.getInt("married_to");
+        this.hijo = row.getInt("hijo");
+
+        this.gangId = row.getInt("gang_id");
+        this.gangRank = row.getInt("gang_rank");
+        this.gangRequest = row.getInt("gang_request");
+        this.changeNameCount = row.getInt("changename_count");
+
+        this.car = row.getInt("car");
+        this.carFuel = row.getInt("car_fuel");
+        this.weed = row.getInt("weed");
+        this.cocaine = row.getInt("cocaine");
+        this.botiquin = row.getInt("botiquin");
+        this.heroina = row.getInt("heroina");
+        this.caramelos = row.getInt("caramelos");
+        this.medicina = row.getInt("medicina");
+        this.cigarette = row.getInt("cigarette");
+        this.pildora = row.getInt("pildora");
+        this.dynamite = row.getInt("dynamite");
+        this.weedmateria = row.getInt("weedmateria");
+
+        this.unlockedQuests = row.getString("unlocked_quests");
+        this.brawlWins = row.getInt("brawl_wins");
+        this.cwWins = row.getInt("cw_wins");
+        this.mwWins = row.getInt("mw_wins");
+        this.soloQueueWins = row.getInt("soloqueue_wins");
+        this.isNoob = row.getString("is_noob").equals("1");
+        this.noobTimeLeft = row.getInt("noob_time_left");
+        this.inmunidadActivada = row.getString("inmunidad_activada").equals("1");
+        this.vipBanned = row.getInt("vip_banned");
+        this.lastCoordinates = row.getString("last_coordinates");
+    }
+
+    public List<ProductOwned> getOwnedProducts() {
+        if (this.ownedProducts == null) {
+            List<ProductOwned> dbProducts = ProductsManager.getMyProductsOwned(this.userId);
+            if (dbProducts == null) {
+                dbProducts = new ArrayList<>();
+            }
+            this.ownedProducts = java.util.Collections.synchronizedList(dbProducts);
+        }
+        return this.ownedProducts;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getLevelExp() {
+        return levelExp;
+    }
+
+    public void setLevelExp(int levelExp) {
+        this.levelExp = levelExp;
+    }
+
+    public String getRpClass() {
+        return rpClass;
+    }
+
+    public void setRpClass(String rpClass) {
+        this.rpClass = rpClass;
+    }
+
+    public boolean isPermanentClass() {
+        return permanentClass;
+    }
+
+    public void setPermanentClass(boolean permanentClass) {
+        this.permanentClass = permanentClass;
+    }
+
+    public int getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
+
+    public int getJobRank() {
+        return jobRank;
+    }
+
+    public void setJobRank(int jobRank) {
+        this.jobRank = jobRank;
+    }
+
+    public int getJobRequest() {
+        return jobRequest;
+    }
+
+    public void setJobRequest(int jobRequest) {
+        this.jobRequest = jobRequest;
+    }
+
+    public int getSendHomeTimeLeft() {
+        return sendHomeTimeLeft;
+    }
+
+    public void setSendHomeTimeLeft(int sendHomeTimeLeft) {
+        this.sendHomeTimeLeft = sendHomeTimeLeft;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
+
+    public int getCurHealth() {
+        return curHealth;
+    }
+
+    public void setCurHealth(int curHealth) {
+        this.curHealth = curHealth;
+    }
+
+    public int getMaxEnergy() {
+        return maxEnergy;
+    }
+
+    public void setMaxEnergy(int maxEnergy) {
+        this.maxEnergy = maxEnergy;
+    }
+
+    public int getCurEnergy() {
+        return curEnergy;
+    }
+
+    public void setCurEnergy(int curEnergy) {
+        this.curEnergy = curEnergy;
+    }
+
+    public int getCurAlcohol() {
+        return curAlcohol;
+    }
+
+    public void setCurAlcohol(int curAlcohol) {
+        this.curAlcohol = curAlcohol;
+    }
+
+    public int getMaxAlcohol() {
+        return maxAlcohol;
+    }
+
+    public void setMaxAlcohol(int maxAlcohol) {
+        this.maxAlcohol = maxAlcohol;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    public int getHunger() {
+        return hunger;
+    }
+
+    public void setHunger(int hunger) {
+        this.hunger = hunger;
+    }
+
+    public int getSida() {
+        return sida;
+    }
+
+    public void setSida(int sida) {
+        this.sida = sida;
+    }
+
+    public int getHygiene() {
+        return hygiene;
+    }
+
+    public void setHygiene(int hygiene) {
+        this.hygiene = hygiene;
+    }
+
+    public int getAnimo() {
+        return animo;
+    }
+
+    public void setAnimo(int animo) {
+        this.animo = animo;
+    }
+
+    public int getPoop() {
+        return poop;
+    }
+
+    public void setPoop(int poop) {
+        this.poop = poop;
+    }
+
+    public int getIntelligence() {
+        return intelligence;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(int stamina) {
+        this.stamina = stamina;
+    }
+
+    public int getIntelligenceExp() {
+        return intelligenceExp;
+    }
+
+    public void setIntelligenceExp(int intelligenceExp) {
+        this.intelligenceExp = intelligenceExp;
+    }
+
+    public int getStrengthExp() {
+        return strengthExp;
+    }
+
+    public void setStrengthExp(int strengthExp) {
+        this.strengthExp = strengthExp;
+    }
+
+    public int getStaminaExp() {
+        return staminaExp;
+    }
+
+    public void setStaminaExp(int staminaExp) {
+        this.staminaExp = staminaExp;
+    }
+
+    public boolean isPassiveMode() {
+        return passiveMode;
+    }
+
+    public void setPassiveMode(boolean passiveMode) {
+        this.passiveMode = passiveMode;
+    }
+
+    public boolean isStun() {
+        return isStun;
+    }
+
+    public void setStun(boolean isStun) {
+        this.isStun = isStun;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean isDead) {
+        this.isDead = isDead;
+    }
+
+    public int getDeadTimeLeft() {
+        return deadTimeLeft;
+    }
+
+    public void setDeadTimeLeft(int deadTimeLeft) {
+        this.deadTimeLeft = deadTimeLeft;
+    }
+
+    public boolean isJailed() {
+        return isJailed;
+    }
+
+    public void setJailed(boolean isJailed) {
+        this.isJailed = isJailed;
+    }
+
+    public int getJailedTimeLeft() {
+        return jailedTimeLeft;
+    }
+
+    public void setJailedTimeLeft(int jailedTimeLeft) {
+        this.jailedTimeLeft = jailedTimeLeft;
+    }
+
+    public boolean isWanted() {
+        return isWanted;
+    }
+
+    public void setWanted(boolean isWanted) {
+        this.isWanted = isWanted;
+    }
+
+    public int getWantedLevel() {
+        return wantedLevel;
+    }
+
+    public void setWantedLevel(int wantedLevel) {
+        this.wantedLevel = wantedLevel;
+    }
+
+    public int getWantedTimeLeft() {
+        return wantedTimeLeft;
+    }
+
+    public void setWantedTimeLeft(int wantedTimeLeft) {
+        this.wantedTimeLeft = wantedTimeLeft;
+    }
+
+    public boolean isOnProbation() {
+        return onProbation;
+    }
+
+    public void setOnProbation(boolean onProbation) {
+        this.onProbation = onProbation;
+    }
+
+    public int getProbationTimeLeft() {
+        return probationTimeLeft;
+    }
+
+    public void setProbationTimeLeft(int probationTimeLeft) {
+        this.probationTimeLeft = probationTimeLeft;
+    }
+
+    public boolean isCuffed() {
+        return isCuffed;
+    }
+
+    public void setCuffed(boolean isCuffed) {
+        this.isCuffed = isCuffed;
+    }
+
+    public int getCuffedTimeLeft() {
+        return cuffedTimeLeft;
+    }
+
+    public void setCuffedTimeLeft(int cuffedTimeLeft) {
+        this.cuffedTimeLeft = cuffedTimeLeft;
+    }
+
+    public int getPunches() {
+        return punches;
+    }
+
+    public void setPunches(int punches) {
+        this.punches = punches;
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public int getHitKills() {
+        return hitKills;
+    }
+
+    public void setHitKills(int hitKills) {
+        this.hitKills = hitKills;
+    }
+
+    public int getGunKills() {
+        return gunKills;
+    }
+
+    public void setGunKills(int gunKills) {
+        this.gunKills = gunKills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public int getCopDeaths() {
+        return copDeaths;
+    }
+
+    public void setCopDeaths(int copDeaths) {
+        this.copDeaths = copDeaths;
+    }
+
+    public int getTimeWorked() {
+        return timeWorked;
+    }
+
+    public void setTimeWorked(int timeWorked) {
+        this.timeWorked = timeWorked;
+    }
+
+    public int getArrests() {
+        return arrests;
+    }
+
+    public void setArrests(int arrests) {
+        this.arrests = arrests;
+    }
+
+    public int getArrested() {
+        return arrested;
+    }
+
+    public void setArrested(int arrested) {
+        this.arrested = arrested;
+    }
+
+    public int getEvasions() {
+        return evasions;
+    }
+
+    public void setEvasions(int evasions) {
+        this.evasions = evasions;
+    }
+
+    public int getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(int bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public int getBankTarget() {
+        return bankTarget;
+    }
+
+    public void setBankTarget(int bankTarget) {
+        this.bankTarget = bankTarget;
+    }
+
+    public int getBankChequings() {
+        return bankChequings;
+    }
+
+    public void setBankChequings(int bankChequings) {
+        this.bankChequings = bankChequings;
+    }
+
+    public int getBankSavings() {
+        return bankSavings;
+    }
+
+    public void setBankSavings(int bankSavings) {
+        this.bankSavings = bankSavings;
+    }
+
+    public int getWeedBaul() {
+        return weedBaul;
+    }
+
+    public void setWeedBaul(int weedBaul) {
+        this.weedBaul = weedBaul;
+    }
+
+    public int getBasuLvl() {
+        return basuLvl;
+    }
+
+    public void setBasuLvl(int basuLvl) {
+        this.basuLvl = basuLvl;
+    }
+
+    public int getBasuXp() {
+        return basuXp;
+    }
+
+    public void setBasuXp(int basuXp) {
+        this.basuXp = basuXp;
+    }
+
+    public int getHuntPoints() {
+        return huntPoints;
+    }
+
+    public void setHuntPoints(int huntPoints) {
+        this.huntPoints = huntPoints;
+    }
+
+    public String getHuntSkins() {
+        return huntSkins;
+    }
+
+    public void setHuntSkins(String huntSkins) {
+        this.huntSkins = huntSkins;
+    }
+
+    public int getArmLvl() {
+        return armLvl;
+    }
+
+    public void setArmLvl(int armLvl) {
+        this.armLvl = armLvl;
+    }
+
+    public int getArmXp() {
+        return armXp;
+    }
+
+    public void setArmXp(int armXp) {
+        this.armXp = armXp;
+    }
+
+    public int getMecLvl() {
+        return mecLvl;
+    }
+
+    public void setMecLvl(int mecLvl) {
+        this.mecLvl = mecLvl;
+    }
+
+    public int getMecXp() {
+        return mecXp;
+    }
+
+    public void setMecXp(int mecXp) {
+        this.mecXp = mecXp;
+    }
+
+    public int getCamLvl() {
+        return camLvl;
+    }
+
+    public void setCamLvl(int camLvl) {
+        this.camLvl = camLvl;
+    }
+
+    public int getCamXp() {
+        return camXp;
+    }
+
+    public void setCamXp(int camXp) {
+        this.camXp = camXp;
+    }
+
+    public int getLastKilled() {
+        return lastKilled;
+    }
+
+    public void setLastKilled(int lastKilled) {
+        this.lastKilled = lastKilled;
+    }
+
+    public int getMarriedTo() {
+        return marriedTo;
+    }
+
+    public void setMarriedTo(int marriedTo) {
+        this.marriedTo = marriedTo;
+    }
+
+    public int getHijo() {
+        return hijo;
+    }
+
+    public void setHijo(int hijo) {
+        this.hijo = hijo;
+    }
+
+    public int getGangId() {
+        return gangId;
+    }
+
+    public void setGangId(int gangId) {
+        this.gangId = gangId;
+    }
+
+    public int getGangRank() {
+        return gangRank;
+    }
+
+    public void setGangRank(int gangRank) {
+        this.gangRank = gangRank;
+    }
+
+    public int getGangRequest() {
+        return gangRequest;
+    }
+
+    public void setGangRequest(int gangRequest) {
+        this.gangRequest = gangRequest;
+    }
+
+    public int getChangeNameCount() {
+        return changeNameCount;
+    }
+
+    public void setChangeNameCount(int changeNameCount) {
+        this.changeNameCount = changeNameCount;
+    }
+
+    public int getCar() {
+        return car;
+    }
+
+    public void setCar(int car) {
+        this.car = car;
+    }
+
+    public int getCarFuel() {
+        return carFuel;
+    }
+
+    public void setCarFuel(int carFuel) {
+        this.carFuel = carFuel;
+    }
+
+    public int getWeed() {
+        return weed;
+    }
+
+    public void setWeed(int weed) {
+        this.weed = weed;
+    }
+
+    public int getCocaine() {
+        return cocaine;
+    }
+
+    public void setCocaine(int cocaine) {
+        this.cocaine = cocaine;
+    }
+
+    public int getBotiquin() {
+        return botiquin;
+    }
+
+    public void setBotiquin(int botiquin) {
+        this.botiquin = botiquin;
+    }
+
+    public int getHeroina() {
+        return heroina;
+    }
+
+    public void setHeroina(int heroina) {
+        this.heroina = heroina;
+    }
+
+    public int getCaramelos() {
+        return caramelos;
+    }
+
+    public void setCaramelos(int caramelos) {
+        this.caramelos = caramelos;
+    }
+
+    public int getMedicina() {
+        return medicina;
+    }
+
+    public void setMedicina(int medicina) {
+        this.medicina = medicina;
+    }
+
+    public int getCigarette() {
+        return cigarette;
+    }
+
+    public void setCigarette(int cigarette) {
+        this.cigarette = cigarette;
+    }
+
+    public int getPildora() {
+        return pildora;
+    }
+
+    public void setPildora(int pildora) {
+        this.pildora = pildora;
+    }
+
+    public int getDynamite() {
+        return dynamite;
+    }
+
+    public void setDynamite(int dynamite) {
+        this.dynamite = dynamite;
+    }
+
+    public int getWeedmateria() {
+        return weedmateria;
+    }
+
+    public void setWeedmateria(int weedmateria) {
+        this.weedmateria = weedmateria;
+    }
+
+    public String getUnlockedQuests() {
+        return unlockedQuests;
+    }
+
+    public void setUnlockedQuests(String unlockedQuests) {
+        this.unlockedQuests = unlockedQuests;
+    }
+
+    public int getBrawlWins() {
+        return brawlWins;
+    }
+
+    public void setBrawlWins(int brawlWins) {
+        this.brawlWins = brawlWins;
+    }
+
+    public int getCwWins() {
+        return cwWins;
+    }
+
+    public void setCwWins(int cwWins) {
+        this.cwWins = cwWins;
+    }
+
+    public int getMwWins() {
+        return mwWins;
+    }
+
+    public void setMwWins(int mwWins) {
+        this.mwWins = mwWins;
+    }
+
+    public int getSoloQueueWins() {
+        return soloQueueWins;
+    }
+
+    public void setSoloQueueWins(int soloQueueWins) {
+        this.soloQueueWins = soloQueueWins;
+    }
+
+    public boolean isNoob() {
+        return isNoob;
+    }
+
+    public void setNoob(boolean isNoob) {
+        this.isNoob = isNoob;
+    }
+
+    public int getNoobTimeLeft() {
+        return noobTimeLeft;
+    }
+
+    public void setNoobTimeLeft(int noobTimeLeft) {
+        this.noobTimeLeft = noobTimeLeft;
+    }
+
+    public boolean isInmunidadActivada() {
+        return inmunidadActivada;
+    }
+
+    public void setInmunidadActivada(boolean inmunidadActivada) {
+        this.inmunidadActivada = inmunidadActivada;
+    }
+
+    public int getVipBanned() {
+        return vipBanned;
+    }
+
+    public void setVipBanned(int vipBanned) {
+        this.vipBanned = vipBanned;
+    }
+
+    public String getLastCoordinates() {
+        return lastCoordinates;
+    }
+
+    public void setLastCoordinates(String lastCoordinates) {
+        this.lastCoordinates = lastCoordinates;
+    }
+
+    public OfferManager getOfferManager() {
+        return offerManager;
+    }
+
+    public Weapon getEquippedWeapon() {
+        return equippedWeapon;
+    }
+
+    public void setEquippedWeapon(Weapon equippedWeapon) {
+        this.equippedWeapon = equippedWeapon;
+    }
+
+    public int getBullets() {
+        return bullets;
+    }
+
+    public void setBullets(int bullets) {
+        this.bullets = bullets;
+    }
+
+    public int getWlife() {
+        return wlife;
+    }
+
+    public void setWlife(int wlife) {
+        this.wlife = wlife;
+    }
+
+    public boolean isCombatMode() {
+        return combatMode;
+    }
+
+    public void setCombatMode(boolean combatMode) {
+        this.combatMode = combatMode;
+    }
+
+    public boolean isDrivingInCar() {
+        return drivingInCar;
+    }
+
+    public void setDrivingInCar(boolean drivingInCar) {
+        this.drivingInCar = drivingInCar;
+    }
+
+    public int getEmbarazo() {
+        return embarazo;
+    }
+
+    public void setEmbarazo(int embarazo) {
+        this.embarazo = embarazo;
+    }
+
+    public boolean isWorking() {
+        return working;
+    }
+
+    public void setWorking(boolean working) {
+        this.working = working;
+    }
+
+    public boolean isPoliceTrial() {
+        return policeTrial;
+    }
+
+    public void setPoliceTrial(boolean policeTrial) {
+        this.policeTrial = policeTrial;
+    }
+
+    public boolean isDisableRadio() {
+        return disableRadio;
+    }
+
+    public void setDisableRadio(boolean disableRadio) {
+        this.disableRadio = disableRadio;
+    }
+
+    public boolean isJailbroken() {
+        return jailbroken;
+    }
+
+    public void setJailbroken(boolean jailbroken) {
+        this.jailbroken = jailbroken;
+    }
+
+    public boolean isDrivingCar() {
+        return drivingCar;
+    }
+
+    public void setDrivingCar(boolean drivingCar) {
+        this.drivingCar = drivingCar;
+    }
+
+    public int getChalecoPor() {
+        return chalecoPor;
+    }
+
+    public void setChalecoPor(int chalecoPor) {
+        this.chalecoPor = chalecoPor;
+    }
+
+    public int getCamCargId() {
+        return camCargId;
+    }
+
+    public void setCamCargId(int camCargId) {
+        this.camCargId = camCargId;
+    }
+
+    public int getCamState() {
+        return camState;
+    }
+
+    public void setCamState(int camState) {
+        this.camState = camState;
+    }
+
+    public int getCamDest() {
+        return camDest;
+    }
+
+    public void setCamDest(int camDest) {
+        this.camDest = camDest;
+    }
+
+    public int getCamOwnId() {
+        return camOwnId;
+    }
+
+    public void setCamOwnId(int camOwnId) {
+        this.camOwnId = camOwnId;
+    }
+
+    public boolean isCamLoading() {
+        return camLoading;
+    }
+
+    public void setCamLoading(boolean camLoading) {
+        this.camLoading = camLoading;
+    }
+
+    public boolean isCamUnLoading() {
+        return camUnLoading;
+    }
+
+    public void setCamUnLoading(boolean camUnLoading) {
+        this.camUnLoading = camUnLoading;
+    }
+
+    public boolean isBasuChofer() {
+        return basuChofer;
+    }
+
+    public void setBasuChofer(boolean basuChofer) {
+        this.basuChofer = basuChofer;
+    }
+
+    public int getBasuTrashCount() {
+        return basuTrashCount;
+    }
+
+    public void setBasuTrashCount(int basuTrashCount) {
+        this.basuTrashCount = basuTrashCount;
+    }
+
+    public int getArmPiecesTo() {
+        return armPiecesTo;
+    }
+
+    public void setArmPiecesTo(int armPiecesTo) {
+        this.armPiecesTo = armPiecesTo;
+    }
+
+    public int getArmUserTo() {
+        return armUserTo;
+    }
+
+    public void setArmUserTo(int armUserTo) {
+        this.armUserTo = armUserTo;
+    }
+
+    public boolean isParalized() {
+        return paralized;
+    }
+
+    public void setParalized(boolean paralized) {
+        this.paralized = paralized;
+    }
+
+    public boolean isViewProducts() {
+        return viewProducts;
+    }
+
+    public void setViewProducts(boolean viewProducts) {
+        this.viewProducts = viewProducts;
+    }
+
+    public boolean isViewBaul() {
+        return viewBaul;
+    }
+
+    public void setViewBaul(boolean viewBaul) {
+        this.viewBaul = viewBaul;
+    }
+
+    public boolean isViewHouse() {
+        return viewHouse;
+    }
+
+    public void setViewHouse(boolean viewHouse) {
+        this.viewHouse = viewHouse;
+    }
+
+    public boolean isViewApartments() {
+        return viewApartments;
+    }
+
+    public void setViewApartments(boolean viewApartments) {
+        this.viewApartments = viewApartments;
+    }
+
+    public boolean isUsingPhone() {
+        return usingPhone;
+    }
+
+    public void setUsingPhone(boolean usingPhone) {
+        this.usingPhone = usingPhone;
+    }
+
+    public String getInApp() {
+        return inApp;
+    }
+
+    public void setInApp(String inApp) {
+        this.inApp = inApp;
+    }
+
+    public boolean isViewShopPhones() {
+        return viewShopPhones;
+    }
+
+    public void setViewShopPhones(boolean viewShopPhones) {
+        this.viewShopPhones = viewShopPhones;
+    }
+
+    public boolean isViewCarList() {
+        return viewCarList;
+    }
+
+    public void setViewCarList(boolean viewCarList) {
+        this.viewCarList = viewCarList;
+    }
+
+    public boolean isProcessCocaine() {
+        return processCocaine;
+    }
+
+    public void setProcessCocaine(boolean processCocaine) {
+        this.processCocaine = processCocaine;
+    }
+
+    public boolean isProcessWeed() {
+        return processWeed;
+    }
+
+    public void setProcessWeed(boolean processWeed) {
+        this.processWeed = processWeed;
+    }
+
+    public boolean isProcessHeroine() {
+        return processHeroine;
+    }
+
+    public void setProcessHeroine(boolean processHeroine) {
+        this.processHeroine = processHeroine;
+    }
+
+    public boolean isWorkingOut() {
+        return isWorkingOut;
+    }
+
+    public void setWorkingOut(boolean workingOut) {
+        this.isWorkingOut = workingOut;
+    }
+
+    public boolean isFuelCharging() {
+        return isFuelCharging;
+    }
+
+    public void setFuelCharging(boolean fuelCharging) {
+        this.isFuelCharging = fuelCharging;
+    }
+
+    public boolean isLearning() {
+        return learning;
+    }
+
+    public void setLearning(boolean learning) {
+        this.learning = learning;
+    }
+
+    public boolean isMecLoading() {
+        return isMecLoading;
+    }
+
+    public void setMecLoading(boolean mecLoading) {
+        this.isMecLoading = mecLoading;
+    }
+
+    public int getDrivingCarId() {
+        return drivingCarId;
+    }
+
+    public void setDrivingCarId(int drivingCarId) {
+        this.drivingCarId = drivingCarId;
+    }
+
+    public int getPasajerosCount() {
+        return pasajerosCount;
+    }
+
+    public void setPasajerosCount(int pasajerosCount) {
+        this.pasajerosCount = pasajerosCount;
+    }
+
+    public String getPasajeros() {
+        return pasajeros;
+    }
+
+    public void setPasajeros(String pasajeros) {
+        this.pasajeros = pasajeros;
+    }
+
+    public boolean isArrowEnabled() {
+        return arrowEnabled;
+    }
+
+    public void setArrowEnabled(boolean arrowEnabled) {
+        this.arrowEnabled = arrowEnabled;
+    }
+
+    public boolean isTargetLock() {
+        return targetLock;
+    }
+
+    public void setTargetLock(boolean targetLock) {
+        this.targetLock = targetLock;
+    }
+
+    public boolean isBreakGeneralTimer() {
+        return breakGeneralTimer;
+    }
+
+    public void setBreakGeneralTimer(boolean breakGeneralTimer) {
+        this.breakGeneralTimer = breakGeneralTimer;
+    }
+
+    public Object getHRidItem() {
+        return hRidItem;
+    }
+
+    public void setHRidItem(Object hRidItem) {
+        this.hRidItem = hRidItem;
+    }
+}
