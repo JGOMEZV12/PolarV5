@@ -99,6 +99,7 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         ch.pipeline().addLast(blockingHttp, "badgeHttpHandler", new BadgeHttpHandler());
         ch.pipeline().addLast(blockingHttp, "badgeLeaderboardHttpHandler", new BadgeLeaderboardHttpHandler());
         ch.pipeline().addLast(blockingHttp, "emuStatsHttpHandler", new EmuStatsHttpHandler());
+        ch.pipeline().addLast("roleplayRouter", new com.eu.habbo.habbohotel.roleplay.websocket.RoleplayWebSocketRouter());
         ch.pipeline().addLast("wsProtocolHandler", new WebSocketServerProtocolHandler(this.wsConfig));
         ch.pipeline().addLast("wsHttpCleanup", new WebSocketHttpCleanupHandler());
         ch.pipeline().addLast("wsFrameAggregator", new WebSocketFrameAggregator(MAX_FRAME_SIZE));
