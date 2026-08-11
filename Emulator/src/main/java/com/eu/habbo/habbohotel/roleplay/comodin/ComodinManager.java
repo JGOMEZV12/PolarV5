@@ -1,14 +1,13 @@
 package com.eu.habbo.habbohotel.roleplay.comodin;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ComodinManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ComodinManager.class);
@@ -19,8 +18,8 @@ public class ComodinManager {
         comodines.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_comodin");
-             ResultSet set = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_comodin");
+                ResultSet set = statement.executeQuery()) {
 
             while (set.next()) {
                 int id = set.getInt("id");

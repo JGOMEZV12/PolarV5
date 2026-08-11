@@ -21,27 +21,67 @@ public class VehicleJobs {
         this.jobId = jobId;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getRoomId() { return roomId; }
-    public void setRoomId(int roomId) { this.roomId = roomId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getBaseItem() { return baseItem; }
-    public void setBaseItem(int baseItem) { this.baseItem = baseItem; }
+    public int getRoomId() {
+        return roomId;
+    }
 
-    public int getX() { return x; }
-    public void setX(int x) { this.x = x; }
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
 
-    public int getY() { return y; }
-    public void setY(int y) { this.y = y; }
+    public int getBaseItem() {
+        return baseItem;
+    }
 
-    public double getZ() { return z; }
-    public void setZ(double z) { this.z = z; }
+    public void setBaseItem(int baseItem) {
+        this.baseItem = baseItem;
+    }
 
-    public int getRot() { return rot; }
-    public void setRot(int rot) { this.rot = rot; }
+    public int getX() {
+        return x;
+    }
 
-    public int getJobId() { return jobId; }
-    public void setJobId(int jobId) { this.jobId = jobId; }
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
+
+    public int getRot() {
+        return rot;
+    }
+
+    public void setRot(int rot) {
+        this.rot = rot;
+    }
+
+    public int getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
 }

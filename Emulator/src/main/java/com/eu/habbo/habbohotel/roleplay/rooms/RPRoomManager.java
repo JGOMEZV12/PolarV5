@@ -1,14 +1,15 @@
 package com.eu.habbo.habbohotel.roleplay.rooms;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RPRoomManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(RPRoomManager.class);
@@ -23,8 +24,7 @@ public class RPRoomManager {
     public final Map<String, List<RPRoom>> basurerosRooms = new HashMap<>();
     public final Map<String, List<RPRoom>> armerosRooms = new HashMap<>();
 
-    public RPRoomManager() {
-    }
+    public RPRoomManager() {}
 
     public void init() {
         hospitalRooms.clear();
@@ -37,11 +37,10 @@ public class RPRoomManager {
         armerosRooms.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT * FROM `rp_rooms` " +
-                             "WHERE `is_hospital` = '1' OR `is_prison` = '1' OR `is_prisonback` = '1' " +
-                             "   OR `is_court` = '1' OR `is_camionero` = '1' OR `is_basurero` = '1' " +
-                             "   OR `is_polstation` = '1' OR `is_armero` = '1'")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM `rp_rooms` "
+                        + "WHERE `is_hospital` = '1' OR `is_prison` = '1' OR `is_prisonback` = '1' "
+                        + "   OR `is_court` = '1' OR `is_camionero` = '1' OR `is_basurero` = '1' "
+                        + "   OR `is_polstation` = '1' OR `is_armero` = '1'")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
@@ -71,14 +70,37 @@ public class RPRoomManager {
         }
     }
 
-    public int tryToGetHospital(String city, RPRoom[] outRoom) { return tryGetRandom(hospitalRooms, city, outRoom); }
-    public int tryToGetJail(String city, RPRoom[] outRoom) { return tryGetRandom(jailRooms, city, outRoom); }
-    public int tryToGetJailBack(String city, RPRoom[] outRoom) { return tryGetRandom(jailBack, city, outRoom); }
-    public int tryToGetCourt(String city, RPRoom[] outRoom) { return tryGetRandom(courtRooms, city, outRoom); }
-    public int tryToGetCamioneros(String city, RPRoom[] outRoom) { return tryGetRandom(camionerosRooms, city, outRoom); }
-    public int tryToGetPolStation(String city, RPRoom[] outRoom) { return tryGetRandom(polStationRooms, city, outRoom); }
-    public int tryToGetBasureros(String city, RPRoom[] outRoom) { return tryGetRandom(basurerosRooms, city, outRoom); }
-    public int tryToGetArmeros(String city, RPRoom[] outRoom) { return tryGetRandom(armerosRooms, city, outRoom); }
+    public int tryToGetHospital(String city, RPRoom[] outRoom) {
+        return tryGetRandom(hospitalRooms, city, outRoom);
+    }
+
+    public int tryToGetJail(String city, RPRoom[] outRoom) {
+        return tryGetRandom(jailRooms, city, outRoom);
+    }
+
+    public int tryToGetJailBack(String city, RPRoom[] outRoom) {
+        return tryGetRandom(jailBack, city, outRoom);
+    }
+
+    public int tryToGetCourt(String city, RPRoom[] outRoom) {
+        return tryGetRandom(courtRooms, city, outRoom);
+    }
+
+    public int tryToGetCamioneros(String city, RPRoom[] outRoom) {
+        return tryGetRandom(camionerosRooms, city, outRoom);
+    }
+
+    public int tryToGetPolStation(String city, RPRoom[] outRoom) {
+        return tryGetRandom(polStationRooms, city, outRoom);
+    }
+
+    public int tryToGetBasureros(String city, RPRoom[] outRoom) {
+        return tryGetRandom(basurerosRooms, city, outRoom);
+    }
+
+    public int tryToGetArmeros(String city, RPRoom[] outRoom) {
+        return tryGetRandom(armerosRooms, city, outRoom);
+    }
 
     private static int tryGetRandom(Map<String, List<RPRoom>> dict, String city, RPRoom[] outRoom) {
         List<RPRoom> rooms = dict.get(city);
@@ -111,8 +133,7 @@ public class RPRoomManager {
                 set.getString("is_mecanico").equals("1"),
                 set.getString("is_basurero").equals("1"),
                 set.getString("is_armero").equals("1"),
-                set.getString("is_polstation").equals("1")
-        );
+                set.getString("is_polstation").equals("1"));
     }
 
     private static int totalRooms(Map<String, List<RPRoom>> dict) {

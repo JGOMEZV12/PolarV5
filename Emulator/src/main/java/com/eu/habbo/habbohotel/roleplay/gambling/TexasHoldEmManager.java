@@ -2,9 +2,6 @@ package com.eu.habbo.habbohotel.roleplay.gambling;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.users.HabboItem;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TexasHoldEmManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(TexasHoldEmManager.class);
@@ -23,8 +22,8 @@ public class TexasHoldEmManager {
         gameList.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM `rp_gambling`");
-             ResultSet set = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM `rp_gambling`");
+                ResultSet set = statement.executeQuery()) {
 
             while (set.next()) {
                 int gameId = set.getInt("id");
@@ -47,8 +46,19 @@ public class TexasHoldEmManager {
 
                 int joinCost = set.getInt("join_cost");
 
-                TexasHoldEm game = new TexasHoldEm(gameId, roomId, player1, player2, player3, banker, potSquare, joinGate,
-                        player1Data, player2Data, player3Data, joinCost);
+                TexasHoldEm game = new TexasHoldEm(
+                        gameId,
+                        roomId,
+                        player1,
+                        player2,
+                        player3,
+                        banker,
+                        potSquare,
+                        joinGate,
+                        player1Data,
+                        player2Data,
+                        player3Data,
+                        joinCost);
 
                 gameList.put(gameId, game);
 
@@ -89,8 +99,8 @@ public class TexasHoldEmManager {
         ConcurrentHashMap<Integer, TexasHoldEmItem> player = new ConcurrentHashMap<>();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "SELECT * FROM `rp_gambling_items` WHERE `game_id` = ? AND `player_id` = ?")) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "SELECT * FROM `rp_gambling_items` WHERE `game_id` = ? AND `player_id` = ?")) {
             statement.setInt(1, gameId);
             statement.setInt(2, playerId);
             try (ResultSet set = statement.executeQuery()) {
@@ -165,17 +175,20 @@ public class TexasHoldEmManager {
         if (item == null) return 0;
 
         for (TexasHoldEm game : gameList.values()) {
-            boolean matchesP1 = game.player1.values().stream().anyMatch(x -> x != null && x.furni != null && x.furni.getId() == item.getId());
+            boolean matchesP1 = game.player1.values().stream()
+                    .anyMatch(x -> x != null && x.furni != null && x.furni.getId() == item.getId());
             if (matchesP1) {
                 if (outGame != null && outGame.length > 0) outGame[0] = game;
                 return 1;
             }
-            boolean matchesP2 = game.player2.values().stream().anyMatch(x -> x != null && x.furni != null && x.furni.getId() == item.getId());
+            boolean matchesP2 = game.player2.values().stream()
+                    .anyMatch(x -> x != null && x.furni != null && x.furni.getId() == item.getId());
             if (matchesP2) {
                 if (outGame != null && outGame.length > 0) outGame[0] = game;
                 return 2;
             }
-            boolean matchesP3 = game.player3.values().stream().anyMatch(x -> x != null && x.furni != null && x.furni.getId() == item.getId());
+            boolean matchesP3 = game.player3.values().stream()
+                    .anyMatch(x -> x != null && x.furni != null && x.furni.getId() == item.getId());
             if (matchesP3) {
                 if (outGame != null && outGame.length > 0) outGame[0] = game;
                 return 3;

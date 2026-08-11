@@ -1,9 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.food;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FoodManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(FoodManager.class);
@@ -21,7 +20,7 @@ public class FoodManager {
         foodList.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_food")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_food")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
@@ -38,7 +37,9 @@ public class FoodManager {
                     String eatText = set.getString("eat_text");
                     boolean servable = set.getString("servable").equals("1");
 
-                    Food food = new Food(name, type, itemId, extraData, cost, health, energy, alcohol, hunger, serveText, eatText, servable);
+                    Food food = new Food(
+                            name, type, itemId, extraData, cost, health, energy, alcohol, hunger, serveText, eatText,
+                            servable);
                     foodList.put(name, food);
                 }
             }

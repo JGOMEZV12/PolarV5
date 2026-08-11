@@ -1,9 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.weapons;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WeaponManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeaponManager.class);
@@ -25,7 +24,7 @@ public class WeaponManager {
         handItems.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_weapons")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_weapons")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
@@ -53,9 +52,32 @@ public class WeaponManager {
 
                     WeaponCategory category = WeaponCategory.fromString(set.getString("category"));
 
-                    Weapon weapon = new Weapon(id, name, publicName, firingText, equipText, unEquipText, reloadText,
-                            energy, effectId, handItem, range, minDamage, maxDamage, clipSize, reloadTime,
-                            cost, costFine, stock, levelRequirement, true, clipSize, wLife, isVip, 0, category);
+                    Weapon weapon = new Weapon(
+                            id,
+                            name,
+                            publicName,
+                            firingText,
+                            equipText,
+                            unEquipText,
+                            reloadText,
+                            energy,
+                            effectId,
+                            handItem,
+                            range,
+                            minDamage,
+                            maxDamage,
+                            clipSize,
+                            reloadTime,
+                            cost,
+                            costFine,
+                            stock,
+                            levelRequirement,
+                            true,
+                            clipSize,
+                            wLife,
+                            isVip,
+                            0,
+                            category);
 
                     weapons.put(name, weapon);
                     enables.add(effectId);

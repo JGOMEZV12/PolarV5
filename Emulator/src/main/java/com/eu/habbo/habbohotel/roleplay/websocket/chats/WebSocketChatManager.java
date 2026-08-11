@@ -5,23 +5,26 @@ import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.roleplay.websocket.WebEventManager;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WebSocketChatManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketChatManager.class);
     private static final Gson GSON = new Gson();
 
     public static final ConcurrentHashMap<String, WebSocketChatRoom> runningChatRooms = new ConcurrentHashMap<>();
-    public static final AtomicReference<WebSocketChatManagerMainTimer> webSocketChatManagerMainTimer = new AtomicReference<>(null);
+    public static final AtomicReference<WebSocketChatManagerMainTimer> webSocketChatManagerMainTimer =
+            new AtomicReference<>(null);
 
     public static void initialize() {
         if (!runningChatRooms.isEmpty()) {
@@ -31,8 +34,8 @@ public class WebSocketChatManager {
         runningChatRooms.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_chat_rooms");
-             ResultSet set = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_chat_rooms");
+                ResultSet set = statement.executeQuery()) {
 
             while (set.next()) {
                 String chatName = set.getString("name");
@@ -49,7 +52,8 @@ public class WebSocketChatManager {
                     for (String part : cleaned.split(":")) {
                         try {
                             chatAdmins.add(Integer.parseInt(part));
-                        } catch (NumberFormatException ignored) {}
+                        } catch (NumberFormatException ignored) {
+                        }
                     }
                 }
 
@@ -58,7 +62,8 @@ public class WebSocketChatManager {
                 initialValues.put("gang", gangId);
                 initialValues.put("locked", locked);
 
-                WebSocketChatRoom newChatRoom = new WebSocketChatRoom(chatName, ownerId, initialValues, chatAdmins, true);
+                WebSocketChatRoom newChatRoom =
+                        new WebSocketChatRoom(chatName, ownerId, initialValues, chatAdmins, true);
                 newChatRoom.refreshChatRoomData(); // Get chat bans & mutes
 
                 runningChatRooms.put(newChatRoom.getChatName(), newChatRoom);
@@ -69,7 +74,8 @@ public class WebSocketChatManager {
         }
 
         if (webSocketChatManagerMainTimer.get() == null) {
-            webSocketChatManagerMainTimer.set(new WebSocketChatManagerMainTimer("websocketchatmanager", 1000, true, null));
+            webSocketChatManagerMainTimer.set(
+                    new WebSocketChatManagerMainTimer("websocketchatmanager", 1000, true, null));
         }
 
         LOGGER.info("WebSocketChatManager -> Loaded {} Chats.", runningChatRooms.size());
@@ -90,12 +96,14 @@ public class WebSocketChatManager {
                     }
 
                     new Thread(() -> {
-                        try {
-                            Thread.sleep(50);
-                        } catch (InterruptedException ignored) {}
+                                try {
+                                    Thread.sleep(50);
+                                } catch (InterruptedException ignored) {
+                                }
 
-                        chat.stop("This chat was stopped! Please join a new one!");
-                    }).start();
+                                chat.stop("This chat was stopped! Please join a new one!");
+                            })
+                            .start();
 
                     removed++;
                 }
@@ -117,7 +125,8 @@ public class WebSocketChatManager {
                 }
 
                 boolean exists = false;
-                try (PreparedStatement statement = connection.prepareStatement("SELECT 1 FROM rp_chat_rooms WHERE name = ?")) {
+                try (PreparedStatement statement =
+                        connection.prepareStatement("SELECT 1 FROM rp_chat_rooms WHERE name = ?")) {
                     statement.setString(1, chatRoom.getChatName());
                     try (ResultSet set = statement.executeQuery()) {
                         exists = set.next();
@@ -160,7 +169,9 @@ public class WebSocketChatManager {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("¡Debes estar conectado al websocket para poder unirte a los chats! ¡Comuníquese con un miembro del personal si este problema persiste!");
+            user.getHabbo()
+                    .whisper(
+                            "¡Debes estar conectado al websocket para poder unirte a los chats! ¡Comuníquese con un miembro del personal si este problema persiste!");
             return false;
         }
 
@@ -231,15 +242,18 @@ public class WebSocketChatManager {
         chatRoom.stop("This chat was deleted by a staff member!");
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM rp_chat_rooms WHERE name = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("DELETE FROM rp_chat_rooms WHERE name = ?")) {
                 statement.setString(1, chatRoom.getChatName());
                 statement.executeUpdate();
             }
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM rp_chat_rooms_data WHERE chat_name = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("DELETE FROM rp_chat_rooms_data WHERE chat_name = ?")) {
                 statement.setString(1, chatRoom.getChatName());
                 statement.executeUpdate();
             }
-            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM rp_chat_rooms_logs WHERE chat_name = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("DELETE FROM rp_chat_rooms_logs WHERE chat_name = ?")) {
                 statement.setString(1, chatRoom.getChatName());
                 statement.executeUpdate();
             }

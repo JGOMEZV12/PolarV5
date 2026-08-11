@@ -24,7 +24,25 @@ public class VehiclesOwned {
     private int camDest;
     private int camOwnId;
 
-    public VehiclesOwned(int id, int furniId, int itemId, int ownerId, int lastUserId, String model, int fuel, int km, int state, boolean traba, boolean alarm, int location, int x, int y, double z, String[] baul, boolean baulOpen, int carLife) {
+    public VehiclesOwned(
+            int id,
+            int furniId,
+            int itemId,
+            int ownerId,
+            int lastUserId,
+            String model,
+            int fuel,
+            int km,
+            int state,
+            boolean traba,
+            boolean alarm,
+            int location,
+            int x,
+            int y,
+            double z,
+            String[] baul,
+            boolean baulOpen,
+            int carLife) {
         this.id = id;
         this.furniId = furniId;
         this.itemId = itemId;
@@ -45,69 +63,179 @@ public class VehiclesOwned {
         this.carLife = carLife;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getFurniId() { return furniId; }
-    public void setFurniId(int furniId) { this.furniId = furniId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getItemId() { return itemId; }
-    public void setItemId(int itemId) { this.itemId = itemId; }
+    public int getFurniId() {
+        return furniId;
+    }
 
-    public int getOwnerId() { return ownerId; }
-    public void setOwnerId(int ownerId) { this.ownerId = ownerId; }
+    public void setFurniId(int furniId) {
+        this.furniId = furniId;
+    }
 
-    public int getLastUserId() { return lastUserId; }
-    public void setLastUserId(int lastUserId) { this.lastUserId = lastUserId; }
+    public int getItemId() {
+        return itemId;
+    }
 
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 
-    public int getFuel() { return fuel; }
-    public void setFuel(int fuel) { this.fuel = fuel; }
+    public int getOwnerId() {
+        return ownerId;
+    }
 
-    public int getKm() { return km; }
-    public void setKm(int km) { this.km = km; }
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
 
-    public int getState() { return state; }
-    public void setState(int state) { this.state = state; }
+    public int getLastUserId() {
+        return lastUserId;
+    }
 
-    public boolean isTraba() { return traba; }
-    public void setTraba(boolean traba) { this.traba = traba; }
+    public void setLastUserId(int lastUserId) {
+        this.lastUserId = lastUserId;
+    }
 
-    public boolean isAlarm() { return alarm; }
-    public void setAlarm(boolean alarm) { this.alarm = alarm; }
+    public String getModel() {
+        return model;
+    }
 
-    public int getLocation() { return location; }
-    public void setLocation(int location) { this.location = location; }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-    public int getX() { return x; }
-    public void setX(int x) { this.x = x; }
+    public int getFuel() {
+        return fuel;
+    }
 
-    public int getY() { return y; }
-    public void setY(int y) { this.y = y; }
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
+    }
 
-    public double getZ() { return z; }
-    public void setZ(double z) { this.z = z; }
+    public int getKm() {
+        return km;
+    }
 
-    public String[] getBaul() { return baul; }
-    public void setBaul(String[] baul) { this.baul = baul; }
+    public void setKm(int km) {
+        this.km = km;
+    }
 
-    public boolean isBaulOpen() { return baulOpen; }
-    public void setBaulOpen(boolean baulOpen) { this.baulOpen = baulOpen; }
+    public int getState() {
+        return state;
+    }
 
-    public int getCarLife() { return carLife; }
-    public void setCarLife(int carLife) { this.carLife = carLife; }
+    public void setState(int state) {
+        this.state = state;
+    }
 
-    public int getCamCargId() { return camCargId; }
-    public void setCamCargId(int camCargId) { this.camCargId = camCargId; }
+    public boolean isTraba() {
+        return traba;
+    }
 
-    public int getCamState() { return camState; }
-    public void setCamState(int camState) { this.camState = camState; }
+    public void setTraba(boolean traba) {
+        this.traba = traba;
+    }
 
-    public int getCamDest() { return camDest; }
-    public void setCamDest(int camDest) { this.camDest = camDest; }
+    public boolean isAlarm() {
+        return alarm;
+    }
 
-    public int getCamOwnId() { return camOwnId; }
-    public void setCamOwnId(int camOwnId) { this.camOwnId = camOwnId; }
+    public void setAlarm(boolean alarm) {
+        this.alarm = alarm;
+    }
+
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public double getZ() {
+        return z;
+    }
+
+    public void setZ(double z) {
+        this.z = z;
+    }
+
+    public String[] getBaul() {
+        return baul;
+    }
+
+    public void setBaul(String[] baul) {
+        this.baul = baul;
+    }
+
+    public boolean isBaulOpen() {
+        return baulOpen;
+    }
+
+    public void setBaulOpen(boolean baulOpen) {
+        this.baulOpen = baulOpen;
+    }
+
+    public int getCarLife() {
+        return carLife;
+    }
+
+    public void setCarLife(int carLife) {
+        this.carLife = carLife;
+    }
+
+    public int getCamCargId() {
+        return camCargId;
+    }
+
+    public void setCamCargId(int camCargId) {
+        this.camCargId = camCargId;
+    }
+
+    public int getCamState() {
+        return camState;
+    }
+
+    public void setCamState(int camState) {
+        this.camState = camState;
+    }
+
+    public int getCamDest() {
+        return camDest;
+    }
+
+    public void setCamDest(int camDest) {
+        this.camDest = camDest;
+    }
+
+    public int getCamOwnId() {
+        return camOwnId;
+    }
+
+    public void setCamOwnId(int camOwnId) {
+        this.camOwnId = camOwnId;
+    }
 }

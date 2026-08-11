@@ -1,9 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.products;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProductsManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductsManager.class);
@@ -21,7 +20,7 @@ public class ProductsManager {
         products.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_products")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_products")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {

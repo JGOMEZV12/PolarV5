@@ -12,7 +12,17 @@ public class WeaponOwned {
     private int baulCarId;
     private int effectId;
 
-    public WeaponOwned(String baseWeapon, String name, int minDamage, int maxDamage, int range, int bullets, boolean canUse, int life, int baulCarId, int effectId) {
+    public WeaponOwned(
+            String baseWeapon,
+            String name,
+            int minDamage,
+            int maxDamage,
+            int range,
+            int bullets,
+            boolean canUse,
+            int life,
+            int baulCarId,
+            int effectId) {
         this.baseWeapon = baseWeapon;
         this.name = name;
         this.minDamage = minDamage;
@@ -25,33 +35,83 @@ public class WeaponOwned {
         this.effectId = effectId;
     }
 
-    public String getBaseWeapon() { return baseWeapon; }
-    public void setBaseWeapon(String baseWeapon) { this.baseWeapon = baseWeapon; }
+    public String getBaseWeapon() {
+        return baseWeapon;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setBaseWeapon(String baseWeapon) {
+        this.baseWeapon = baseWeapon;
+    }
 
-    public int getMinDamage() { return minDamage; }
-    public void setMinDamage(int minDamage) { this.minDamage = minDamage; }
+    public String getName() {
+        return name;
+    }
 
-    public int getMaxDamage() { return maxDamage; }
-    public void setMaxDamage(int maxDamage) { this.maxDamage = maxDamage; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getRange() { return range; }
-    public void setRange(int range) { this.range = range; }
+    public int getMinDamage() {
+        return minDamage;
+    }
 
-    public int getBullets() { return bullets; }
-    public void setBullets(int bullets) { this.bullets = bullets; }
+    public void setMinDamage(int minDamage) {
+        this.minDamage = minDamage;
+    }
 
-    public boolean isCanUse() { return canUse; }
-    public void setCanUse(boolean canUse) { this.canUse = canUse; }
+    public int getMaxDamage() {
+        return maxDamage;
+    }
 
-    public int getLife() { return life; }
-    public void setLife(int life) { this.life = life; }
+    public void setMaxDamage(int maxDamage) {
+        this.maxDamage = maxDamage;
+    }
 
-    public int getBaulCarId() { return baulCarId; }
-    public void setBaulCarId(int baulCarId) { this.baulCarId = baulCarId; }
+    public int getRange() {
+        return range;
+    }
 
-    public int getEffectId() { return effectId; }
-    public void setEffectId(int effectId) { this.effectId = effectId; }
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public int getBullets() {
+        return bullets;
+    }
+
+    public void setBullets(int bullets) {
+        this.bullets = bullets;
+    }
+
+    public boolean isCanUse() {
+        return canUse;
+    }
+
+    public void setCanUse(boolean canUse) {
+        this.canUse = canUse;
+    }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getBaulCarId() {
+        return baulCarId;
+    }
+
+    public void setBaulCarId(int baulCarId) {
+        this.baulCarId = baulCarId;
+    }
+
+    public int getEffectId() {
+        return effectId;
+    }
+
+    public void setEffectId(int effectId) {
+        this.effectId = effectId;
+    }
 }

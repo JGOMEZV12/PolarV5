@@ -13,7 +13,18 @@ public class RPRoom {
     private boolean armeroRP;
     private boolean polStationRP;
 
-    public RPRoom(int id, String cityRP, boolean courtRP, boolean hospitalRP, boolean prisonRP, boolean prisonBRP, boolean camioneroRP, boolean mecanicoRP, boolean basureroRP, boolean armeroRP, boolean polStationRP) {
+    public RPRoom(
+            int id,
+            String cityRP,
+            boolean courtRP,
+            boolean hospitalRP,
+            boolean prisonRP,
+            boolean prisonBRP,
+            boolean camioneroRP,
+            boolean mecanicoRP,
+            boolean basureroRP,
+            boolean armeroRP,
+            boolean polStationRP) {
         this.id = id;
         this.cityRP = cityRP;
         this.hospitalRP = hospitalRP;

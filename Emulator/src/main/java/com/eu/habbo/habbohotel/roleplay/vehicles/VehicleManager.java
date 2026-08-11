@@ -1,9 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.vehicles;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VehicleManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(VehicleManager.class);
@@ -23,7 +22,7 @@ public class VehicleManager {
         enables.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_vehicles")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_vehicles")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
@@ -41,8 +40,20 @@ public class VehicleManager {
                     int carCorp = set.getInt("jobid");
                     int fastCar = set.getInt("fast");
 
-                    Vehicle vehicle = new Vehicle(id, itemId, itemName, effectId, price, model, displayName,
-                            maxFuel, maxTrunks, carType, maxDoors, carCorp, fastCar);
+                    Vehicle vehicle = new Vehicle(
+                            id,
+                            itemId,
+                            itemName,
+                            effectId,
+                            price,
+                            model,
+                            displayName,
+                            maxFuel,
+                            maxTrunks,
+                            carType,
+                            maxDoors,
+                            carCorp,
+                            fastCar);
 
                     vehicles.put(model, vehicle);
                     enables.add(effectId);

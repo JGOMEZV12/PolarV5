@@ -163,9 +163,11 @@ public class Habbo implements Runnable {
     public com.eu.habbo.habbohotel.roleplay.users.RoleplayUser getRoleplay() {
         if (this.roleplay == null) {
             this.roleplay = new com.eu.habbo.habbohotel.roleplay.users.RoleplayUser();
-            this.roleplay.setCooldownManager(new com.eu.habbo.habbohotel.roleplay.cooldowns.CooldownManager(this.getClient()));
+            this.roleplay.setCooldownManager(
+                    new com.eu.habbo.habbohotel.roleplay.cooldowns.CooldownManager(this.getClient()));
             this.roleplay.setTimerManager(new com.eu.habbo.habbohotel.roleplay.timers.TimerManager(this.getClient()));
-            com.eu.habbo.habbohotel.roleplay.users.UserDataHandler.loadData(this.getHabboInfo().getId(), this.roleplay);
+            com.eu.habbo.habbohotel.roleplay.users.UserDataHandler.loadData(
+                    this.getHabboInfo().getId(), this.roleplay);
         }
         return this.roleplay;
     }
@@ -345,7 +347,8 @@ public class Habbo implements Runnable {
     private void persistDisconnect() {
         this.run();
         if (this.roleplay != null) {
-            com.eu.habbo.habbohotel.roleplay.users.UserDataHandler.saveData(this.getHabboInfo().getId(), this.roleplay);
+            com.eu.habbo.habbohotel.roleplay.users.UserDataHandler.saveData(
+                    this.getHabboInfo().getId(), this.roleplay);
         }
         this.getInventory().dispose();
         AchievementManager.saveAchievements(this);

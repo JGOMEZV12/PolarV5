@@ -11,7 +11,16 @@ public class HechizoOwned {
     private int firingDamage;
     private int health;
 
-    public HechizoOwned(int id, int userId, String baseWizard, String name, int power, int firingRange, int shields, int firingDamage, int health) {
+    public HechizoOwned(
+            int id,
+            int userId,
+            String baseWizard,
+            String name,
+            int power,
+            int firingRange,
+            int shields,
+            int firingDamage,
+            int health) {
         this.id = id;
         this.userId = userId;
         this.baseWizard = baseWizard;
@@ -23,30 +32,75 @@ public class HechizoOwned {
         this.health = health;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getBaseWizard() { return baseWizard; }
-    public void setBaseWizard(String baseWizard) { this.baseWizard = baseWizard; }
+    public int getUserId() {
+        return userId;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-    public int getPower() { return power; }
-    public void setPower(int power) { this.power = power; }
+    public String getBaseWizard() {
+        return baseWizard;
+    }
 
-    public int getFiringRange() { return firingRange; }
-    public void setFiringRange(int firingRange) { this.firingRange = firingRange; }
+    public void setBaseWizard(String baseWizard) {
+        this.baseWizard = baseWizard;
+    }
 
-    public int getShields() { return shields; }
-    public void setShields(int shields) { this.shields = shields; }
+    public String getName() {
+        return name;
+    }
 
-    public int getFiringDamage() { return firingDamage; }
-    public void setFiringDamage(int firingDamage) { this.firingDamage = firingDamage; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getHealth() { return health; }
-    public void setHealth(int health) { this.health = health; }
+    public int getPower() {
+        return power;
+    }
+
+    public void setPower(int power) {
+        this.power = power;
+    }
+
+    public int getFiringRange() {
+        return firingRange;
+    }
+
+    public void setFiringRange(int firingRange) {
+        this.firingRange = firingRange;
+    }
+
+    public int getShields() {
+        return shields;
+    }
+
+    public void setShields(int shields) {
+        this.shields = shields;
+    }
+
+    public int getFiringDamage() {
+        return firingDamage;
+    }
+
+    public void setFiringDamage(int firingDamage) {
+        this.firingDamage = firingDamage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
 }

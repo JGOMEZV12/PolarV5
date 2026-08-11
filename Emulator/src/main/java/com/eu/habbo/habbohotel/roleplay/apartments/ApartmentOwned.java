@@ -11,7 +11,16 @@ public class ApartmentOwned {
     private String paymentType;
     private boolean floorEditor;
 
-    public ApartmentOwned(int id, int apartId, int roomId, int lobbyId, int owner, boolean forSale, int price, String paymentType, boolean floorEditor) {
+    public ApartmentOwned(
+            int id,
+            int apartId,
+            int roomId,
+            int lobbyId,
+            int owner,
+            boolean forSale,
+            int price,
+            String paymentType,
+            boolean floorEditor) {
         this.id = id;
         this.apartId = apartId;
         this.roomId = roomId;
@@ -23,30 +32,75 @@ public class ApartmentOwned {
         this.floorEditor = floorEditor;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getApartId() { return apartId; }
-    public void setApartId(int apartId) { this.apartId = apartId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getRoomId() { return roomId; }
-    public void setRoomId(int roomId) { this.roomId = roomId; }
+    public int getApartId() {
+        return apartId;
+    }
 
-    public int getLobbyId() { return lobbyId; }
-    public void setLobbyId(int lobbyId) { this.lobbyId = lobbyId; }
+    public void setApartId(int apartId) {
+        this.apartId = apartId;
+    }
 
-    public int getOwner() { return owner; }
-    public void setOwner(int owner) { this.owner = owner; }
+    public int getRoomId() {
+        return roomId;
+    }
 
-    public boolean isForSale() { return forSale; }
-    public void setForSale(boolean forSale) { this.forSale = forSale; }
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
 
-    public int getPrice() { return price; }
-    public void setPrice(int price) { this.price = price; }
+    public int getLobbyId() {
+        return lobbyId;
+    }
 
-    public String getPaymentType() { return paymentType; }
-    public void setPaymentType(String paymentType) { this.paymentType = paymentType; }
+    public void setLobbyId(int lobbyId) {
+        this.lobbyId = lobbyId;
+    }
 
-    public boolean isFloorEditor() { return floorEditor; }
-    public void setFloorEditor(boolean floorEditor) { this.floorEditor = floorEditor; }
+    public int getOwner() {
+        return owner;
+    }
+
+    public void setOwner(int owner) {
+        this.owner = owner;
+    }
+
+    public boolean isForSale() {
+        return forSale;
+    }
+
+    public void setForSale(boolean forSale) {
+        this.forSale = forSale;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public boolean isFloorEditor() {
+        return floorEditor;
+    }
+
+    public void setFloorEditor(boolean floorEditor) {
+        this.floorEditor = floorEditor;
+    }
 }

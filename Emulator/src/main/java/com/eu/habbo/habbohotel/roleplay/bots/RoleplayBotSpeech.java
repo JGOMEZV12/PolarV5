@@ -13,15 +13,35 @@ public class RoleplayBotSpeech {
         this.shout = shout;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getBotId() { return botId; }
-    public void setBotId(int botId) { this.botId = botId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getSpeech() { return speech; }
-    public void setSpeech(String speech) { this.speech = speech; }
+    public int getBotId() {
+        return botId;
+    }
 
-    public boolean isShout() { return shout; }
-    public void setShout(boolean shout) { this.shout = shout; }
+    public void setBotId(int botId) {
+        this.botId = botId;
+    }
+
+    public String getSpeech() {
+        return speech;
+    }
+
+    public void setSpeech(String speech) {
+        this.speech = speech;
+    }
+
+    public boolean isShout() {
+        return shout;
+    }
+
+    public void setShout(boolean shout) {
+        this.shout = shout;
+    }
 }

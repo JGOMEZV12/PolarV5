@@ -15,7 +15,19 @@ public class Hechizos {
     private int stock;
     private int quantity = 1;
 
-    public Hechizos(int id, String name, String publicName, String message, int power, int firingRange, int shields, int firingDamage, int health, int cost, int costFine, int stock) {
+    public Hechizos(
+            int id,
+            String name,
+            String publicName,
+            String message,
+            int power,
+            int firingRange,
+            int shields,
+            int firingDamage,
+            int health,
+            int cost,
+            int costFine,
+            int stock) {
         this.id = id;
         this.name = name;
         this.publicName = publicName;
@@ -30,42 +42,107 @@ public class Hechizos {
         this.stock = stock;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getPublicName() { return publicName; }
-    public void setPublicName(String publicName) { this.publicName = publicName; }
+    public String getName() {
+        return name;
+    }
 
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getPower() { return power; }
-    public void setPower(int power) { this.power = power; }
+    public String getPublicName() {
+        return publicName;
+    }
 
-    public int getFiringRange() { return firingRange; }
-    public void setFiringRange(int firingRange) { this.firingRange = firingRange; }
+    public void setPublicName(String publicName) {
+        this.publicName = publicName;
+    }
 
-    public int getShields() { return shields; }
-    public void setShields(int shields) { this.shields = shields; }
+    public String getMessage() {
+        return message;
+    }
 
-    public int getFiringDamage() { return firingDamage; }
-    public void setFiringDamage(int firingDamage) { this.firingDamage = firingDamage; }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-    public int getHealth() { return health; }
-    public void setHealth(int health) { this.health = health; }
+    public int getPower() {
+        return power;
+    }
 
-    public int getCost() { return cost; }
-    public void setCost(int cost) { this.cost = cost; }
+    public void setPower(int power) {
+        this.power = power;
+    }
 
-    public int getCostFine() { return costFine; }
-    public void setCostFine(int costFine) { this.costFine = costFine; }
+    public int getFiringRange() {
+        return firingRange;
+    }
 
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
+    public void setFiringRange(int firingRange) {
+        this.firingRange = firingRange;
+    }
 
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public int getShields() {
+        return shields;
+    }
+
+    public void setShields(int shields) {
+        this.shields = shields;
+    }
+
+    public int getFiringDamage() {
+        return firingDamage;
+    }
+
+    public void setFiringDamage(int firingDamage) {
+        this.firingDamage = firingDamage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getCostFine() {
+        return costFine;
+    }
+
+    public void setCostFine(int costFine) {
+        this.costFine = costFine;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 }

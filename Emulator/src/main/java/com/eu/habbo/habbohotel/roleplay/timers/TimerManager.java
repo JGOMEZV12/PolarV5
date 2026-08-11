@@ -1,7 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.timers;
 
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-
 import java.util.concurrent.ConcurrentHashMap;
 
 public class TimerManager {

@@ -42,39 +42,99 @@ public class SeedSatchel {
     }
 
     // Getters and Setters
-    public int getBlueStarflowerSeeds() { return blueStarflowerSeeds; }
-    public void setBlueStarflowerSeeds(int blueStarflowerSeeds) { this.blueStarflowerSeeds = blueStarflowerSeeds; }
+    public int getBlueStarflowerSeeds() {
+        return blueStarflowerSeeds;
+    }
 
-    public int getYellowStarflowerSeeds() { return yellowStarflowerSeeds; }
-    public void setYellowStarflowerSeeds(int yellowStarflowerSeeds) { this.yellowStarflowerSeeds = yellowStarflowerSeeds; }
+    public void setBlueStarflowerSeeds(int blueStarflowerSeeds) {
+        this.blueStarflowerSeeds = blueStarflowerSeeds;
+    }
 
-    public int getPinkDahliaSeeds() { return pinkDahliaSeeds; }
-    public void setPinkDahliaSeeds(int pinkDahliaSeeds) { this.pinkDahliaSeeds = pinkDahliaSeeds; }
+    public int getYellowStarflowerSeeds() {
+        return yellowStarflowerSeeds;
+    }
 
-    public int getYellowPlumeriaSeeds() { return yellowPlumeriaSeeds; }
-    public void setYellowPlumeriaSeeds(int yellowPlumeriaSeeds) { this.yellowPlumeriaSeeds = yellowPlumeriaSeeds; }
+    public void setYellowStarflowerSeeds(int yellowStarflowerSeeds) {
+        this.yellowStarflowerSeeds = yellowStarflowerSeeds;
+    }
 
-    public int getPinkPrimroseSeeds() { return pinkPrimroseSeeds; }
-    public void setPinkPrimroseSeeds(int pinkPrimroseSeeds) { this.pinkPrimroseSeeds = pinkPrimroseSeeds; }
+    public int getPinkDahliaSeeds() {
+        return pinkDahliaSeeds;
+    }
 
-    public int getBluePrimroseSeeds() { return bluePrimroseSeeds; }
-    public void setBluePrimroseSeeds(int bluePrimroseSeeds) { this.bluePrimroseSeeds = bluePrimroseSeeds; }
+    public void setPinkDahliaSeeds(int pinkDahliaSeeds) {
+        this.pinkDahliaSeeds = pinkDahliaSeeds;
+    }
 
-    public int getYellowPrimroseSeeds() { return yellowPrimroseSeeds; }
-    public void setYellowPrimroseSeeds(int yellowPrimroseSeeds) { this.yellowPrimroseSeeds = yellowPrimroseSeeds; }
+    public int getYellowPlumeriaSeeds() {
+        return yellowPlumeriaSeeds;
+    }
 
-    public int getYellowDahliaSeeds() { return yellowDahliaSeeds; }
-    public void setYellowDahliaSeeds(int yellowDahliaSeeds) { this.yellowDahliaSeeds = yellowDahliaSeeds; }
+    public void setYellowPlumeriaSeeds(int yellowPlumeriaSeeds) {
+        this.yellowPlumeriaSeeds = yellowPlumeriaSeeds;
+    }
 
-    public int getBluePlumeriaSeeds() { return bluePlumeriaSeeds; }
-    public void setBluePlumeriaSeeds(int bluePlumeriaSeeds) { this.bluePlumeriaSeeds = bluePlumeriaSeeds; }
+    public int getPinkPrimroseSeeds() {
+        return pinkPrimroseSeeds;
+    }
 
-    public int getPinkPlumeriaSeeds() { return pinkPlumeriaSeeds; }
-    public void setPinkPlumeriaSeeds(int pinkPlumeriaSeeds) { this.pinkPlumeriaSeeds = pinkPlumeriaSeeds; }
+    public void setPinkPrimroseSeeds(int pinkPrimroseSeeds) {
+        this.pinkPrimroseSeeds = pinkPrimroseSeeds;
+    }
 
-    public int getRedStarflowerSeeds() { return redStarflowerSeeds; }
-    public void setRedStarflowerSeeds(int redStarflowerSeeds) { this.redStarflowerSeeds = redStarflowerSeeds; }
+    public int getBluePrimroseSeeds() {
+        return bluePrimroseSeeds;
+    }
 
-    public int getBlueDahliaSeeds() { return blueDahliaSeeds; }
-    public void setBlueDahliaSeeds(int blueDahliaSeeds) { this.blueDahliaSeeds = blueDahliaSeeds; }
+    public void setBluePrimroseSeeds(int bluePrimroseSeeds) {
+        this.bluePrimroseSeeds = bluePrimroseSeeds;
+    }
+
+    public int getYellowPrimroseSeeds() {
+        return yellowPrimroseSeeds;
+    }
+
+    public void setYellowPrimroseSeeds(int yellowPrimroseSeeds) {
+        this.yellowPrimroseSeeds = yellowPrimroseSeeds;
+    }
+
+    public int getYellowDahliaSeeds() {
+        return yellowDahliaSeeds;
+    }
+
+    public void setYellowDahliaSeeds(int yellowDahliaSeeds) {
+        this.yellowDahliaSeeds = yellowDahliaSeeds;
+    }
+
+    public int getBluePlumeriaSeeds() {
+        return bluePlumeriaSeeds;
+    }
+
+    public void setBluePlumeriaSeeds(int bluePlumeriaSeeds) {
+        this.bluePlumeriaSeeds = bluePlumeriaSeeds;
+    }
+
+    public int getPinkPlumeriaSeeds() {
+        return pinkPlumeriaSeeds;
+    }
+
+    public void setPinkPlumeriaSeeds(int pinkPlumeriaSeeds) {
+        this.pinkPlumeriaSeeds = pinkPlumeriaSeeds;
+    }
+
+    public int getRedStarflowerSeeds() {
+        return redStarflowerSeeds;
+    }
+
+    public void setRedStarflowerSeeds(int redStarflowerSeeds) {
+        this.redStarflowerSeeds = redStarflowerSeeds;
+    }
+
+    public int getBlueDahliaSeeds() {
+        return blueDahliaSeeds;
+    }
+
+    public void setBlueDahliaSeeds(int blueDahliaSeeds) {
+        this.blueDahliaSeeds = blueDahliaSeeds;
+    }
 }

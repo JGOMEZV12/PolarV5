@@ -12,7 +12,17 @@ public class RoleplayGroupRank {
     private int limit;
     private int timer;
 
-    public RoleplayGroupRank(int gangId, int rank, String name, String maleFigure, String femaleFigure, int pay, String commands, String workrooms, int limit, int timer) {
+    public RoleplayGroupRank(
+            int gangId,
+            int rank,
+            String name,
+            String maleFigure,
+            String femaleFigure,
+            int pay,
+            String commands,
+            String workrooms,
+            int limit,
+            int timer) {
         this.gangId = gangId;
         this.rank = rank;
         this.name = name;
@@ -25,33 +35,83 @@ public class RoleplayGroupRank {
         this.timer = timer;
     }
 
-    public int getGangId() { return gangId; }
-    public void setGangId(int gangId) { this.gangId = gangId; }
+    public int getGangId() {
+        return gangId;
+    }
 
-    public int getRank() { return rank; }
-    public void setRank(int rank) { this.rank = rank; }
+    public void setGangId(int gangId) {
+        this.gangId = gangId;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public int getRank() {
+        return rank;
+    }
 
-    public String getMaleFigure() { return maleFigure; }
-    public void setMaleFigure(String maleFigure) { this.maleFigure = maleFigure; }
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
 
-    public String getFemaleFigure() { return femaleFigure; }
-    public void setFemaleFigure(String femaleFigure) { this.femaleFigure = femaleFigure; }
+    public String getName() {
+        return name;
+    }
 
-    public int getPay() { return pay; }
-    public void setPay(int pay) { this.pay = pay; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getCommands() { return commands; }
-    public void setCommands(String commands) { this.commands = commands; }
+    public String getMaleFigure() {
+        return maleFigure;
+    }
 
-    public String getWorkrooms() { return workrooms; }
-    public void setWorkrooms(String workrooms) { this.workrooms = workrooms; }
+    public void setMaleFigure(String maleFigure) {
+        this.maleFigure = maleFigure;
+    }
 
-    public int getLimit() { return limit; }
-    public void setLimit(int limit) { this.limit = limit; }
+    public String getFemaleFigure() {
+        return femaleFigure;
+    }
 
-    public int getTimer() { return timer; }
-    public void setTimer(int timer) { this.timer = timer; }
+    public void setFemaleFigure(String femaleFigure) {
+        this.femaleFigure = femaleFigure;
+    }
+
+    public int getPay() {
+        return pay;
+    }
+
+    public void setPay(int pay) {
+        this.pay = pay;
+    }
+
+    public String getCommands() {
+        return commands;
+    }
+
+    public void setCommands(String commands) {
+        this.commands = commands;
+    }
+
+    public String getWorkrooms() {
+        return workrooms;
+    }
+
+    public void setWorkrooms(String workrooms) {
+        this.workrooms = workrooms;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public int getTimer() {
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
+    }
 }

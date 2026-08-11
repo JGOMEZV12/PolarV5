@@ -17,21 +17,51 @@ public class RoleplayGroupRequest {
         this.timestamp = timestamp;
     }
 
-    public int getGroupId() { return groupId; }
-    public void setGroupId(int groupId) { this.groupId = groupId; }
+    public int getGroupId() {
+        return groupId;
+    }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public void setGroupId(int groupId) {
+        this.groupId = groupId;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public int getUserId() {
+        return userId;
+    }
 
-    public int getHours() { return hours; }
-    public void setHours(int hours) { this.hours = hours; }
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-    public String getRegion() { return region; }
-    public void setRegion(String region) { this.region = region; }
+    public String getDescription() {
+        return description;
+    }
 
-    public long getTimestamp() { return timestamp; }
-    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 }

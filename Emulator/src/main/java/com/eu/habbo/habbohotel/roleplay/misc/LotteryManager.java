@@ -3,9 +3,6 @@ package com.eu.habbo.habbohotel.roleplay.misc;
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.users.Habbo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LotteryManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(LotteryManager.class);
@@ -41,8 +40,8 @@ public class LotteryManager {
         lotteryTickets.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_lottery");
-             ResultSet set = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_lottery");
+                ResultSet set = statement.executeQuery()) {
 
             while (set.next()) {
                 int userId = set.getInt("user_id");
@@ -90,8 +89,8 @@ public class LotteryManager {
                     statement.executeUpdate();
                 }
 
-                try (PreparedStatement statement = connection.prepareStatement(
-                        "SELECT `username` FROM `users` WHERE `id` = ? LIMIT 1")) {
+                try (PreparedStatement statement =
+                        connection.prepareStatement("SELECT `username` FROM `users` WHERE `id` = ? LIMIT 1")) {
                     statement.setInt(1, winner);
                     try (ResultSet set = statement.executeQuery()) {
                         if (set.next()) {
@@ -110,7 +109,8 @@ public class LotteryManager {
     }
 
     public static void sendWinnerAlert(String winner) {
-        for (GameClient client : Emulator.getGameServer().getGameClientManager().getSessions().values()) {
+        for (GameClient client :
+                Emulator.getGameServer().getGameClientManager().getSessions().values()) {
             if (client == null || client.getHabbo() == null) {
                 continue;
             }
@@ -122,7 +122,7 @@ public class LotteryManager {
         lotteryTickets.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("TRUNCATE TABLE `rp_lottery`")) {
+                PreparedStatement statement = connection.prepareStatement("TRUNCATE TABLE `rp_lottery`")) {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Failed to clear lottery from DB", e);

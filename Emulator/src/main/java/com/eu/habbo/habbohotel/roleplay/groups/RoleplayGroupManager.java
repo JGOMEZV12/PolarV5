@@ -1,14 +1,13 @@
 package com.eu.habbo.habbohotel.roleplay.groups;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RoleplayGroupManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleplayGroupManager.class);
@@ -23,7 +22,7 @@ public class RoleplayGroupManager {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // 1. Load rp_jobs
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_jobs");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     String name = set.getString("name");
@@ -40,7 +39,7 @@ public class RoleplayGroupManager {
 
             // 2. Load rp_gangs
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_gangs");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     String name = set.getString("name");
@@ -51,7 +50,8 @@ public class RoleplayGroupManager {
                     int balance = set.getInt("bank_balance");
                     int medipacks = set.getInt("medipacks");
 
-                    RoleplayGroup group = new RoleplayGroup(id, name, description, badge, ownerId, roomId, balance, medipacks);
+                    RoleplayGroup group =
+                            new RoleplayGroup(id, name, description, badge, ownerId, roomId, balance, medipacks);
                     gangs.put(id, group);
                 }
             }

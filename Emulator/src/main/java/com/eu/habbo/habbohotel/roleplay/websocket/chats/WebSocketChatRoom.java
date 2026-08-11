@@ -2,19 +2,21 @@ package com.eu.habbo.habbohotel.roleplay.websocket.chats;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.roleplay.websocket.WebEventManager;
 import com.eu.habbo.habbohotel.roleplay.websocket.IWebEvent;
+import com.eu.habbo.habbohotel.roleplay.websocket.WebEventManager;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WebSocketChatRoom {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketChatRoom.class);
@@ -33,7 +35,12 @@ public class WebSocketChatRoom {
     private final ConcurrentHashMap<Integer, ConcurrentHashMap<String, String>> chatLogs = new ConcurrentHashMap<>();
     private boolean mutedRoom = false;
 
-    public WebSocketChatRoom(String chatName, int chatOwner, Map<Object, Object> initialValues, List<Integer> chatAdmins, boolean fromDB) {
+    public WebSocketChatRoom(
+            String chatName,
+            int chatOwner,
+            Map<Object, Object> initialValues,
+            List<Integer> chatAdmins,
+            boolean fromDB) {
         this.chatName = chatName.toLowerCase();
         this.chatOwner = chatOwner;
         if (initialValues != null) {
@@ -127,7 +134,8 @@ public class WebSocketChatRoom {
         this.chatAdmins.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement("SELECT owner_id, password, locked, admins, gang_id from `rp_chat_rooms` WHERE name = ?")) {
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "SELECT owner_id, password, locked, admins, gang_id from `rp_chat_rooms` WHERE name = ?")) {
                 statement.setString(1, this.chatName);
                 try (ResultSet set = statement.executeQuery()) {
                     if (set.next()) {
@@ -143,7 +151,8 @@ public class WebSocketChatRoom {
                             for (String part : cleaned.split(":")) {
                                 try {
                                     adminsList.add(Integer.parseInt(part));
-                                } catch (NumberFormatException ignored) {}
+                                } catch (NumberFormatException ignored) {
+                                }
                             }
                         }
                         this.chatAdmins = adminsList;
@@ -156,7 +165,8 @@ public class WebSocketChatRoom {
             }
 
             double now = System.currentTimeMillis() / 1000.0;
-            try (PreparedStatement statement = connection.prepareStatement("SELECT * from `rp_chat_rooms_data` WHERE chat_name = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("SELECT * from `rp_chat_rooms_data` WHERE chat_name = ?")) {
                 statement.setString(1, this.chatName);
                 try (ResultSet set = statement.executeQuery()) {
                     while (set.next()) {
@@ -275,8 +285,8 @@ public class WebSocketChatRoom {
                 adminStr = adminStr.substring(0, adminStr.length() - 1);
             }
 
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "UPDATE `rp_chat_rooms` SET `admins` = ? WHERE `name` = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("UPDATE `rp_chat_rooms` SET `admins` = ? WHERE `name` = ?")) {
                 statement.setString(1, adminStr);
                 statement.setString(2, this.chatName);
                 statement.executeUpdate();
@@ -378,13 +388,15 @@ public class WebSocketChatRoom {
     public void insertMuteData(String userId, double muteExpire) {
         try {
             this.mutedUsers.put(Integer.parseInt(userId), muteExpire);
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
     }
 
     public void insertBanData(String userId, double banExpire) {
         try {
             this.bannedUsers.put(Integer.parseInt(userId), banExpire);
-        } catch (NumberFormatException ignored) {}
+        } catch (NumberFormatException ignored) {
+        }
     }
 
     public boolean onUserJoin(GameClient user) {
@@ -393,7 +405,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return false;
         }
 
@@ -438,7 +452,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -460,7 +476,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -482,7 +500,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -503,7 +523,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -524,7 +546,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -554,7 +578,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -575,7 +601,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -616,7 +644,9 @@ public class WebSocketChatRoom {
         }
 
         if (user.getHabbo().getRoleplay().getWebSocketConnection() == null) {
-            user.getHabbo().whisper("Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
+            user.getHabbo()
+                    .whisper(
+                            "Tu conexión de websocket está desconectada. Póngase en contacto con un miembro del personal si el problema persiste");
             return;
         }
 
@@ -707,8 +737,8 @@ public class WebSocketChatRoom {
     public void saveNewChat() {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             boolean exists = false;
-            try (PreparedStatement statement = connection.prepareStatement(
-                    "SELECT 1 FROM rp_chat_rooms WHERE name = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("SELECT 1 FROM rp_chat_rooms WHERE name = ?")) {
                 statement.setString(1, this.chatName);
                 try (ResultSet set = statement.executeQuery()) {
                     exists = set.next();
@@ -771,11 +801,13 @@ public class WebSocketChatRoom {
         }
 
         new Thread(() -> {
-            try {
-                Thread.sleep(50);
-            } catch (InterruptedException ignored) {}
-            this.dispose();
-        }).start();
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException ignored) {
+                    }
+                    this.dispose();
+                })
+                .start();
     }
 
     public void dispose() {

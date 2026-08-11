@@ -1,14 +1,13 @@
 package com.eu.habbo.habbohotel.roleplay.phones;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PhonesManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(PhonesManager.class);
@@ -27,7 +26,7 @@ public class PhonesManager {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // 1. Load rp_phones
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_phones");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     String modelName = set.getString("model_name");
@@ -44,7 +43,7 @@ public class PhonesManager {
 
             // 2. Load rp_phones_owned
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_phones_owned");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     int phoneId = set.getInt("phone_id");
@@ -58,7 +57,7 @@ public class PhonesManager {
 
             // 3. Load rp_phones_apps
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_phones_apps");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     String name = set.getString("name");
@@ -76,7 +75,7 @@ public class PhonesManager {
 
             // 4. Load rp_phones_apps_owned
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_phones_apps_owned");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     int phoneId = set.getInt("phone_id");
@@ -90,8 +89,12 @@ public class PhonesManager {
                 }
             }
 
-            LOGGER.info("PhonesManager -> Loaded {} phones, {} owned, {} apps, and {} owned apps.",
-                    phones.size(), phonesOwned.size(), phonesApps.size(), phonesAppsOwned.size());
+            LOGGER.info(
+                    "PhonesManager -> Loaded {} phones, {} owned, {} apps, and {} owned apps.",
+                    phones.size(),
+                    phonesOwned.size(),
+                    phonesApps.size(),
+                    phonesAppsOwned.size());
 
         } catch (SQLException e) {
             LOGGER.error("Failed to load phones from database", e);

@@ -9,7 +9,8 @@ public class Phones {
     private int screenSlots;
     private int dockSlots;
 
-    public Phones(int id, String modelName, String displayName, int price, int effectId, int screenSlots, int dockSlots) {
+    public Phones(
+            int id, String modelName, String displayName, int price, int effectId, int screenSlots, int dockSlots) {
         this.id = id;
         this.modelName = modelName;
         this.displayName = displayName;

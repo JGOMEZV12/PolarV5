@@ -1,12 +1,11 @@
 package com.eu.habbo.habbohotel.roleplay.turfs;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Turf {
     private static final Logger LOGGER = LoggerFactory.getLogger(Turf.class);
@@ -35,7 +34,8 @@ public class Turf {
 
     public void updateTurf(int newGangId) {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE `rp_gangs_turfs` SET `gang_id` = ? WHERE `gang_id` = ? AND `room_id` = ?")) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "UPDATE `rp_gangs_turfs` SET `gang_id` = ? WHERE `gang_id` = ? AND `room_id` = ?")) {
             statement.setInt(1, newGangId);
             statement.setInt(2, this.gangId);
             statement.setInt(3, this.roomId);
@@ -46,30 +46,75 @@ public class Turf {
         }
     }
 
-    public int getRoomId() { return roomId; }
-    public void setRoomId(int roomId) { this.roomId = roomId; }
+    public int getRoomId() {
+        return roomId;
+    }
 
-    public int getGangId() { return gangId; }
-    public void setGangId(int gangId) { this.gangId = gangId; }
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
 
-    public int getBeginX() { return beginX; }
-    public void setBeginX(int beginX) { this.beginX = beginX; }
+    public int getGangId() {
+        return gangId;
+    }
 
-    public int getBeginY() { return beginY; }
-    public void setBeginY(int beginY) { this.beginY = beginY; }
+    public void setGangId(int gangId) {
+        this.gangId = gangId;
+    }
 
-    public int getEndX() { return endX; }
-    public void setEndX(int endX) { this.endX = endX; }
+    public int getBeginX() {
+        return beginX;
+    }
 
-    public int getEndY() { return endY; }
-    public void setEndY(int endY) { this.endY = endY; }
+    public void setBeginX(int beginX) {
+        this.beginX = beginX;
+    }
 
-    public int getFlagX() { return flagX; }
-    public void setFlagX(int flagX) { this.flagX = flagX; }
+    public int getBeginY() {
+        return beginY;
+    }
 
-    public int getFlagY() { return flagY; }
-    public void setFlagY(int flagY) { this.flagY = flagY; }
+    public void setBeginY(int beginY) {
+        this.beginY = beginY;
+    }
 
-    public boolean isFlagSpawned() { return flagSpawned; }
-    public void setFlagSpawned(boolean flagSpawned) { this.flagSpawned = flagSpawned; }
+    public int getEndX() {
+        return endX;
+    }
+
+    public void setEndX(int endX) {
+        this.endX = endX;
+    }
+
+    public int getEndY() {
+        return endY;
+    }
+
+    public void setEndY(int endY) {
+        this.endY = endY;
+    }
+
+    public int getFlagX() {
+        return flagX;
+    }
+
+    public void setFlagX(int flagX) {
+        this.flagX = flagX;
+    }
+
+    public int getFlagY() {
+        return flagY;
+    }
+
+    public void setFlagY(int flagY) {
+        this.flagY = flagY;
+    }
+
+    public boolean isFlagSpawned() {
+        return flagSpawned;
+    }
+
+    public void setFlagSpawned(boolean flagSpawned) {
+        this.flagSpawned = flagSpawned;
+    }
 }

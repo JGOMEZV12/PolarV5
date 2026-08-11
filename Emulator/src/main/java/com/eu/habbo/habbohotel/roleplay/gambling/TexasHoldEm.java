@@ -3,20 +3,24 @@ package com.eu.habbo.habbohotel.roleplay.gambling;
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.eu.habbo.habbohotel.items.Item;
+import com.eu.habbo.habbohotel.rooms.FurnitureMovementError;
 import com.eu.habbo.habbohotel.rooms.Room;
 import com.eu.habbo.habbohotel.rooms.RoomTile;
-import com.eu.habbo.habbohotel.rooms.FurnitureMovementError;
 import com.eu.habbo.habbohotel.users.Habbo;
 import com.eu.habbo.habbohotel.users.HabboItem;
 import com.eu.habbo.messages.outgoing.rooms.items.RemoveFloorItemComposer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TexasHoldEm {
     private static final Logger LOGGER = LoggerFactory.getLogger(TexasHoldEm.class);
@@ -45,13 +49,19 @@ public class TexasHoldEm {
     public int gameSequence;
     public int playersTurn;
 
-    public TexasHoldEm(int gameId, int roomId,
-                       ConcurrentHashMap<Integer, TexasHoldEmItem> player1,
-                       ConcurrentHashMap<Integer, TexasHoldEmItem> player2,
-                       ConcurrentHashMap<Integer, TexasHoldEmItem> player3,
-                       ConcurrentHashMap<Integer, TexasHoldEmItem> banker,
-                       TexasHoldEmItem potSquare, TexasHoldEmItem joinGate,
-                       String[] player1Data, String[] player2Data, String[] player3Data, int joinCost) {
+    public TexasHoldEm(
+            int gameId,
+            int roomId,
+            ConcurrentHashMap<Integer, TexasHoldEmItem> player1,
+            ConcurrentHashMap<Integer, TexasHoldEmItem> player2,
+            ConcurrentHashMap<Integer, TexasHoldEmItem> player3,
+            ConcurrentHashMap<Integer, TexasHoldEmItem> banker,
+            TexasHoldEmItem potSquare,
+            TexasHoldEmItem joinGate,
+            String[] player1Data,
+            String[] player2Data,
+            String[] player3Data,
+            int joinCost) {
         this.gameId = gameId;
         this.roomId = roomId;
 
@@ -83,16 +93,23 @@ public class TexasHoldEm {
         try {
             if (gameStarted) return;
 
-            GameClient player = Emulator.getGameServer().getGameClientManager().getHabbo(userId).getClient();
+            GameClient player = Emulator.getGameServer()
+                    .getGameClientManager()
+                    .getHabbo(userId)
+                    .getClient();
             if (player == null || player.getHabbo() == null) return;
 
             if (player.getHabbo().getHabboInfo().getCredits() < this.joinCost) {
-                player.getHabbo().whisper("¡No tienes suficiente dinero para jugar! El pote de arranque cuesta $" + this.joinCost + "!");
+                player.getHabbo()
+                        .whisper("¡No tienes suficiente dinero para jugar! El pote de arranque cuesta $" + this.joinCost
+                                + "!");
                 return;
             }
 
             synchronized (playerList) {
-                long activeCount = playerList.values().stream().filter(x -> x != null && x.userId > 0).count();
+                long activeCount = playerList.values().stream()
+                        .filter(x -> x != null && x.userId > 0)
+                        .count();
                 if (activeCount >= 3) return;
 
                 boolean alreadyIn = playerList.values().stream().anyMatch(x -> x != null && x.userId == userId);
@@ -122,12 +139,14 @@ public class TexasHoldEm {
             player.getHabbo().getRoleplay().setTexasHoldEmPlayer(number);
             spawnStartingBet(number);
 
-            long currentCount = playerList.values().stream().filter(x -> x != null && x.userId > 0).count();
+            long currentCount = playerList.values().stream()
+                    .filter(x -> x != null && x.userId > 0)
+                    .count();
             if (currentCount == 3) {
                 if (timerTask == null) {
-                    timerTask = Emulator.getThreading().getService().scheduleAtFixedRate(
-                            this::runTimerTick, 1, 1, TimeUnit.SECONDS
-                    );
+                    timerTask = Emulator.getThreading()
+                            .getService()
+                            .scheduleAtFixedRate(this::runTimerTick, 1, 1, TimeUnit.SECONDS);
                 }
 
                 this.playersTurn = 1;
@@ -138,7 +157,8 @@ public class TexasHoldEm {
                 if (p1 != null && p1.userId > 0) {
                     Habbo h1 = Emulator.getGameServer().getGameClientManager().getHabbo(p1.userId);
                     if (h1 != null) {
-                        sendStartMessage("Por favor " + h1.getHabboInfo().getUsername() + " Haga rodar sus dados, dandole clic dos veces");
+                        sendStartMessage("Por favor " + h1.getHabboInfo().getUsername()
+                                + " Haga rodar sus dados, dandole clic dos veces");
                     }
                 }
             }
@@ -179,11 +199,16 @@ public class TexasHoldEm {
                 }
             }
 
-            GameClient player = Emulator.getGameServer().getGameClientManager().getHabbo(userId).getClient();
+            GameClient player = Emulator.getGameServer()
+                    .getGameClientManager()
+                    .getHabbo(userId)
+                    .getClient();
             if (player != null && player.getHabbo() != null) {
                 Room room = Emulator.getGameEnvironment().getRoomManager().getRoom(this.roomId);
                 if (room != null) {
-                    room.teleportHabboToLocation(player.getHabbo(), (short) room.getLayout().getDoorX(), (short) room.getLayout().getDoorY());
+                    room.teleportHabboToLocation(
+                            player.getHabbo(), (short) room.getLayout().getDoorX(), (short)
+                                    room.getLayout().getDoorY());
                 }
                 player.getHabbo().getRoleplay().setTexasHoldEmPlayer(0);
             }
@@ -260,20 +285,21 @@ public class TexasHoldEm {
             }
 
             int[] itemsToSpawn = {
-                    200054, hundreds, // Diamond
-                    187378, fifties,  // Emerald
-                    187377, tens,     // Ruby
-                    187381, fives     // Sapphire
+                200054, hundreds, // Diamond
+                187378, fifties, // Emerald
+                187377, tens, // Ruby
+                187381, fives // Sapphire
             };
 
             for (int i = 0; i < itemsToSpawn.length; i += 2) {
                 int baseId = itemsToSpawn[i];
-                int count = itemsToSpawn[i+1];
+                int count = itemsToSpawn[i + 1];
                 Item baseItem = Emulator.getGameEnvironment().getItemManager().getItem(baseId);
                 if (baseItem == null) continue;
 
                 while (count > 0 && tile != null) {
-                    HabboItem item = Emulator.getGameEnvironment().getItemManager().createItem(0, baseItem, 0, 0, "0");
+                    HabboItem item =
+                            Emulator.getGameEnvironment().getItemManager().createItem(0, baseItem, 0, 0, "0");
                     if (item != null) {
                         item.setRoomId(this.roomId);
                         FurnitureMovementError error = room.placeFloorFurniAt(item, tile, 0, null);
@@ -300,7 +326,9 @@ public class TexasHoldEm {
             int y = Integer.parseInt(data[3]);
 
             List<HabboItem> items = room.getFloorItems().stream()
-                    .filter(item -> item.getX() == x && item.getY() == y && item.getBaseItem().getName().toLowerCase().contains("cfc"))
+                    .filter(item -> item.getX() == x
+                            && item.getY() == y
+                            && item.getBaseItem().getName().toLowerCase().contains("cfc"))
                     .collect(Collectors.toList());
 
             for (HabboItem item : items) {
@@ -358,21 +386,22 @@ public class TexasHoldEm {
             }
 
             int[] itemsToSpawn = {
-                    200059, thousands, // Obsidian
-                    200054, hundreds,  // Diamond
-                    200062, fifties,   // Emerald
-                    200058, tens,      // Ruby
-                    200056, fives      // Sapphire
+                200059, thousands, // Obsidian
+                200054, hundreds, // Diamond
+                200062, fifties, // Emerald
+                200058, tens, // Ruby
+                200056, fives // Sapphire
             };
 
             for (int i = 0; i < itemsToSpawn.length; i += 2) {
                 int baseId = itemsToSpawn[i];
-                int count = itemsToSpawn[i+1];
+                int count = itemsToSpawn[i + 1];
                 Item baseItem = Emulator.getGameEnvironment().getItemManager().getItem(baseId);
                 if (baseItem == null) continue;
 
                 while (count > 0 && tile != null) {
-                    HabboItem item = Emulator.getGameEnvironment().getItemManager().createItem(0, baseItem, 0, 0, "0");
+                    HabboItem item =
+                            Emulator.getGameEnvironment().getItemManager().createItem(0, baseItem, 0, 0, "0");
                     if (item != null) {
                         item.setRoomId(this.roomId);
                         FurnitureMovementError error = room.placeFloorFurniAt(item, tile, 0, null);
@@ -398,7 +427,9 @@ public class TexasHoldEm {
             int y = potSquare.y;
 
             List<HabboItem> items = room.getFloorItems().stream()
-                    .filter(item -> item.getX() == x && item.getY() == y && item.getBaseItem().getName().toLowerCase().contains("cfc"))
+                    .filter(item -> item.getX() == x
+                            && item.getY() == y
+                            && item.getBaseItem().getName().toLowerCase().contains("cfc"))
                     .collect(Collectors.toList());
 
             for (HabboItem item : items) {
@@ -413,7 +444,8 @@ public class TexasHoldEm {
 
     public int minimumBet(int number) {
         TexasHoldEmPlayer player = playerList.get(number);
-        int required = playerList.values().stream().mapToInt(x -> x.currentBet).max().orElse(0);
+        int required =
+                playerList.values().stream().mapToInt(x -> x.currentBet).max().orElse(0);
         return required - player.currentBet;
     }
 
@@ -430,10 +462,14 @@ public class TexasHoldEm {
                 return;
             }
 
-            ConcurrentHashMap<Integer, TexasHoldEmItem> data = (number == 1) ? player1 : (number == 2 ? player2 : player3);
+            ConcurrentHashMap<Integer, TexasHoldEmItem> data =
+                    (number == 1) ? player1 : (number == 2 ? player2 : player3);
             if (data == null || data.isEmpty()) return;
 
-            TexasHoldEmItem texasItem = data.values().stream().filter(x -> x != null && x.furni != null && x.furni.getId() == item.getId()).findFirst().orElse(null);
+            TexasHoldEmItem texasItem = data.values().stream()
+                    .filter(x -> x != null && x.furni != null && x.furni.getId() == item.getId())
+                    .findFirst()
+                    .orElse(null);
             if (texasItem == null || texasItem.rolled) return;
 
             // In Polaris, trigger standard Dice rolling or randomize extra_data from 1 to 6
@@ -482,10 +518,13 @@ public class TexasHoldEm {
                 Habbo client = Emulator.getGameServer().getGameClientManager().getHabbo(playerId);
                 if (client != null) {
                     if (gameSequence == 0) {
-                        sendStartMessage("Por favor " + client.getHabboInfo().getUsername() + " Gire para tirar sus dados!");
+                        sendStartMessage(
+                                "Por favor " + client.getHabboInfo().getUsername() + " Gire para tirar sus dados!");
                     } else if (gameSequence == 1 || gameSequence == 2) {
-                        sendStartMessage("Por favor " + client.getHabboInfo().getUsername() + ". ¿Quieres ':apostar' o ':pasar' para abandonar ':salirevento (fold)'?");
-                        client.whisper("La apuesta mínima actual es de $" + this.minimumBet(this.playersTurn) + "! Solo tienes $" + playerList.get(this.playersTurn).totalAmount + "!");
+                        sendStartMessage("Por favor " + client.getHabboInfo().getUsername()
+                                + ". ¿Quieres ':apostar' o ':pasar' para abandonar ':salirevento (fold)'?");
+                        client.whisper("La apuesta mínima actual es de $" + this.minimumBet(this.playersTurn)
+                                + "! Solo tienes $" + playerList.get(this.playersTurn).totalAmount + "!");
                     }
                 }
             }
@@ -526,9 +565,15 @@ public class TexasHoldEm {
             ConcurrentHashMap<Integer, List<TexasHoldEmItem>> dice = new ConcurrentHashMap<>();
 
             synchronized (playerList) {
-                long activePlayers = playerList.values().stream().filter(x -> x != null && x.userId > 0).count();
+                long activePlayers = playerList.values().stream()
+                        .filter(x -> x != null && x.userId > 0)
+                        .count();
                 if (activePlayers == 1) {
-                    int winnerId = playerList.entrySet().stream().filter(x -> x.getValue() != null && x.getValue().userId > 0).findFirst().get().getKey();
+                    int winnerId = playerList.entrySet().stream()
+                            .filter(x -> x.getValue() != null && x.getValue().userId > 0)
+                            .findFirst()
+                            .get()
+                            .getKey();
                     endGame(winnerId);
                     return;
                 }
@@ -537,7 +582,8 @@ public class TexasHoldEm {
                     int number = entry.getKey();
                     if (entry.getValue() == null || entry.getValue().userId <= 0) continue;
 
-                    ConcurrentHashMap<Integer, TexasHoldEmItem> data = (number == 1) ? player1 : (number == 2 ? player2 : player3);
+                    ConcurrentHashMap<Integer, TexasHoldEmItem> data =
+                            (number == 1) ? player1 : (number == 2 ? player2 : player3);
                     List<TexasHoldEmItem> allDice = new ArrayList<>(data.values());
                     allDice.add(banker.get(1));
                     allDice.add(banker.get(2));
@@ -550,52 +596,88 @@ public class TexasHoldEm {
             Map<Integer, int[]> scores = new HashMap<>();
             for (Map.Entry<Integer, List<TexasHoldEmItem>> entry : dice.entrySet()) {
                 int number = entry.getKey();
-                List<Integer> rolls = entry.getValue().stream().map(x -> x.value).collect(Collectors.toList());
+                List<Integer> rolls =
+                        entry.getValue().stream().map(x -> x.value).collect(Collectors.toList());
 
-                Map<Integer, Long> grouped = rolls.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
+                Map<Integer, Long> grouped =
+                        rolls.stream().collect(Collectors.groupingBy(x -> x, Collectors.counting()));
 
                 int scoreKind = 1;
                 int scoreCard = 1;
 
                 if (grouped.containsValue(5L)) {
                     scoreKind = 8;
-                    scoreCard = grouped.entrySet().stream().filter(x -> x.getValue() == 5L).map(Map.Entry::getKey).findFirst().orElse(1);
+                    scoreCard = grouped.entrySet().stream()
+                            .filter(x -> x.getValue() == 5L)
+                            .map(Map.Entry::getKey)
+                            .findFirst()
+                            .orElse(1);
                 } else if (grouped.containsValue(4L)) {
                     scoreKind = 7;
-                    scoreCard = grouped.entrySet().stream().filter(x -> x.getValue() == 4L).map(Map.Entry::getKey).findFirst().orElse(1);
+                    scoreCard = grouped.entrySet().stream()
+                            .filter(x -> x.getValue() == 4L)
+                            .map(Map.Entry::getKey)
+                            .findFirst()
+                            .orElse(1);
                 } else if (grouped.containsValue(3L) && grouped.containsValue(2L)) {
                     scoreKind = 6;
-                    scoreCard = grouped.entrySet().stream().filter(x -> x.getValue() == 3L).map(Map.Entry::getKey).findFirst().orElse(1);
-                } else if (rolls.containsAll(Arrays.asList(1, 2, 3, 4, 5)) || rolls.containsAll(Arrays.asList(2, 3, 4, 5, 6))) {
+                    scoreCard = grouped.entrySet().stream()
+                            .filter(x -> x.getValue() == 3L)
+                            .map(Map.Entry::getKey)
+                            .findFirst()
+                            .orElse(1);
+                } else if (rolls.containsAll(Arrays.asList(1, 2, 3, 4, 5))
+                        || rolls.containsAll(Arrays.asList(2, 3, 4, 5, 6))) {
                     scoreKind = 5;
                     scoreCard = rolls.contains(6) ? 2 : 1;
                 } else if (grouped.containsValue(3L)) {
                     scoreKind = 4;
-                    scoreCard = grouped.entrySet().stream().filter(x -> x.getValue() == 3L).map(Map.Entry::getKey).findFirst().orElse(1);
+                    scoreCard = grouped.entrySet().stream()
+                            .filter(x -> x.getValue() == 3L)
+                            .map(Map.Entry::getKey)
+                            .findFirst()
+                            .orElse(1);
                 } else {
-                    long doubleCount = grouped.values().stream().filter(x -> x == 2L).count();
+                    long doubleCount =
+                            grouped.values().stream().filter(x -> x == 2L).count();
                     if (doubleCount >= 2) {
                         scoreKind = 3;
-                        scoreCard = grouped.entrySet().stream().filter(x -> x.getValue() == 2L).mapToInt(Map.Entry::getKey).max().orElse(1);
+                        scoreCard = grouped.entrySet().stream()
+                                .filter(x -> x.getValue() == 2L)
+                                .mapToInt(Map.Entry::getKey)
+                                .max()
+                                .orElse(1);
                     } else if (doubleCount == 1) {
                         scoreKind = 2;
-                        scoreCard = grouped.entrySet().stream().filter(x -> x.getValue() == 2L).map(Map.Entry::getKey).findFirst().orElse(1);
+                        scoreCard = grouped.entrySet().stream()
+                                .filter(x -> x.getValue() == 2L)
+                                .map(Map.Entry::getKey)
+                                .findFirst()
+                                .orElse(1);
                     } else {
                         scoreKind = 1;
                         scoreCard = rolls.stream().mapToInt(x -> x).max().orElse(1);
                     }
                 }
 
-                scores.put(number, new int[]{scoreKind, scoreCard});
+                scores.put(number, new int[] {scoreKind, scoreCard});
             }
 
-            int bestScoreKind = scores.values().stream().mapToInt(x -> x[0]).max().orElse(1);
-            List<Map.Entry<Integer, int[]>> candidates = scores.entrySet().stream().filter(x -> x.getValue()[0] == bestScoreKind).collect(Collectors.toList());
+            int bestScoreKind =
+                    scores.values().stream().mapToInt(x -> x[0]).max().orElse(1);
+            List<Map.Entry<Integer, int[]>> candidates = scores.entrySet().stream()
+                    .filter(x -> x.getValue()[0] == bestScoreKind)
+                    .collect(Collectors.toList());
 
             int winnerKey = candidates.get(0).getKey();
             if (candidates.size() > 1) {
-                int maxCard = candidates.stream().mapToInt(x -> x.getValue()[1]).max().orElse(1);
-                winnerKey = candidates.stream().filter(x -> x.getValue()[1] == maxCard).findFirst().get().getKey();
+                int maxCard =
+                        candidates.stream().mapToInt(x -> x.getValue()[1]).max().orElse(1);
+                winnerKey = candidates.stream()
+                        .filter(x -> x.getValue()[1] == maxCard)
+                        .findFirst()
+                        .get()
+                        .getKey();
             }
 
             endGame(winnerKey);
@@ -612,7 +694,8 @@ public class TexasHoldEm {
             if (winnerPlayer != null && winnerPlayer.userId > 0) {
                 Habbo h = Emulator.getGameServer().getGameClientManager().getHabbo(winnerPlayer.userId);
                 if (h != null) {
-                    sendWinnerMessage("El ganador es: " + h.getHabboInfo().getUsername() + " Quien gana el bote de $" + prize + "!");
+                    sendWinnerMessage("El ganador es: " + h.getHabboInfo().getUsername() + " Quien gana el bote de $"
+                            + prize + "!");
                     synchronized (h) {
                         h.giveCredits(prize);
                     }
@@ -695,7 +778,9 @@ public class TexasHoldEm {
                 return;
             }
 
-            long activeCount = playerList.values().stream().filter(x -> x != null && x.userId > 0).count();
+            long activeCount = playerList.values().stream()
+                    .filter(x -> x != null && x.userId > 0)
+                    .count();
             if (activeCount <= 0) {
                 removePotFurni();
                 resetGame();
@@ -703,7 +788,11 @@ public class TexasHoldEm {
             }
 
             if (activeCount == 1) {
-                int winnerId = playerList.entrySet().stream().filter(x -> x.getValue() != null && x.getValue().userId > 0).findFirst().get().getKey();
+                int winnerId = playerList.entrySet().stream()
+                        .filter(x -> x.getValue() != null && x.getValue().userId > 0)
+                        .findFirst()
+                        .get()
+                        .getKey();
                 endGame(winnerId);
                 return;
             }
@@ -713,7 +802,9 @@ public class TexasHoldEm {
                 if (entry.getValue() == null || entry.getValue().userId <= 0) continue;
 
                 Habbo h = Emulator.getGameServer().getGameClientManager().getHabbo(entry.getValue().userId);
-                if (h == null || h.getHabboInfo().getCurrentRoom() == null || h.getHabboInfo().getCurrentRoom().getId() != this.roomId) {
+                if (h == null
+                        || h.getHabboInfo().getCurrentRoom() == null
+                        || h.getHabboInfo().getCurrentRoom().getId() != this.roomId) {
                     removePlayerFromGame(entry.getValue().userId);
                     break;
                 }

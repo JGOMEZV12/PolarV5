@@ -2,24 +2,23 @@ package com.eu.habbo.habbohotel.roleplay.users;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.roleplay.farming.FarmingStats;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserDataHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDataHandler.class);
 
-    public UserDataHandler() {
-    }
+    public UserDataHandler() {}
 
     public static boolean loadData(int userId, RoleplayUser rp) {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // 1. Load rp_stats
-            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_stats WHERE id = ? LIMIT 1")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("SELECT * FROM rp_stats WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, userId);
                 try (ResultSet set = statement.executeQuery()) {
                     if (set.next()) {
@@ -71,11 +70,13 @@ public class UserDataHandler {
             }
 
             // 2. Ensure rp_stats_cooldowns row exists
-            try (PreparedStatement statement = connection.prepareStatement("SELECT 1 FROM rp_stats_cooldowns WHERE id = ?")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("SELECT 1 FROM rp_stats_cooldowns WHERE id = ?")) {
                 statement.setInt(1, userId);
                 try (ResultSet set = statement.executeQuery()) {
                     if (!set.next()) {
-                        try (PreparedStatement insert = connection.prepareStatement("INSERT INTO rp_stats_cooldowns (id) VALUES (?)")) {
+                        try (PreparedStatement insert =
+                                connection.prepareStatement("INSERT INTO rp_stats_cooldowns (id) VALUES (?)")) {
                             insert.setInt(1, userId);
                             insert.executeUpdate();
                         }
@@ -84,7 +85,8 @@ public class UserDataHandler {
             }
 
             // 3. Ensure rp_stats_farming row exists
-            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_stats_farming WHERE id = ? LIMIT 1")) {
+            try (PreparedStatement statement =
+                    connection.prepareStatement("SELECT * FROM rp_stats_farming WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, userId);
                 try (ResultSet set = statement.executeQuery()) {
                     if (set.next()) {
@@ -92,16 +94,17 @@ public class UserDataHandler {
                         rp.setFarmingStats(farming);
                     } else {
                         try (PreparedStatement insert = connection.prepareStatement(
-                                "INSERT INTO rp_stats_farming (id, level, exp, has_seed_satchel, has_plant_satchel, " +
-                                        "blue_starflower, yellow_starflower, pink_dahlia, yellow_plumeria, pink_primrose, " +
-                                        "blue_primrose, yellow_primrose, yellow_dahlia, blue_plumeria, pink_plumeria, " +
-                                        "red_starflower, blue_dahlia) VALUES (?, 1, 0, '0', '0', " +
-                                        "'0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0')")) {
+                                "INSERT INTO rp_stats_farming (id, level, exp, has_seed_satchel, has_plant_satchel, "
+                                        + "blue_starflower, yellow_starflower, pink_dahlia, yellow_plumeria, pink_primrose, "
+                                        + "blue_primrose, yellow_primrose, yellow_dahlia, blue_plumeria, pink_plumeria, "
+                                        + "red_starflower, blue_dahlia) VALUES (?, 1, 0, '0', '0', "
+                                        + "'0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0', '0:0')")) {
                             insert.setInt(1, userId);
                             insert.executeUpdate();
                         }
                         // Re-query newly created farming stats
-                        try (PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM rp_stats_farming WHERE id = ? LIMIT 1")) {
+                        try (PreparedStatement statement2 =
+                                connection.prepareStatement("SELECT * FROM rp_stats_farming WHERE id = ? LIMIT 1")) {
                             statement2.setInt(1, userId);
                             try (ResultSet set2 = statement2.executeQuery()) {
                                 if (set2.next()) {
@@ -134,23 +137,22 @@ public class UserDataHandler {
     }
 
     public static boolean saveData(int userId, RoleplayUser rp) {
-        String query = "UPDATE rp_stats SET " +
-                "level = ?, level_exp = ?, job_id = ?, job_rank = ?, job_request = ?, " +
-                "maxhealth = ?, curhealth = ?, maxenergy = ?, curenergy = ?, curalcohol = ?, maxalcohol = ?, " +
-                "kevlar = ?, hunger = ?, sida = ?, hygiene = ?, animo = ?, poop = ?, " +
-                "intelligence = ?, strength = ?, stamina = ?, intelligence_exp = ?, strength_exp = ?, stamina_exp = ?, " +
-                "is_stun = ?, is_dead = ?, dead_time_left = ?, is_jailed = ?, jailed_time_left = ?, " +
-                "is_wanted = ?, wanted_level = ?, wanted_time_left = ?, on_probation = ?, probation_time_left = ?, " +
-                "sendhome_time_left = ?, is_cuffed = ?, cuffed_time_left = ?, " +
-                "bank_account = ?, bank_target = ?, bank_chequings = ?, bank_savings = ? " +
-                "WHERE id = ?";
+        String query = "UPDATE rp_stats SET " + "level = ?, level_exp = ?, job_id = ?, job_rank = ?, job_request = ?, "
+                + "maxhealth = ?, curhealth = ?, maxenergy = ?, curenergy = ?, curalcohol = ?, maxalcohol = ?, "
+                + "kevlar = ?, hunger = ?, sida = ?, hygiene = ?, animo = ?, poop = ?, "
+                + "intelligence = ?, strength = ?, stamina = ?, intelligence_exp = ?, strength_exp = ?, stamina_exp = ?, "
+                + "is_stun = ?, is_dead = ?, dead_time_left = ?, is_jailed = ?, jailed_time_left = ?, "
+                + "is_wanted = ?, wanted_level = ?, wanted_time_left = ?, on_probation = ?, probation_time_left = ?, "
+                + "sendhome_time_left = ?, is_cuffed = ?, cuffed_time_left = ?, "
+                + "bank_account = ?, bank_target = ?, bank_chequings = ?, bank_savings = ? "
+                + "WHERE id = ?";
 
-        String farmingQuery = "UPDATE rp_stats_farming SET " +
-                "level = ?, exp = ?, has_seed_satchel = ?, has_plant_satchel = ?, " +
-                "blue_starflower = ?, yellow_starflower = ?, pink_dahlia = ?, yellow_plumeria = ?, " +
-                "pink_primrose = ?, blue_primrose = ?, yellow_primrose = ?, yellow_dahlia = ?, " +
-                "blue_plumeria = ?, pink_plumeria = ?, red_starflower = ?, blue_dahlia = ? " +
-                "WHERE id = ?";
+        String farmingQuery =
+                "UPDATE rp_stats_farming SET " + "level = ?, exp = ?, has_seed_satchel = ?, has_plant_satchel = ?, "
+                        + "blue_starflower = ?, yellow_starflower = ?, pink_dahlia = ?, yellow_plumeria = ?, "
+                        + "pink_primrose = ?, blue_primrose = ?, yellow_primrose = ?, yellow_dahlia = ?, "
+                        + "blue_plumeria = ?, pink_plumeria = ?, red_starflower = ?, blue_dahlia = ? "
+                        + "WHERE id = ?";
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // 1. Save rp_stats
@@ -209,18 +211,54 @@ public class UserDataHandler {
                     statement.setString(3, fs.isHasSeedSatchel() ? "1" : "0");
                     statement.setString(4, fs.isHasPlantSatchel() ? "1" : "0");
 
-                    statement.setString(5, fs.getSeedSatchel().getBlueStarflowerSeeds() + ":" + fs.getPlantSatchel().getBlueStarflowers());
-                    statement.setString(6, fs.getSeedSatchel().getYellowStarflowerSeeds() + ":" + fs.getPlantSatchel().getYellowStarflowers());
-                    statement.setString(7, fs.getSeedSatchel().getPinkDahliaSeeds() + ":" + fs.getPlantSatchel().getPinkDahlias());
-                    statement.setString(8, fs.getSeedSatchel().getYellowPlumeriaSeeds() + ":" + fs.getPlantSatchel().getYellowPlumerias());
-                    statement.setString(9, fs.getSeedSatchel().getPinkPrimroseSeeds() + ":" + fs.getPlantSatchel().getPinkPrimroses());
-                    statement.setString(10, fs.getSeedSatchel().getBluePrimroseSeeds() + ":" + fs.getPlantSatchel().getBluePrimroses());
-                    statement.setString(11, fs.getSeedSatchel().getYellowPrimroseSeeds() + ":" + fs.getPlantSatchel().getYellowPrimroses());
-                    statement.setString(12, fs.getSeedSatchel().getYellowDahliaSeeds() + ":" + fs.getPlantSatchel().getYellowDahlias());
-                    statement.setString(13, fs.getSeedSatchel().getBluePlumeriaSeeds() + ":" + fs.getPlantSatchel().getBluePlumerias());
-                    statement.setString(14, fs.getSeedSatchel().getPinkPlumeriaSeeds() + ":" + fs.getPlantSatchel().getPinkPlumerias());
-                    statement.setString(15, fs.getSeedSatchel().getRedStarflowerSeeds() + ":" + fs.getPlantSatchel().getRedStarflowers());
-                    statement.setString(16, fs.getSeedSatchel().getBlueDahliaSeeds() + ":" + fs.getPlantSatchel().getBlueDahlias());
+                    statement.setString(
+                            5,
+                            fs.getSeedSatchel().getBlueStarflowerSeeds() + ":"
+                                    + fs.getPlantSatchel().getBlueStarflowers());
+                    statement.setString(
+                            6,
+                            fs.getSeedSatchel().getYellowStarflowerSeeds() + ":"
+                                    + fs.getPlantSatchel().getYellowStarflowers());
+                    statement.setString(
+                            7,
+                            fs.getSeedSatchel().getPinkDahliaSeeds() + ":"
+                                    + fs.getPlantSatchel().getPinkDahlias());
+                    statement.setString(
+                            8,
+                            fs.getSeedSatchel().getYellowPlumeriaSeeds() + ":"
+                                    + fs.getPlantSatchel().getYellowPlumerias());
+                    statement.setString(
+                            9,
+                            fs.getSeedSatchel().getPinkPrimroseSeeds() + ":"
+                                    + fs.getPlantSatchel().getPinkPrimroses());
+                    statement.setString(
+                            10,
+                            fs.getSeedSatchel().getBluePrimroseSeeds() + ":"
+                                    + fs.getPlantSatchel().getBluePrimroses());
+                    statement.setString(
+                            11,
+                            fs.getSeedSatchel().getYellowPrimroseSeeds() + ":"
+                                    + fs.getPlantSatchel().getYellowPrimroses());
+                    statement.setString(
+                            12,
+                            fs.getSeedSatchel().getYellowDahliaSeeds() + ":"
+                                    + fs.getPlantSatchel().getYellowDahlias());
+                    statement.setString(
+                            13,
+                            fs.getSeedSatchel().getBluePlumeriaSeeds() + ":"
+                                    + fs.getPlantSatchel().getBluePlumerias());
+                    statement.setString(
+                            14,
+                            fs.getSeedSatchel().getPinkPlumeriaSeeds() + ":"
+                                    + fs.getPlantSatchel().getPinkPlumerias());
+                    statement.setString(
+                            15,
+                            fs.getSeedSatchel().getRedStarflowerSeeds() + ":"
+                                    + fs.getPlantSatchel().getRedStarflowers());
+                    statement.setString(
+                            16,
+                            fs.getSeedSatchel().getBlueDahliaSeeds() + ":"
+                                    + fs.getPlantSatchel().getBlueDahlias());
                     statement.setInt(17, userId);
 
                     statement.executeUpdate();

@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.combat;
 
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.misc.RoleplayManager;
+import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,25 +31,32 @@ public class Fist implements ICombat {
         RoleplayUser targetRp = targetClient.getHabbo().getRoleplay();
 
         // Calculate Fist damage (melee)
-        int damage = 5 + (int)(Math.random() * 6); // 5 to 10 random damage
+        int damage = 5 + (int) (Math.random() * 6); // 5 to 10 random damage
 
         synchronized (targetClient.getHabbo()) {
             int newHealth = targetRp.getCurHealth() - damage;
             if (newHealth <= 0) {
                 targetRp.setCurHealth(0);
                 targetRp.setDead(true);
-                RoleplayManager.shout(client, "*Le da un golpe final a " + targetClient.getHabbo().getHabboInfo().getUsername() + " dejándolo inconsciente*");
+                RoleplayManager.shout(
+                        client,
+                        "*Le da un golpe final a "
+                                + targetClient.getHabbo().getHabboInfo().getUsername() + " dejándolo inconsciente*");
                 getRewards(client, targetClient, "hit");
             } else {
                 targetRp.setCurHealth(newHealth);
-                RoleplayManager.shout(client, "*Le da un puñetazo a " + targetClient.getHabbo().getHabboInfo().getUsername() + " causándole " + damage + " de daño*");
+                RoleplayManager.shout(
+                        client,
+                        "*Le da un puñetazo a "
+                                + targetClient.getHabbo().getHabboInfo().getUsername() + " causándole " + damage
+                                + " de daño*");
             }
         }
     }
 
     @Override
     public int getEXP(GameClient client, GameClient targetClient) {
-        return 15 + (int)(Math.random() * 11); // 15 to 25 EXP
+        return 15 + (int) (Math.random() * 11); // 15 to 25 EXP
     }
 
     @Override
@@ -80,7 +87,9 @@ public class Fist implements ICombat {
                 synchronized (lock2) {
                     if (targetClient.getHabbo().tryTakeCredits(coinsToSteal)) {
                         client.getHabbo().giveCredits(coinsToSteal);
-                        client.getHabbo().whisper("¡Has robado $" + coinsToSteal + " del bolsillo de " + targetClient.getHabbo().getHabboInfo().getUsername() + "!");
+                        client.getHabbo()
+                                .whisper("¡Has robado $" + coinsToSteal + " del bolsillo de "
+                                        + targetClient.getHabbo().getHabboInfo().getUsername() + "!");
                         targetClient.getHabbo().whisper("¡Has perdido $" + coinsToSteal + " por ser noqueado!");
                     }
                 }

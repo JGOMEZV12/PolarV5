@@ -1,12 +1,11 @@
 package com.eu.habbo.habbohotel.roleplay.groups;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RoleplayGroup {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleplayGroup.class);
@@ -20,7 +19,15 @@ public class RoleplayGroup {
     private int balance;
     private int medipacks;
 
-    public RoleplayGroup(int id, String name, String description, String badge, int ownerId, int roomId, int balance, int medipacks) {
+    public RoleplayGroup(
+            int id,
+            String name,
+            String description,
+            String badge,
+            int ownerId,
+            int roomId,
+            int balance,
+            int medipacks) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -41,7 +48,8 @@ public class RoleplayGroup {
         String col = isGang() ? "bank_balance" : "balance"; // assuming balance column name in rp_jobs
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE `" + table + "` SET `" + col + "` = ? WHERE `id` = ?")) {
+                PreparedStatement statement =
+                        connection.prepareStatement("UPDATE `" + table + "` SET `" + col + "` = ? WHERE `id` = ?")) {
             statement.setInt(1, this.balance);
             statement.setInt(2, this.id);
             statement.executeUpdate();
@@ -50,27 +58,67 @@ public class RoleplayGroup {
         }
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public String getName() {
+        return name;
+    }
 
-    public String getBadge() { return badge; }
-    public void setBadge(String badge) { this.badge = badge; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getOwnerId() { return ownerId; }
-    public void setOwnerId(int ownerId) { this.ownerId = ownerId; }
+    public String getDescription() {
+        return description;
+    }
 
-    public int getRoomId() { return roomId; }
-    public void setRoomId(int roomId) { this.roomId = roomId; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-    public int getBalance() { return balance; }
-    public void setBalance(int balance) { this.balance = balance; }
+    public String getBadge() {
+        return badge;
+    }
 
-    public int getMedipacks() { return medipacks; }
-    public void setMedipacks(int medipacks) { this.medipacks = medipacks; }
+    public void setBadge(String badge) {
+        this.badge = badge;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public int getMedipacks() {
+        return medipacks;
+    }
+
+    public void setMedipacks(int medipacks) {
+        this.medipacks = medipacks;
+    }
 }

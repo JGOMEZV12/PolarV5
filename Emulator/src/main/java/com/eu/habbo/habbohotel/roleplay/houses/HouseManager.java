@@ -1,9 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.houses;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HouseManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(HouseManager.class);
@@ -21,7 +20,7 @@ public class HouseManager {
         houseList.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_houses")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_houses")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
@@ -41,7 +40,22 @@ public class HouseManager {
                     long lastForcing = set.getLong("last_forcing");
                     String[] space = set.getString("space").split(";");
 
-                    House house = new House(itemId, roomId, ownerId, cost, forSale, level, upgrades, isLocked, insideRoomId, doorX, doorY, doorZ, type, lastForcing, space);
+                    House house = new House(
+                            itemId,
+                            roomId,
+                            ownerId,
+                            cost,
+                            forSale,
+                            level,
+                            upgrades,
+                            isLocked,
+                            insideRoomId,
+                            doorX,
+                            doorY,
+                            doorZ,
+                            type,
+                            lastForcing,
+                            space);
                     houseList.put(itemId, house);
                 }
             }
@@ -91,7 +105,10 @@ public class HouseManager {
 
     public House getHouseByPosition(int roomId, int x, int y, double z) {
         for (House house : houseList.values()) {
-            if (house.getRoomId() == roomId && house.getDoorX() == x && house.getDoorY() == y && Math.abs(house.getDoorZ() - z) < 0.1) {
+            if (house.getRoomId() == roomId
+                    && house.getDoorX() == x
+                    && house.getDoorY() == y
+                    && Math.abs(house.getDoorZ() - z) < 0.1) {
                 return house;
             }
         }

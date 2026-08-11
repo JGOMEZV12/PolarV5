@@ -28,9 +28,8 @@ public class ATMWebEvent implements IWebEvent {
 
                 switch (action) {
                     case "open":
-                        String sendData = rp.getBankAccount() + "," +
-                                rp.getBankChequings() + "," +
-                                rp.getBankSavings() + ",";
+                        String sendData =
+                                rp.getBankAccount() + "," + rp.getBankChequings() + "," + rp.getBankSavings() + ",";
                         WebEventManager.getInstance().sendData(channel, "compose_atm|open|" + sendData);
                         break;
 
@@ -49,7 +48,9 @@ public class ATMWebEvent implements IWebEvent {
                         }
 
                         String withdrawAccountType = parts[3]; // "Checkings" or other
-                        int withdrawActualAmount = withdrawAccountType.equalsIgnoreCase("Checkings") ? rp.getBankChequings() : rp.getBankSavings();
+                        int withdrawActualAmount = withdrawAccountType.equalsIgnoreCase("Checkings")
+                                ? rp.getBankChequings()
+                                : rp.getBankSavings();
 
                         if (withdrawAmount <= 0) {
                             WebEventManager.getInstance().sendData(channel, "compose_atm|error|Invalid amount!");
@@ -57,49 +58,70 @@ public class ATMWebEvent implements IWebEvent {
                         }
 
                         if (withdrawAmount > withdrawActualAmount || withdrawActualAmount - withdrawAmount < 0) {
-                            WebEventManager.getInstance().sendData(channel, "compose_atm|error|Usted no tiene ese tipo de dinero para retirar");
+                            WebEventManager.getInstance()
+                                    .sendData(
+                                            channel,
+                                            "compose_atm|error|Usted no tiene ese tipo de dinero para retirar");
                             return;
                         }
 
                         if (withdrawAccountType.equalsIgnoreCase("Checkings")) {
                             if (rp.getBankAccount() < 1) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡No tienes una cuenta corriente!");
+                                WebEventManager.getInstance()
+                                        .sendData(channel, "compose_atm|error|¡No tienes una cuenta corriente!");
                                 return;
                             }
 
                             if (rp.getBankTarget() < 1) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡Usted no tiene tarjeta de debito, vaya al banco y pida la suya escribiendo: tarjeta!");
+                                WebEventManager.getInstance()
+                                        .sendData(
+                                                channel,
+                                                "compose_atm|error|¡Usted no tiene tarjeta de debito, vaya al banco y pida la suya escribiendo: tarjeta!");
                                 return;
                             }
 
-                            RoleplayManager.shout(client, "*Saca $" + withdrawAmount + " De su cuenta Corriente [-100$ Por retiro]*");
-                            client.getHabbo().whisper("Si no deseas pagar comisión por retiro, dirigete al banco y escribe :retirar cantidad");
+                            RoleplayManager.shout(
+                                    client, "*Saca $" + withdrawAmount + " De su cuenta Corriente [-100$ Por retiro]*");
+                            client.getHabbo()
+                                    .whisper(
+                                            "Si no deseas pagar comisión por retiro, dirigete al banco y escribe :retirar cantidad");
 
                             rp.setBankChequings(rp.getBankChequings() - withdrawAmount);
 
                             client.getHabbo().giveCredits(withdrawAmount - 100);
 
-                            WebEventManager.getInstance().sendData(channel, "compose_atm|change_balance_1|" + rp.getBankChequings());
+                            WebEventManager.getInstance()
+                                    .sendData(channel, "compose_atm|change_balance_1|" + rp.getBankChequings());
                         } else {
                             if (rp.getBankAccount() < 2) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡No tienes una cuenta de ahorros!");
+                                WebEventManager.getInstance()
+                                        .sendData(channel, "compose_atm|error|¡No tienes una cuenta de ahorros!");
                                 return;
                             }
 
                             if (rp.getBankTarget() < 1) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡Usted no tiene tarjeta de debito, vaya al banco y pida la suya!");
+                                WebEventManager.getInstance()
+                                        .sendData(
+                                                channel,
+                                                "compose_atm|error|¡Usted no tiene tarjeta de debito, vaya al banco y pida la suya!");
                                 return;
                             }
 
                             int taxAmount = (int) (withdrawAmount * 0.05);
-                            RoleplayManager.shout(client, "*Saca $" + withdrawAmount + " De su Cuenta de Ahorros y lo coloca en sus bolsillos*");
-                            client.getHabbo().whisper("Usted pagó un impuesto de $" + taxAmount + " Para retirar $" + withdrawAmount + "!");
+                            RoleplayManager.shout(
+                                    client,
+                                    "*Saca $" + withdrawAmount
+                                            + " De su Cuenta de Ahorros y lo coloca en sus bolsillos*");
+                            client.getHabbo()
+                                    .whisper("Usted pagó un impuesto de $" + taxAmount + " Para retirar $"
+                                            + withdrawAmount + "!");
 
                             rp.setBankSavings(rp.getBankSavings() - withdrawAmount);
 
                             client.getHabbo().giveCredits(withdrawAmount - taxAmount);
 
-                            WebEventManager.getInstance().sendData(channel, "compose_atm|change_balance_2|" + rp.getBankSavings());
+                            WebEventManager.getInstance()
+                                    .sendData(channel, "compose_atm|change_balance_2|" + rp.getBankSavings());
                         }
                         break;
 
@@ -123,39 +145,55 @@ public class ATMWebEvent implements IWebEvent {
 
                         if (depositAccountType.equalsIgnoreCase("Checkings")) {
                             if (rp.getBankAccount() < 1) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡No tienes una cuenta de corriente!");
+                                WebEventManager.getInstance()
+                                        .sendData(channel, "compose_atm|error|¡No tienes una cuenta de corriente!");
                                 return;
                             }
 
                             int required = depositAmount + 150;
                             if (!client.getHabbo().tryTakeCredits(required)) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡No tienes suficiente dinero en tu billetera!");
+                                WebEventManager.getInstance()
+                                        .sendData(
+                                                channel,
+                                                "compose_atm|error|¡No tienes suficiente dinero en tu billetera!");
                                 return;
                             }
 
-                            RoleplayManager.shout(client, "*Mete $" + depositAmount + " que sacó de su bolsillo y los deposita en su cuenta de corriente [-150$ Comisión cajero]*");
+                            RoleplayManager.shout(
+                                    client,
+                                    "*Mete $" + depositAmount
+                                            + " que sacó de su bolsillo y los deposita en su cuenta de corriente [-150$ Comisión cajero]*");
 
                             rp.setBankChequings(rp.getBankChequings() + depositAmount);
                             RoleplayManager.giveMoneyToCompany(9, client, "bank", true, 100);
 
-                            WebEventManager.getInstance().sendData(channel, "compose_atm|change_balance_1|" + rp.getBankChequings());
+                            WebEventManager.getInstance()
+                                    .sendData(channel, "compose_atm|change_balance_1|" + rp.getBankChequings());
                         } else {
                             if (rp.getBankAccount() < 2) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡No tienes una cuenta de ahorros!");
+                                WebEventManager.getInstance()
+                                        .sendData(channel, "compose_atm|error|¡No tienes una cuenta de ahorros!");
                                 return;
                             }
 
                             if (!client.getHabbo().tryTakeCredits(depositAmount)) {
-                                WebEventManager.getInstance().sendData(channel, "compose_atm|error|¡No tienes suficiente dinero en tu billetera!");
+                                WebEventManager.getInstance()
+                                        .sendData(
+                                                channel,
+                                                "compose_atm|error|¡No tienes suficiente dinero en tu billetera!");
                                 return;
                             }
 
-                            RoleplayManager.shout(client, "*Mete en la ranura del cajero $" + depositAmount + " que saca de su bolsillo y lo deposita en su cuenta de ahorros*");
+                            RoleplayManager.shout(
+                                    client,
+                                    "*Mete en la ranura del cajero $" + depositAmount
+                                            + " que saca de su bolsillo y lo deposita en su cuenta de ahorros*");
 
                             rp.setBankSavings(rp.getBankSavings() + depositAmount);
                             RoleplayManager.giveMoneyToCompany(9, client, "bank", true, 100);
 
-                            WebEventManager.getInstance().sendData(channel, "compose_atm|change_balance_2|" + rp.getBankSavings());
+                            WebEventManager.getInstance()
+                                    .sendData(channel, "compose_atm|change_balance_2|" + rp.getBankSavings());
                         }
                         break;
                 }

@@ -20,21 +20,51 @@ public class FarmingStats {
         this.plantSatchel = new PlantSatchel(row);
     }
 
-    public int getLevel() { return level; }
-    public void setLevel(int level) { this.level = level; }
+    public int getLevel() {
+        return level;
+    }
 
-    public int getExp() { return exp; }
-    public void setExp(int exp) { this.exp = exp; }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-    public boolean isHasSeedSatchel() { return hasSeedSatchel; }
-    public void setHasSeedSatchel(boolean hasSeedSatchel) { this.hasSeedSatchel = hasSeedSatchel; }
+    public int getExp() {
+        return exp;
+    }
 
-    public boolean isHasPlantSatchel() { return hasPlantSatchel; }
-    public void setHasPlantSatchel(boolean hasPlantSatchel) { this.hasPlantSatchel = hasPlantSatchel; }
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
 
-    public SeedSatchel getSeedSatchel() { return seedSatchel; }
-    public void setSeedSatchel(SeedSatchel seedSatchel) { this.seedSatchel = seedSatchel; }
+    public boolean isHasSeedSatchel() {
+        return hasSeedSatchel;
+    }
 
-    public PlantSatchel getPlantSatchel() { return plantSatchel; }
-    public void setPlantSatchel(PlantSatchel plantSatchel) { this.plantSatchel = plantSatchel; }
+    public void setHasSeedSatchel(boolean hasSeedSatchel) {
+        this.hasSeedSatchel = hasSeedSatchel;
+    }
+
+    public boolean isHasPlantSatchel() {
+        return hasPlantSatchel;
+    }
+
+    public void setHasPlantSatchel(boolean hasPlantSatchel) {
+        this.hasPlantSatchel = hasPlantSatchel;
+    }
+
+    public SeedSatchel getSeedSatchel() {
+        return seedSatchel;
+    }
+
+    public void setSeedSatchel(SeedSatchel seedSatchel) {
+        this.seedSatchel = seedSatchel;
+    }
+
+    public PlantSatchel getPlantSatchel() {
+        return plantSatchel;
+    }
+
+    public void setPlantSatchel(PlantSatchel plantSatchel) {
+        this.plantSatchel = plantSatchel;
+    }
 }

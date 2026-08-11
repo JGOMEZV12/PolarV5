@@ -1,9 +1,6 @@
 package com.eu.habbo.habbohotel.roleplay.vehicles;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VehiclesOwnedManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(VehiclesOwnedManager.class);
@@ -21,7 +20,7 @@ public class VehiclesOwnedManager {
         vehiclesOwned.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_vehicles_owned")) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_vehicles_owned")) {
 
             try (ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
@@ -44,7 +43,25 @@ public class VehiclesOwnedManager {
                     boolean baulOpen = set.getString("baul_state").equals("1");
                     int carLife = set.getInt("life");
 
-                    VehiclesOwned vo = new VehiclesOwned(id, furniId, itemId, ownerId, lastUserId, model, fuel, km, state, traba, alarm, location, x, y, z, baul, baulOpen, carLife);
+                    VehiclesOwned vo = new VehiclesOwned(
+                            id,
+                            furniId,
+                            itemId,
+                            ownerId,
+                            lastUserId,
+                            model,
+                            fuel,
+                            km,
+                            state,
+                            traba,
+                            alarm,
+                            location,
+                            x,
+                            y,
+                            z,
+                            baul,
+                            baulOpen,
+                            carLife);
                     vehiclesOwned.put(id, vo);
                 }
             }
@@ -78,7 +95,8 @@ public class VehiclesOwnedManager {
         vehiclesOwned.remove(id);
         if (toDb) {
             try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-                 PreparedStatement statement = connection.prepareStatement("DELETE FROM rp_vehicles_owned WHERE id = ? LIMIT 1")) {
+                    PreparedStatement statement =
+                            connection.prepareStatement("DELETE FROM rp_vehicles_owned WHERE id = ? LIMIT 1")) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
             } catch (SQLException e) {

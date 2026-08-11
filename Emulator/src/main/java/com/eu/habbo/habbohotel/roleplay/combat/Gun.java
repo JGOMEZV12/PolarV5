@@ -1,8 +1,8 @@
 package com.eu.habbo.habbohotel.roleplay.combat;
 
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.misc.RoleplayManager;
+import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,25 +31,32 @@ public class Gun implements ICombat {
         RoleplayUser targetRp = targetClient.getHabbo().getRoleplay();
 
         // Gun range damage (ranged weapon)
-        int damage = 15 + (int)(Math.random() * 16); // 15 to 30 damage
+        int damage = 15 + (int) (Math.random() * 16); // 15 to 30 damage
 
         synchronized (targetClient.getHabbo()) {
             int newHealth = targetRp.getCurHealth() - damage;
             if (newHealth <= 0) {
                 targetRp.setCurHealth(0);
                 targetRp.setDead(true);
-                RoleplayManager.shout(client, "*Le dispara un tiro fatal en el pecho a " + targetClient.getHabbo().getHabboInfo().getUsername() + " dejándolo moribundo*");
+                RoleplayManager.shout(
+                        client,
+                        "*Le dispara un tiro fatal en el pecho a "
+                                + targetClient.getHabbo().getHabboInfo().getUsername() + " dejándolo moribundo*");
                 getRewards(client, targetClient, "gun");
             } else {
                 targetRp.setCurHealth(newHealth);
-                RoleplayManager.shout(client, "*Le dispara a " + targetClient.getHabbo().getHabboInfo().getUsername() + " causándole " + damage + " de daño*");
+                RoleplayManager.shout(
+                        client,
+                        "*Le dispara a "
+                                + targetClient.getHabbo().getHabboInfo().getUsername() + " causándole " + damage
+                                + " de daño*");
             }
         }
     }
 
     @Override
     public int getEXP(GameClient client, GameClient targetClient) {
-        return 25 + (int)(Math.random() * 16); // 25 to 40 EXP
+        return 25 + (int) (Math.random() * 16); // 25 to 40 EXP
     }
 
     @Override
@@ -80,8 +87,12 @@ public class Gun implements ICombat {
                 synchronized (lock2) {
                     if (targetClient.getHabbo().tryTakeCredits(coinsToSteal)) {
                         client.getHabbo().giveCredits(coinsToSteal);
-                        client.getHabbo().whisper("¡Has robado $" + coinsToSteal + " del bolsillo de " + targetClient.getHabbo().getHabboInfo().getUsername() + "!");
-                        targetClient.getHabbo().whisper("¡Has perdido $" + coinsToSteal + " por ser herido con arma de fuego!");
+                        client.getHabbo()
+                                .whisper("¡Has robado $" + coinsToSteal + " del bolsillo de "
+                                        + targetClient.getHabbo().getHabboInfo().getUsername() + "!");
+                        targetClient
+                                .getHabbo()
+                                .whisper("¡Has perdido $" + coinsToSteal + " por ser herido con arma de fuego!");
                     }
                 }
             }

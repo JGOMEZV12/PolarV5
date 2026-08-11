@@ -1,14 +1,13 @@
 package com.eu.habbo.habbohotel.roleplay.apartments;
 
 import com.eu.habbo.Emulator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ApartmentManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApartmentManager.class);
@@ -23,7 +22,7 @@ public class ApartmentManager {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // 1. Load rp_apartments
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_apartments");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     String modelName = set.getString("model_name");
@@ -38,7 +37,7 @@ public class ApartmentManager {
 
             // 2. Load rp_apartments_owned
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_apartments_owned");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     int apartId = set.getInt("apart_id");
@@ -50,12 +49,16 @@ public class ApartmentManager {
                     String paymentType = set.getString("payment_type");
                     boolean floorEditor = set.getString("floor_editor").equals("1");
 
-                    ApartmentOwned owned = new ApartmentOwned(id, apartId, roomId, lobbyId, owner, forSale, price, paymentType, floorEditor);
+                    ApartmentOwned owned = new ApartmentOwned(
+                            id, apartId, roomId, lobbyId, owner, forSale, price, paymentType, floorEditor);
                     apartmentsOwned.put(id, owned);
                 }
             }
 
-            LOGGER.info("ApartmentManager -> Loaded {} apartments and {} owned apartments.", apartments.size(), apartmentsOwned.size());
+            LOGGER.info(
+                    "ApartmentManager -> Loaded {} apartments and {} owned apartments.",
+                    apartments.size(),
+                    apartmentsOwned.size());
 
         } catch (SQLException e) {
             LOGGER.error("Failed to load apartments from database", e);

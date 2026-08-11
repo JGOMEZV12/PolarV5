@@ -15,7 +15,20 @@ public class Vehicle {
     private int carCorp;
     private int fastCar;
 
-    public Vehicle(int id, int itemId, String itemName, int effectId, int price, String model, String displayName, int maxFuel, int maxTrunks, int carType, int maxDoors, int carCorp, int fastCar) {
+    public Vehicle(
+            int id,
+            int itemId,
+            String itemName,
+            int effectId,
+            int price,
+            String model,
+            String displayName,
+            int maxFuel,
+            int maxTrunks,
+            int carType,
+            int maxDoors,
+            int carCorp,
+            int fastCar) {
         this.id = id;
         this.itemId = itemId;
         this.itemName = itemName;
@@ -31,42 +44,107 @@ public class Vehicle {
         this.fastCar = fastCar;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getItemId() { return itemId; }
-    public void setItemId(int itemId) { this.itemId = itemId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getItemName() { return itemName; }
-    public void setItemName(String itemName) { this.itemName = itemName; }
+    public int getItemId() {
+        return itemId;
+    }
 
-    public int getEffectId() { return effectId; }
-    public void setEffectId(int effectId) { this.effectId = effectId; }
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
 
-    public int getPrice() { return price; }
-    public void setPrice(int price) { this.price = price; }
+    public String getItemName() {
+        return itemName;
+    }
 
-    public String getModel() { return model; }
-    public void setModel(String model) { this.model = model; }
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
 
-    public String getDisplayName() { return displayName; }
-    public void setDisplayName(String displayName) { this.displayName = displayName; }
+    public int getEffectId() {
+        return effectId;
+    }
 
-    public int getMaxFuel() { return maxFuel; }
-    public void setMaxFuel(int maxFuel) { this.maxFuel = maxFuel; }
+    public void setEffectId(int effectId) {
+        this.effectId = effectId;
+    }
 
-    public int getMaxTrunks() { return maxTrunks; }
-    public void setMaxTrunks(int maxTrunks) { this.maxTrunks = maxTrunks; }
+    public int getPrice() {
+        return price;
+    }
 
-    public int getCarType() { return carType; }
-    public void setCarType(int carType) { this.carType = carType; }
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
-    public int getMaxDoors() { return maxDoors; }
-    public void setMaxDoors(int maxDoors) { this.maxDoors = maxDoors; }
+    public String getModel() {
+        return model;
+    }
 
-    public int getCarCorp() { return carCorp; }
-    public void setCarCorp(int carCorp) { this.carCorp = carCorp; }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-    public int getFastCar() { return fastCar; }
-    public void setFastCar(int fastCar) { this.fastCar = fastCar; }
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public int getMaxFuel() {
+        return maxFuel;
+    }
+
+    public void setMaxFuel(int maxFuel) {
+        this.maxFuel = maxFuel;
+    }
+
+    public int getMaxTrunks() {
+        return maxTrunks;
+    }
+
+    public void setMaxTrunks(int maxTrunks) {
+        this.maxTrunks = maxTrunks;
+    }
+
+    public int getCarType() {
+        return carType;
+    }
+
+    public void setCarType(int carType) {
+        this.carType = carType;
+    }
+
+    public int getMaxDoors() {
+        return maxDoors;
+    }
+
+    public void setMaxDoors(int maxDoors) {
+        this.maxDoors = maxDoors;
+    }
+
+    public int getCarCorp() {
+        return carCorp;
+    }
+
+    public void setCarCorp(int carCorp) {
+        this.carCorp = carCorp;
+    }
+
+    public int getFastCar() {
+        return fastCar;
+    }
+
+    public void setFastCar(int fastCar) {
+        this.fastCar = fastCar;
+    }
 }

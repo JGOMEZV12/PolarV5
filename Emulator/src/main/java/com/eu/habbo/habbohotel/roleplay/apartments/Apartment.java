@@ -15,18 +15,43 @@ public class Apartment {
         this.price = price;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public String getModelName() { return modelName; }
-    public void setModelName(String modelName) { this.modelName = modelName; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getTiles() { return tiles; }
-    public void setTiles(int tiles) { this.tiles = tiles; }
+    public String getModelName() {
+        return modelName;
+    }
 
-    public String getImage() { return image; }
-    public void setImage(String image) { this.image = image; }
+    public void setModelName(String modelName) {
+        this.modelName = modelName;
+    }
 
-    public int getPrice() { return price; }
-    public void setPrice(int price) { this.price = price; }
+    public int getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(int tiles) {
+        this.tiles = tiles;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 }

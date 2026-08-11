@@ -13,15 +13,35 @@ public class ProductOwned {
         this.extradata = extradata;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getProductId() { return productId; }
-    public void setProductId(int productId) { this.productId = productId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public int getProductId() {
+        return productId;
+    }
 
-    public String getExtradata() { return extradata; }
-    public void setExtradata(String extradata) { this.extradata = extradata; }
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getExtradata() {
+        return extradata;
+    }
+
+    public void setExtradata(String extradata) {
+        this.extradata = extradata;
+    }
 }

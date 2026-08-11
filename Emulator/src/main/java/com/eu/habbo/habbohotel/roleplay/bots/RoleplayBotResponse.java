@@ -13,15 +13,35 @@ public class RoleplayBotResponse {
         this.type = type;
     }
 
-    public String getMessage() { return message; }
-    public void setMessage(String message) { this.message = message; }
+    public String getMessage() {
+        return message;
+    }
 
-    public String getResponse() { return response; }
-    public void setResponse(String response) { this.response = response; }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-    public int getBubble() { return bubble; }
-    public void setBubble(int bubble) { this.bubble = bubble; }
+    public String getResponse() {
+        return response;
+    }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public int getBubble() {
+        return bubble;
+    }
+
+    public void setBubble(int bubble) {
+        this.bubble = bubble;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

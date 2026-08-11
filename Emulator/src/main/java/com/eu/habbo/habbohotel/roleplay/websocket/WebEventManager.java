@@ -5,10 +5,9 @@ import com.eu.habbo.habbohotel.gameclients.GameClient;
 import com.google.gson.Gson;
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
+import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 public class WebEventManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebEventManager.class);
@@ -25,7 +24,8 @@ public class WebEventManager {
 
     private final ConcurrentHashMap<Channel, WebSocketUser> webSockets = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, IWebEvent> webEvents = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<Integer, ConcurrentHashMap<Channel, Byte>> userSocketIndex = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, ConcurrentHashMap<Channel, Byte>> userSocketIndex =
+            new ConcurrentHashMap<>();
 
     public WebEventManager() {
         registerIncoming();
@@ -51,8 +51,8 @@ public class WebEventManager {
             WebSocketUser wsUser = new WebSocketUser(userId, "", channel);
             webSockets.put(channel, wsUser);
 
-            ConcurrentHashMap<Channel, Byte> set = userSocketIndex.computeIfAbsent(userId,
-                    k -> new ConcurrentHashMap<>());
+            ConcurrentHashMap<Channel, Byte> set =
+                    userSocketIndex.computeIfAbsent(userId, k -> new ConcurrentHashMap<>());
             set.put(channel, (byte) 0);
 
             LOGGER.info("WebSocket registered: UserId={}", userId);
@@ -93,9 +93,14 @@ public class WebEventManager {
             if (data.equalsIgnoreCase("ping") || data.equalsIgnoreCase("pong")) return;
 
             WebEvent received = GSON.fromJson(data, WebEvent.class);
-            if (received == null || received.getEventName() == null || received.getEventName().isEmpty()) return;
+            if (received == null
+                    || received.getEventName() == null
+                    || received.getEventName().isEmpty()) return;
 
-            GameClient client = Emulator.getGameServer().getGameClientManager().getHabbo(received.getUserId()).getClient();
+            GameClient client = Emulator.getGameServer()
+                    .getGameClientManager()
+                    .getHabbo(received.getUserId())
+                    .getClient();
             if (client == null || client.getHabbo() == null) return;
 
             // In our system, verify if the WebSocket is registered

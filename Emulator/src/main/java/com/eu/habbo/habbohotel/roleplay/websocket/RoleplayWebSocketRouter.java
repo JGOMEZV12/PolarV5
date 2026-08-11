@@ -20,7 +20,9 @@ public class RoleplayWebSocketRouter extends ChannelInboundHandlerAdapter {
             String uri = req.uri();
             if (uri != null && uri.startsWith("/events")) {
                 isRoleplayPath = true;
-                LOGGER.info("Detected Roleplay WebSocket handshake on /events from {}", ctx.channel().remoteAddress());
+                LOGGER.info(
+                        "Detected Roleplay WebSocket handshake on /events from {}",
+                        ctx.channel().remoteAddress());
 
                 // Swap default wsProtocolHandler with one configured for /events
                 WebSocketServerProtocolConfig rpWsConfig = WebSocketServerProtocolConfig.newBuilder()
@@ -30,13 +32,18 @@ public class RoleplayWebSocketRouter extends ChannelInboundHandlerAdapter {
                         .build();
 
                 if (ctx.pipeline().get("wsProtocolHandler") != null) {
-                    ctx.pipeline().replace("wsProtocolHandler", "wsProtocolHandler", new WebSocketServerProtocolHandler(rpWsConfig));
+                    ctx.pipeline()
+                            .replace(
+                                    "wsProtocolHandler",
+                                    "wsProtocolHandler",
+                                    new WebSocketServerProtocolHandler(rpWsConfig));
                 }
 
                 // Add our custom roleplay frame handler after the protocol handler or aggregator
                 if (ctx.pipeline().get("wsFrameAggregator") != null) {
                     if (ctx.pipeline().get("roleplayWsHandler") == null) {
-                        ctx.pipeline().addAfter("wsFrameAggregator", "roleplayWsHandler", new RoleplayWebSocketHandler());
+                        ctx.pipeline()
+                                .addAfter("wsFrameAggregator", "roleplayWsHandler", new RoleplayWebSocketHandler());
                     }
                 }
             }

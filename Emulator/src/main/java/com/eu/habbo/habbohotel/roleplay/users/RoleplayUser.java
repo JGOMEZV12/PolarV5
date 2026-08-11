@@ -100,7 +100,9 @@ public class RoleplayUser {
     public int socketChatSpamTicks = -1;
     public int socketChatFloodTime = 0;
     public int socketChatSpamCount = 0;
-    private final java.util.concurrent.ConcurrentHashMap<String, com.eu.habbo.habbohotel.roleplay.websocket.chats.WebSocketChatRoom> chatRooms = new java.util.concurrent.ConcurrentHashMap<>();
+    private final java.util.concurrent.ConcurrentHashMap<
+                    String, com.eu.habbo.habbohotel.roleplay.websocket.chats.WebSocketChatRoom>
+            chatRooms = new java.util.concurrent.ConcurrentHashMap<>();
     public int texasHoldEmPlayer = 0;
 
     private int teleportDestX = 0;
@@ -110,8 +112,7 @@ public class RoleplayUser {
     private boolean taxiTeleportAuthorized = false;
     private int taxiTargetRoomId = 0;
 
-    public RoleplayUser() {
-    }
+    public RoleplayUser() {}
 
     // Getters and Setters for Persistent Stats
     public int getLevel() {
@@ -636,12 +637,15 @@ public class RoleplayUser {
         this.socketChatSpamCount = socketChatSpamCount;
     }
 
-    public java.util.concurrent.ConcurrentHashMap<String, com.eu.habbo.habbohotel.roleplay.websocket.chats.WebSocketChatRoom> getChatRooms() {
+    public java.util.concurrent.ConcurrentHashMap<
+                    String, com.eu.habbo.habbohotel.roleplay.websocket.chats.WebSocketChatRoom>
+            getChatRooms() {
         return chatRooms;
     }
 
     public io.netty.channel.Channel getWebSocketConnection() {
-        return com.eu.habbo.habbohotel.roleplay.websocket.WebEventManager.getInstance().getChannelByUserId(this.userId);
+        return com.eu.habbo.habbohotel.roleplay.websocket.WebEventManager.getInstance()
+                .getChannelByUserId(this.userId);
     }
 
     public int getTexasHoldEmPlayer() {

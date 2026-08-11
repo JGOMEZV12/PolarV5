@@ -33,7 +33,38 @@ public class RoleplayBot {
     private int speechTimer;
     private String petData;
 
-    public RoleplayBot(int id, int ownerId, String name, String gender, String figure, String motto, int maxHealth, int curHealth, int strength, int level, int spawnId, int spawnX, int spawnY, double spawnZ, int spawnRot, String aiType, int roamInterval, int attackInterval, int followInterval, int stayInterval, boolean roamBot, boolean roamCityBot, boolean addableBot, int corporationId, String stopworkItem, String workUniform, boolean canBeAttacked, int attackPos, String actionOdds, int speechTimer, String petData) {
+    public RoleplayBot(
+            int id,
+            int ownerId,
+            String name,
+            String gender,
+            String figure,
+            String motto,
+            int maxHealth,
+            int curHealth,
+            int strength,
+            int level,
+            int spawnId,
+            int spawnX,
+            int spawnY,
+            double spawnZ,
+            int spawnRot,
+            String aiType,
+            int roamInterval,
+            int attackInterval,
+            int followInterval,
+            int stayInterval,
+            boolean roamBot,
+            boolean roamCityBot,
+            boolean addableBot,
+            int corporationId,
+            String stopworkItem,
+            String workUniform,
+            boolean canBeAttacked,
+            int attackPos,
+            String actionOdds,
+            int speechTimer,
+            String petData) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
@@ -67,96 +98,251 @@ public class RoleplayBot {
         this.petData = petData;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getOwnerId() { return ownerId; }
-    public void setOwnerId(int ownerId) { this.ownerId = ownerId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public int getOwnerId() {
+        return ownerId;
+    }
 
-    public String getGender() { return gender; }
-    public void setGender(String gender) { this.figure = gender; }
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
 
-    public String getFigure() { return figure; }
-    public void setFigure(String figure) { this.figure = figure; }
+    public String getName() {
+        return name;
+    }
 
-    public String getMotto() { return motto; }
-    public void setMotto(String motto) { this.motto = motto; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getMaxHealth() { return maxHealth; }
-    public void setMaxHealth(int maxHealth) { this.maxHealth = maxHealth; }
+    public String getGender() {
+        return gender;
+    }
 
-    public int getCurHealth() { return curHealth; }
-    public void setCurHealth(int curHealth) { this.curHealth = curHealth; }
+    public void setGender(String gender) {
+        this.figure = gender;
+    }
 
-    public int getStrength() { return strength; }
-    public void setStrength(int strength) { this.strength = strength; }
+    public String getFigure() {
+        return figure;
+    }
 
-    public int getLevel() { return level; }
-    public void setLevel(int level) { this.level = level; }
+    public void setFigure(String figure) {
+        this.figure = figure;
+    }
 
-    public int getSpawnId() { return spawnId; }
-    public void setSpawnId(int spawnId) { this.spawnId = spawnId; }
+    public String getMotto() {
+        return motto;
+    }
 
-    public int getSpawnX() { return spawnX; }
-    public void setSpawnX(int spawnX) { this.spawnX = spawnX; }
+    public void setMotto(String motto) {
+        this.motto = motto;
+    }
 
-    public int getSpawnY() { return spawnY; }
-    public void setSpawnY(int spawnY) { this.spawnY = spawnY; }
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
-    public double getSpawnZ() { return spawnZ; }
-    public void setSpawnZ(double spawnZ) { this.spawnZ = spawnZ; }
+    public void setMaxHealth(int maxHealth) {
+        this.maxHealth = maxHealth;
+    }
 
-    public int getSpawnRot() { return spawnRot; }
-    public void setSpawnRot(int spawnRot) { this.spawnRot = spawnRot; }
+    public int getCurHealth() {
+        return curHealth;
+    }
 
-    public String getAiType() { return aiType; }
-    public void setAiType(String aiType) { this.aiType = aiType; }
+    public void setCurHealth(int curHealth) {
+        this.curHealth = curHealth;
+    }
 
-    public int getRoamInterval() { return roamInterval; }
-    public void setRoamInterval(int roamInterval) { this.roamInterval = roamInterval; }
+    public int getStrength() {
+        return strength;
+    }
 
-    public int getAttackInterval() { return attackInterval; }
-    public void setAttackInterval(int attackInterval) { this.attackInterval = attackInterval; }
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
 
-    public int getFollowInterval() { return followInterval; }
-    public void setFollowInterval(int followInterval) { this.followInterval = followInterval; }
+    public int getLevel() {
+        return level;
+    }
 
-    public int getStayInterval() { return stayInterval; }
-    public void setStayInterval(int stayInterval) { this.stayInterval = stayInterval; }
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-    public boolean isRoamBot() { return roamBot; }
-    public void setRoamBot(boolean roamBot) { this.roamBot = roamBot; }
+    public int getSpawnId() {
+        return spawnId;
+    }
 
-    public boolean isRoamCityBot() { return roamCityBot; }
-    public void setRoamCityBot(boolean roamCityBot) { this.roamCityBot = roamCityBot; }
+    public void setSpawnId(int spawnId) {
+        this.spawnId = spawnId;
+    }
 
-    public boolean isAddableBot() { return addableBot; }
-    public void setAddableBot(boolean addableBot) { this.addableBot = addableBot; }
+    public int getSpawnX() {
+        return spawnX;
+    }
 
-    public int getCorporationId() { return corporationId; }
-    public void setCorporationId(int corporationId) { this.corporationId = corporationId; }
+    public void setSpawnX(int spawnX) {
+        this.spawnX = spawnX;
+    }
 
-    public String getStopworkItem() { return stopworkItem; }
-    public void setStopworkItem(String stopworkItem) { this.stopworkItem = stopworkItem; }
+    public int getSpawnY() {
+        return spawnY;
+    }
 
-    public String getWorkUniform() { return workUniform; }
-    public void setWorkUniform(String workUniform) { this.workUniform = workUniform; }
+    public void setSpawnY(int spawnY) {
+        this.spawnY = spawnY;
+    }
 
-    public boolean isCanBeAttacked() { return canBeAttacked; }
-    public void setCanBeAttacked(boolean canBeAttacked) { this.canBeAttacked = canBeAttacked; }
+    public double getSpawnZ() {
+        return spawnZ;
+    }
 
-    public int getAttackPos() { return attackPos; }
-    public void setAttackPos(int attackPos) { this.attackPos = attackPos; }
+    public void setSpawnZ(double spawnZ) {
+        this.spawnZ = spawnZ;
+    }
 
-    public String getActionOdds() { return actionOdds; }
-    public void setActionOdds(String actionOdds) { this.actionOdds = actionOdds; }
+    public int getSpawnRot() {
+        return spawnRot;
+    }
 
-    public int getSpeechTimer() { return speechTimer; }
-    public void setSpeechTimer(int speechTimer) { this.speechTimer = speechTimer; }
+    public void setSpawnRot(int spawnRot) {
+        this.spawnRot = spawnRot;
+    }
 
-    public String getPetData() { return petData; }
-    public void setPetData(String petData) { this.petData = petData; }
+    public String getAiType() {
+        return aiType;
+    }
+
+    public void setAiType(String aiType) {
+        this.aiType = aiType;
+    }
+
+    public int getRoamInterval() {
+        return roamInterval;
+    }
+
+    public void setRoamInterval(int roamInterval) {
+        this.roamInterval = roamInterval;
+    }
+
+    public int getAttackInterval() {
+        return attackInterval;
+    }
+
+    public void setAttackInterval(int attackInterval) {
+        this.attackInterval = attackInterval;
+    }
+
+    public int getFollowInterval() {
+        return followInterval;
+    }
+
+    public void setFollowInterval(int followInterval) {
+        this.followInterval = followInterval;
+    }
+
+    public int getStayInterval() {
+        return stayInterval;
+    }
+
+    public void setStayInterval(int stayInterval) {
+        this.stayInterval = stayInterval;
+    }
+
+    public boolean isRoamBot() {
+        return roamBot;
+    }
+
+    public void setRoamBot(boolean roamBot) {
+        this.roamBot = roamBot;
+    }
+
+    public boolean isRoamCityBot() {
+        return roamCityBot;
+    }
+
+    public void setRoamCityBot(boolean roamCityBot) {
+        this.roamCityBot = roamCityBot;
+    }
+
+    public boolean isAddableBot() {
+        return addableBot;
+    }
+
+    public void setAddableBot(boolean addableBot) {
+        this.addableBot = addableBot;
+    }
+
+    public int getCorporationId() {
+        return corporationId;
+    }
+
+    public void setCorporationId(int corporationId) {
+        this.corporationId = corporationId;
+    }
+
+    public String getStopworkItem() {
+        return stopworkItem;
+    }
+
+    public void setStopworkItem(String stopworkItem) {
+        this.stopworkItem = stopworkItem;
+    }
+
+    public String getWorkUniform() {
+        return workUniform;
+    }
+
+    public void setWorkUniform(String workUniform) {
+        this.workUniform = workUniform;
+    }
+
+    public boolean isCanBeAttacked() {
+        return canBeAttacked;
+    }
+
+    public void setCanBeAttacked(boolean canBeAttacked) {
+        this.canBeAttacked = canBeAttacked;
+    }
+
+    public int getAttackPos() {
+        return attackPos;
+    }
+
+    public void setAttackPos(int attackPos) {
+        this.attackPos = attackPos;
+    }
+
+    public String getActionOdds() {
+        return actionOdds;
+    }
+
+    public void setActionOdds(String actionOdds) {
+        this.actionOdds = actionOdds;
+    }
+
+    public int getSpeechTimer() {
+        return speechTimer;
+    }
+
+    public void setSpeechTimer(int speechTimer) {
+        this.speechTimer = speechTimer;
+    }
+
+    public String getPetData() {
+        return petData;
+    }
+
+    public void setPetData(String petData) {
+        this.petData = petData;
+    }
 }

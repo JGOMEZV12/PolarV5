@@ -2,11 +2,10 @@ package com.eu.habbo.habbohotel.roleplay.timers;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class RoleplayTimer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RoleplayTimer.class);
@@ -27,12 +26,9 @@ public abstract class RoleplayTimer {
         this.forever = forever;
         this.params = params;
 
-        this.task = Emulator.getThreading().getService().scheduleAtFixedRate(
-                this::runTick,
-                time,
-                time,
-                TimeUnit.MILLISECONDS
-        );
+        this.task = Emulator.getThreading()
+                .getService()
+                .scheduleAtFixedRate(this::runTick, time, time, TimeUnit.MILLISECONDS);
     }
 
     private void runTick() {
@@ -67,11 +63,31 @@ public abstract class RoleplayTimer {
 
     public abstract void execute();
 
-    public String getType() { return type; }
-    public GameClient getClient() { return client; }
-    public int getTime() { return time; }
-    public boolean isForever() { return forever; }
-    public Object[] getParams() { return params; }
-    public int getTimeLeft() { return timeLeft; }
-    public void setTimeLeft(int timeLeft) { this.timeLeft = timeLeft; }
+    public String getType() {
+        return type;
+    }
+
+    public GameClient getClient() {
+        return client;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public boolean isForever() {
+        return forever;
+    }
+
+    public Object[] getParams() {
+        return params;
+    }
+
+    public int getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(int timeLeft) {
+        this.timeLeft = timeLeft;
+    }
 }

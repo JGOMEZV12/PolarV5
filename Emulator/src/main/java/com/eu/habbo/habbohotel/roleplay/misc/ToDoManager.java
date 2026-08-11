@@ -1,11 +1,14 @@
 package com.eu.habbo.habbohotel.roleplay.misc;
 
 import com.eu.habbo.Emulator;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ToDoManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(ToDoManager.class);
@@ -16,8 +19,8 @@ public class ToDoManager {
         toDoList.clear();
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_todo_list");
-             ResultSet set = statement.executeQuery()) {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_todo_list");
+                ResultSet set = statement.executeQuery()) {
 
             while (set.next()) {
                 int id = set.getInt("id");
@@ -37,9 +40,9 @@ public class ToDoManager {
 
     public static void addNewTodo(ToDo New) {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement(
-                     "INSERT INTO `rp_todo_list` (added_by, todo, timestamp) VALUES (?, ?, ?)",
-                     Statement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "INSERT INTO `rp_todo_list` (added_by, todo, timestamp) VALUES (?, ?, ?)",
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, New.addedBy);
             statement.setString(2, New.string);
             statement.setDouble(3, New.timeStamp);
@@ -63,7 +66,8 @@ public class ToDoManager {
         toDoList.remove(id);
 
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("DELETE FROM `rp_todo_list` WHERE `id` = ? LIMIT 1")) {
+                PreparedStatement statement =
+                        connection.prepareStatement("DELETE FROM `rp_todo_list` WHERE `id` = ? LIMIT 1")) {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {

@@ -2,14 +2,13 @@ package com.eu.habbo.habbohotel.roleplay.timers;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import com.eu.habbo.habbohotel.roleplay.misc.RoleplayManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.eu.habbo.habbohotel.roleplay.users.RoleplayUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TurfCaptureTimer extends RoleplayTimer {
     private static final Logger LOGGER = LoggerFactory.getLogger(TurfCaptureTimer.class);
@@ -39,7 +38,10 @@ public class TurfCaptureTimer extends RoleplayTimer {
 
         if (getTimeLeft() > 0) {
             if (timeCount >= 60) {
-                RoleplayManager.shout(client, "*Se acerca a capturar el barrio de pandillas [" + (getTimeLeft() / 60) + " Minutos restantes]*");
+                RoleplayManager.shout(
+                        client,
+                        "*Se acerca a capturar el barrio de pandillas [" + (getTimeLeft() / 60)
+                                + " Minutos restantes]*");
                 timeCount = 0;
             }
             return;
@@ -67,7 +69,8 @@ public class TurfCaptureTimer extends RoleplayTimer {
 
         // Parameterized update to the gang score
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE `rp_gangs` SET `gang_score` = `gang_score` + 15 WHERE `id` = ?")) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "UPDATE `rp_gangs` SET `gang_score` = `gang_score` + 15 WHERE `id` = ?")) {
             statement.setInt(1, rp.getJobId()); // assuming jobId holds gangId or group ID
             statement.executeUpdate();
         } catch (SQLException e) {

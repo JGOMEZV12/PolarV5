@@ -1,14 +1,14 @@
 package com.eu.habbo.habbohotel.roleplay.misc;
 
 import com.eu.habbo.habbohotel.gameclients.GameClient;
+import com.eu.habbo.habbohotel.roleplay.food.FoodManager;
+import com.eu.habbo.habbohotel.roleplay.houses.HouseManager;
+import com.eu.habbo.habbohotel.roleplay.products.ProductsManager;
 import com.eu.habbo.habbohotel.roleplay.rooms.RPRoomManager;
-import com.eu.habbo.habbohotel.roleplay.weapons.WeaponManager;
-import com.eu.habbo.habbohotel.roleplay.weapons.WSkinManager;
 import com.eu.habbo.habbohotel.roleplay.vehicles.VehicleManager;
 import com.eu.habbo.habbohotel.roleplay.vehicles.VehiclesOwnedManager;
-import com.eu.habbo.habbohotel.roleplay.food.FoodManager;
-import com.eu.habbo.habbohotel.roleplay.products.ProductsManager;
-import com.eu.habbo.habbohotel.roleplay.houses.HouseManager;
+import com.eu.habbo.habbohotel.roleplay.weapons.WSkinManager;
+import com.eu.habbo.habbohotel.roleplay.weapons.WeaponManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,8 +73,13 @@ public class RoleplayManager {
         }
     }
 
-    public static void giveMoneyToCompany(int companyId, GameClient client, String reason, boolean someBool, int amount) {
-        LOGGER.info("RoleplayManager: Give money to company {} for client {}, amount: {}", companyId, client.getHabbo().getHabboInfo().getUsername(), amount);
+    public static void giveMoneyToCompany(
+            int companyId, GameClient client, String reason, boolean someBool, int amount) {
+        LOGGER.info(
+                "RoleplayManager: Give money to company {} for client {}, amount: {}",
+                companyId,
+                client.getHabbo().getHabboInfo().getUsername(),
+                amount);
     }
 
     public static RPRoomManager getRpRoomManager() {

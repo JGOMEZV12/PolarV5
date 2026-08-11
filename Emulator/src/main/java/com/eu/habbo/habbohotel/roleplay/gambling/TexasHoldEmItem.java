@@ -2,9 +2,9 @@ package com.eu.habbo.habbohotel.roleplay.gambling;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.items.Item;
+import com.eu.habbo.habbohotel.rooms.FurnitureMovementError;
 import com.eu.habbo.habbohotel.rooms.Room;
 import com.eu.habbo.habbohotel.rooms.RoomTile;
-import com.eu.habbo.habbohotel.rooms.FurnitureMovementError;
 import com.eu.habbo.habbohotel.users.HabboItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

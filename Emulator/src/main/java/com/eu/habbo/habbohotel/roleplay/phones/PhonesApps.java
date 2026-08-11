@@ -10,7 +10,15 @@ public class PhonesApps {
     private int price;
     private String version;
 
-    public PhonesApps(int id, String name, String displayName, String icon, String developerName, String code, int price, String version) {
+    public PhonesApps(
+            int id,
+            String name,
+            String displayName,
+            String icon,
+            String developerName,
+            String code,
+            int price,
+            String version) {
         this.id = id;
         this.name = name;
         this.displayName = displayName;

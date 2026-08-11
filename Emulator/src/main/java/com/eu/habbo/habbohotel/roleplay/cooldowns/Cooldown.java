@@ -2,11 +2,10 @@ package com.eu.habbo.habbohotel.roleplay.cooldowns;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class Cooldown {
     private static final Logger LOGGER = LoggerFactory.getLogger(Cooldown.class);
@@ -25,12 +24,9 @@ public abstract class Cooldown {
         this.amount = amount;
 
         // Schedule the execution at fixed rate using Emulator's Threading service
-        this.task = Emulator.getThreading().getService().scheduleAtFixedRate(
-                this::runTick,
-                interval,
-                interval,
-                TimeUnit.MILLISECONDS
-        );
+        this.task = Emulator.getThreading()
+                .getService()
+                .scheduleAtFixedRate(this::runTick, interval, interval, TimeUnit.MILLISECONDS);
     }
 
     private void runTick() {
@@ -57,7 +53,11 @@ public abstract class Cooldown {
         }
 
         if (client != null && client.getHabbo() != null && client.getHabbo().getRoleplay() != null) {
-            client.getHabbo().getRoleplay().getCooldownManager().getActiveCooldowns().remove(type);
+            client.getHabbo()
+                    .getRoleplay()
+                    .getCooldownManager()
+                    .getActiveCooldowns()
+                    .remove(type);
         }
     }
 

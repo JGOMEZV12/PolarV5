@@ -9,9 +9,19 @@ public class RoleplayBotFriendship {
         this.userId = userId;
     }
 
-    public int getBotId() { return botId; }
-    public void setBotId(int botId) { this.botId = botId; }
+    public int getBotId() {
+        return botId;
+    }
 
-    public int getUserId() { return userId; }
-    public void setUserId(int userId) { this.userId = userId; }
+    public void setBotId(int botId) {
+        this.botId = botId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 }

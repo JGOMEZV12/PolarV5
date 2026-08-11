@@ -2,9 +2,6 @@ package com.eu.habbo.habbohotel.roleplay.farming;
 
 import com.eu.habbo.Emulator;
 import com.eu.habbo.habbohotel.gameclients.GameClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class FarmingManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(FarmingManager.class);
@@ -26,7 +25,7 @@ public class FarmingManager {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // Load farming items
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_farming");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     String baseItem = set.getString("base_item").toLowerCase();
@@ -36,14 +35,15 @@ public class FarmingManager {
                     int sellPrice = set.getInt("sell_price");
                     int buyPrice = set.getInt("buy_price");
 
-                    FarmingItem item = new FarmingItem(id, baseItem, levelRequired, minExp, maxExp, sellPrice, buyPrice);
+                    FarmingItem item =
+                            new FarmingItem(id, baseItem, levelRequired, minExp, maxExp, sellPrice, buyPrice);
                     farmingItems.put(baseItem, item);
                 }
             }
 
             // Load farming spaces
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM rp_farming_spaces");
-                 ResultSet set = statement.executeQuery()) {
+                    ResultSet set = statement.executeQuery()) {
                 while (set.next()) {
                     int id = set.getInt("id");
                     int itemId = set.getInt("item_id");
@@ -60,7 +60,10 @@ public class FarmingManager {
                 }
             }
 
-            LOGGER.info("FarmingManager -> Loaded {} farming items and {} farming spaces.", farmingItems.size(), farmingSpaces.size());
+            LOGGER.info(
+                    "FarmingManager -> Loaded {} farming items and {} farming spaces.",
+                    farmingItems.size(),
+                    farmingSpaces.size());
 
         } catch (SQLException e) {
             LOGGER.error("Failed to initialize FarmingManager", e);
@@ -93,7 +96,8 @@ public class FarmingManager {
 
     public static void updateAllFarmingSpaces() {
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection();
-             PreparedStatement statement = connection.prepareStatement("UPDATE `rp_farming_spaces` SET `expiration` = ?, `owner_id` = ? WHERE `id` = ?")) {
+                PreparedStatement statement = connection.prepareStatement(
+                        "UPDATE `rp_farming_spaces` SET `expiration` = ?, `owner_id` = ? WHERE `id` = ?")) {
             for (FarmingSpace space : farmingSpaces.values()) {
                 statement.setInt(1, space.getExpiration());
                 statement.setInt(2, space.getOwnerId());
