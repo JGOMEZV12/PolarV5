@@ -64,6 +64,7 @@ public class RoleplayUser {
 
     // Farming stats
     private com.eu.habbo.habbohotel.roleplay.farming.FarmingStats farmingStats;
+    private final com.eu.habbo.habbohotel.roleplay.users.offers.OffersManager offerManager = new com.eu.habbo.habbohotel.roleplay.users.offers.OffersManager();
 
     public com.eu.habbo.habbohotel.roleplay.farming.FarmingStats getFarmingStats() {
         return farmingStats;
@@ -71,6 +72,10 @@ public class RoleplayUser {
 
     public void setFarmingStats(com.eu.habbo.habbohotel.roleplay.farming.FarmingStats farmingStats) {
         this.farmingStats = farmingStats;
+    }
+
+    public com.eu.habbo.habbohotel.roleplay.users.offers.OffersManager getOfferManager() {
+        return offerManager;
     }
 
     // Cooldown manager
