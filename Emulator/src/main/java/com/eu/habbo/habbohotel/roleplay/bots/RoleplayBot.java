@@ -127,7 +127,7 @@ public class RoleplayBot {
     }
 
     public void setGender(String gender) {
-        this.figure = gender;
+        this.gender = gender;
     }
 
     public String getFigure() {

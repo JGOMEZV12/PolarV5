@@ -99,13 +99,6 @@ public class TexasHoldEm {
                     .getClient();
             if (player == null || player.getHabbo() == null) return;
 
-            if (player.getHabbo().getHabboInfo().getCredits() < this.joinCost) {
-                player.getHabbo()
-                        .whisper("¡No tienes suficiente dinero para jugar! El pote de arranque cuesta $" + this.joinCost
-                                + "!");
-                return;
-            }
-
             synchronized (playerList) {
                 long activeCount = playerList.values().stream()
                         .filter(x -> x != null && x.userId > 0)
@@ -114,6 +107,13 @@ public class TexasHoldEm {
 
                 boolean alreadyIn = playerList.values().stream().anyMatch(x -> x != null && x.userId == userId);
                 if (alreadyIn) return;
+            }
+
+            if (!player.getHabbo().tryTakeCredits(this.joinCost)) {
+                player.getHabbo()
+                        .whisper("¡No tienes suficiente dinero para jugar! El pote de arranque cuesta $" + this.joinCost
+                                + "!");
+                return;
             }
 
             int number = 1;

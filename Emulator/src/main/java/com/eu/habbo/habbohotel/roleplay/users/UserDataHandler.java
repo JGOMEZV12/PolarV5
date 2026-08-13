@@ -15,6 +15,7 @@ public class UserDataHandler {
     public UserDataHandler() {}
 
     public static boolean loadData(int userId, RoleplayUser rp) {
+        rp.setUserId(userId);
         try (Connection connection = Emulator.getDatabase().getDataSource().getConnection()) {
             // 1. Load rp_stats
             try (PreparedStatement statement =
