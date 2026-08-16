@@ -28,8 +28,6 @@ public class WebEventManager {
             new ConcurrentHashMap<>();
 
     public WebEventManager() {
-        // Registered Roleplay WebEvents
-
         registerIncoming();
         registerOutgoing();
     }

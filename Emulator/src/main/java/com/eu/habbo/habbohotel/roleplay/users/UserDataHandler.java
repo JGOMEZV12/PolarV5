@@ -11,6 +11,21 @@ import org.slf4j.LoggerFactory;
 
 public class UserDataHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDataHandler.class);
+    private static final java.util.concurrent.ConcurrentHashMap<Integer, RoleplayUser> USERS = new java.util.concurrent.ConcurrentHashMap<>();
+
+    public static RoleplayUser getRoleplayUser(int userId) {
+        if (userId <= 0) return null;
+        return USERS.computeIfAbsent(userId, id -> {
+            RoleplayUser rp = new RoleplayUser();
+            loadData(id, rp);
+            return rp;
+        });
+    }
+
+    public static RoleplayUser getRoleplayUser(com.eu.habbo.habbohotel.users.Habbo habbo) {
+        if (habbo == null || habbo.getHabboInfo() == null) return null;
+        return getRoleplayUser(habbo.getHabboInfo().getId());
+    }
 
     public UserDataHandler() {}
 
