@@ -661,4 +661,8 @@ public class RoleplayUser {
     public void setTexasHoldEmPlayer(int texasHoldEmPlayer) {
         this.texasHoldEmPlayer = texasHoldEmPlayer;
     }
+
+    public com.eu.habbo.habbohotel.users.Habbo getHabbo() {
+        return com.eu.habbo.Emulator.getGameServer().getGameClientManager().getHabbo(this.userId);
+    }
 }
