@@ -28,14 +28,59 @@ public class WebEventManager {
             new ConcurrentHashMap<>();
 
     public WebEventManager() {
-        // Registered Roleplay WebEvents
-
         registerIncoming();
         registerOutgoing();
     }
 
     public void registerIncoming() {
-        webEvents.put("event_atm", new ATMWebEvent());
+        webEvents.put("atm", new ATMWebEvent());
+        webEvents.put("action", new ActionWebEvent());
+        webEvents.put("apartments", new ApartmentsWebEvent());
+        webEvents.put("armero", new ArmeroWebEvent());
+        webEvents.put("basurero", new BasureroWebEvent());
+        webEvents.put("bounty", new BountyWebEvent());
+        webEvents.put("business", new BusinessWebEvent());
+        webEvents.put("camionero", new CamioneroWebEvent());
+        webEvents.put("captcha", new CaptchaWebEvent());
+        webEvents.put("changename", new ChangeNameWebEvent());
+        webEvents.put("commands", new CommandsWebEvent());
+        webEvents.put("driving", new DrivingWebEvent());
+        webEvents.put("food", new FoodWebEvent());
+        webEvents.put("gangs", new GangsWebEvent());
+        webEvents.put("gps", new GpsWebEvent());
+        webEvents.put("groups", new GroupsWebEvent());
+        webEvents.put("hechizos", new HechizosWebEvent());
+        webEvents.put("hospital", new HospitalWebEvent());
+        webEvents.put("houses", new HousesWebEvent());
+        webEvents.put("htmlpage", new HtmlPageWebEvent());
+        webEvents.put("item", new ItemWebEvent());
+        webEvents.put("job", new JobWebEvent());
+        webEvents.put("macro", new MacroWebEvent());
+        webEvents.put("manejar", new ManejarWebEvent());
+        webEvents.put("mapa", new MapaWebEvent());
+        webEvents.put("move", new MoveWebEvent());
+        webEvents.put("onlinecount", new OnlineCountWebEvent());
+        webEvents.put("phone", new PhoneWebEvent());
+        webEvents.put("placehtml", new PlaceHtmlWebEvent());
+        webEvents.put("pong", new PongWebEvent());
+        webEvents.put("products", new ProductsWebEvent());
+        webEvents.put("profile", new ProfileWebEvent());
+        webEvents.put("purge", new PurgeWebEvent());
+        webEvents.put("purse", new PurseWebEvent());
+        webEvents.put("retrievestats", new RetrieveStatsWebEvent());
+        webEvents.put("retrieveustats", new RetrieveUStatsWebEvent());
+        webEvents.put("sendnotification", new SendNotificationWebEvent());
+        webEvents.put("sendwhisper", new SendWhisperWebEvent());
+        webEvents.put("stats", new StatsWebEvent());
+        webEvents.put("target", new TargetWebEvent());
+        webEvents.put("taxi", new TaxiWebEvent());
+        webEvents.put("timerdialogue", new TimerDialogueWebEvent());
+        webEvents.put("tutorial", new TutorialWebEvent());
+        webEvents.put("vip", new VIPWebEvent());
+        webEvents.put("vehicles", new VehiclesWebEvent());
+        webEvents.put("wskin", new WSkinWebEvent());
+        webEvents.put("wanted", new WantedWebEvent());
+        webEvents.put("weapons", new WeaponsWebEvent());
     }
 
     public void registerOutgoing() {
