@@ -78,6 +78,7 @@ public class Habbo implements Runnable {
     private volatile boolean disconnected = false;
     private volatile boolean disconnecting = false;
     public boolean roomBypass = false;
+    private int tokenId;
 
     public Habbo(ResultSet set) {
         this.client = null;
@@ -92,6 +93,7 @@ public class Habbo implements Runnable {
         this.roomUnit = new RoomUnit();
         this.roomUnit.setRoomUnitType(RoomUnitType.USER);
         this.update = false;
+        this.tokenId = (int) (Math.random() * 1000000000);
     }
 
     public boolean isOnline() {
@@ -146,6 +148,32 @@ public class Habbo implements Runnable {
 
     public void setClient(GameClient client) {
         this.client = client;
+    }
+
+    public int getTokenId() {
+        return this.tokenId;
+    }
+
+    public void setTokenId(int tokenId) {
+        this.tokenId = tokenId;
+    }
+
+    private com.eu.habbo.habbohotel.roleplay.users.RoleplayUser roleplay;
+
+    public com.eu.habbo.habbohotel.roleplay.users.RoleplayUser getRoleplay() {
+        if (this.roleplay == null) {
+            this.roleplay = new com.eu.habbo.habbohotel.roleplay.users.RoleplayUser();
+            this.roleplay.setCooldownManager(
+                    new com.eu.habbo.habbohotel.roleplay.cooldowns.CooldownManager(this.getClient()));
+            this.roleplay.setTimerManager(new com.eu.habbo.habbohotel.roleplay.timers.TimerManager(this.getClient()));
+            com.eu.habbo.habbohotel.roleplay.users.UserDataHandler.loadData(
+                    this.getHabboInfo().getId(), this.roleplay);
+        }
+        return this.roleplay;
+    }
+
+    public void setRoleplay(com.eu.habbo.habbohotel.roleplay.users.RoleplayUser roleplay) {
+        this.roleplay = roleplay;
     }
 
     public boolean connect() {
@@ -318,6 +346,10 @@ public class Habbo implements Runnable {
 
     private void persistDisconnect() {
         this.run();
+        if (this.roleplay != null) {
+            com.eu.habbo.habbohotel.roleplay.users.UserDataHandler.saveData(
+                    this.getHabboInfo().getId(), this.roleplay);
+        }
         this.getInventory().dispose();
         AchievementManager.saveAchievements(this);
         this.habboStats.dispose();

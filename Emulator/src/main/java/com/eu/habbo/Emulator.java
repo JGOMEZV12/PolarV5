@@ -217,6 +217,9 @@ public final class Emulator {
             Emulator.isReady = true;
             Emulator.timeStarted = getLongUnixTimestamp();
 
+            // Initialize Roleplay managers
+            com.eu.habbo.habbohotel.roleplay.misc.RoleplayManager.initialize();
+
             if (shouldLaunchGui()) {
                 EmulatorDashboard.launch();
             }
